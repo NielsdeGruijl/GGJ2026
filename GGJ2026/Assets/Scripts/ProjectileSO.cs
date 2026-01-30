@@ -9,4 +9,6 @@ public class ProjectileSO : ScriptableObject
 
     public float damage;
     public float Speed;
+
+    public float cooldown;
 }

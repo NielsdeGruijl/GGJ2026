@@ -1,16 +1,17 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Vector2 velocity;
+    
+    private Rigidbody2D rigidBody;
+    
+    
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.gravityScale = 0;
+        rigidBody.AddForce(velocity, ForceMode2D.Impulse);
     }
 }
