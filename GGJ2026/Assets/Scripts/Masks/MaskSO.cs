@@ -1,9 +1,20 @@
 using UnityEngine;
 
-public abstract class MaskSO : ScriptableObject
+public class MaskSO : ScriptableObject
 {
-    [SerializeField] protected float cooldown;
+    [SerializeField] public InventoryMask maskItem;
     
-    public abstract void Equip(Player pPlayer);
-    public abstract void Unequip(Player pPlayer);
+    [SerializeField] protected float cooldown;
+
+    protected bool isActive = false;
+
+    public virtual void Equip(Player pPlayer)
+    {
+        isActive = true;
+    }
+
+    public virtual void Unequip(Player pPlayer)
+    {
+        isActive = false;
+    }
 }

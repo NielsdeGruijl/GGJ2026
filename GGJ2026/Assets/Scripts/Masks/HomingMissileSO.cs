@@ -8,16 +8,11 @@ public class HomingMissileSO : MaskSO
     
     public override void Equip(Player pPlayer)
     {
-        pPlayer.StartCoroutine(ShootMissileCo(pPlayer));
+        base.Equip(pPlayer);
     }
 
     public override void Unequip(Player pPlayer)
     {
-    }
-    
-    private IEnumerator ShootMissileCo(Player pPlayer)
-    {
-        Projectile projectileObject = Instantiate(projectile.projectilePrefab, pPlayer.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(cooldown);
+        base.Unequip(pPlayer);
     }
 }
