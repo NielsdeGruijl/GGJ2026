@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
         playerInput.actions["Move"].performed += MovePlayer;
         playerInput.actions["Move"].canceled += MovePlayer;
 
-        playerInput.actions["Purchase"].performed += PurchaseChest;
+        playerInput.actions["Purchase"].started += PurchaseChest;
         
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.gravityScale = 0;
