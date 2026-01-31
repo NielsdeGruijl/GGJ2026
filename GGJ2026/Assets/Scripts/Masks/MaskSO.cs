@@ -8,13 +8,13 @@ public class MaskSO : ScriptableObject
 
     protected bool isActive = false;
 
+    public virtual InventoryMask MakeMask(Player pPlayer)
+    {
+        return Instantiate(maskItem);
+    }
+    
     public virtual void Equip(Player pPlayer)
     {
         isActive = true;
-    }
-
-    public virtual void Unequip(Player pPlayer)
-    {
-        isActive = false;
     }
 }

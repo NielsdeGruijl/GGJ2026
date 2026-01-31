@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class HomingMissile : Projectile
 {
@@ -25,10 +26,9 @@ public class HomingMissile : Projectile
             if (target = FindTarget())
             {
                 activeTarget = target;
-                //MoveToTarget(target);
             }
             
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -56,26 +56,15 @@ public class HomingMissile : Projectile
         return closestCollider;
     }
 
-    private void MoveToTarget(Collider2D target)
-    {
-        Vector2 targetDirection = (target.transform.position.ToVector2() - transform.position.ToVector2()).normalized;
-        
-        float diffAngle = Vector2.Angle(transform.up, targetDirection);
-
-        //StartCoroutine(RotateMissileCo(diffAngle));
-    }
-
     private void RotateToTarget()
     {
-        canRotate = false;
-        float rotationAmount = 0;
-        float startRotation = transform.eulerAngles.z;
-
-        float dirNormal = 0;
+        if (!activeTarget)
+            return;
         
         Vector2 targetDirection = (activeTarget.transform.position.ToVector2() - transform.position.ToVector2()).normalized;
-        
         float diffAngle = Vector2.Angle(transform.up, targetDirection);
+        
+        float dirNormal = 0;
 
         if (IsLeft(transform.up, targetDirection))
             dirNormal = 1;
@@ -84,6 +73,18 @@ public class HomingMissile : Projectile
         
         float angleStep = dirNormal * turnspeed;
         transform.Rotate(0, 0, angleStep);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        HealthManager enemyManager;
+
+        if (collider.TryGetComponent<HealthManager>(out enemyManager))
+        {
+            enemyManager.TakeDamage(damage);
+            
+            Destroy(gameObject);
+        }
     }
     
     bool IsLeft(Vector2 A, Vector2 B)
@@ -94,12 +95,6 @@ public class HomingMissile : Projectile
     private void FixedUpdate()
     {
         rigidBody.AddForce(transform.up * (moveSpeed * Time.deltaTime));
-
         RotateToTarget();
-        
-        if (canRotate)
-        {
-            
-        }
     }
 }

@@ -6,9 +6,11 @@ public class Projectile : MonoBehaviour
 {
     public Vector2 velocity;
 
-    protected float moveSpeed = 0;
+    public float moveSpeed = 0;
 
     protected Rigidbody2D rigidBody;
+
+    protected float damage;
 
     private void Awake()
     {
@@ -24,5 +26,10 @@ public class Projectile : MonoBehaviour
     public virtual void SetSpeed(float pSpeed)
     {
         moveSpeed = pSpeed;
+    }
+
+    public virtual void SetDamage(float pDamage)
+    {
+        damage = pDamage;
     }
 }

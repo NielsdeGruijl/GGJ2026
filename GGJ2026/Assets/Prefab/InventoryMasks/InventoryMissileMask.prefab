@@ -133,12 +133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae64069c404c6347a9bedf759eb4d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  baseMoveSpeed: 1
+  bonusMoveSpeed: 0.1
   cooldown: 3
   numInRing: 0
   ringCapacity: 0
   targetRadius: 0
   projectile: {fileID: 11400000, guid: 2c08125db6168744aaaa2fe410c60058, type: 2}
+  damage: 0
 --- !u!70 &3753011198614264914
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
