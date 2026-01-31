@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerAbility : MonoBehaviour
 {
     [SerializeField] private ProjectileSO projectileData;
+    [SerializeField] private float cooldown;
 
     private Camera cam;
 
@@ -33,7 +35,7 @@ public class PlayerAbility : MonoBehaviour
         while (true)
         {
             Use();
-            yield return new WaitForSeconds(projectileData.cooldown);
+            yield return new WaitForSeconds(cooldown);
         }
     }
 }
