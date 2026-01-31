@@ -10,22 +10,30 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     private PlayerOrbitManager orbitManager;
+    private CurrencyManager currencyManager;
     
     private PlayerInput playerInput;
 
+    private List<Chest> chests = new List<Chest>();
+    
     private Vector2 moveDirection;
 
     private Rigidbody2D rigidBody;
 
     private Vector2 velocity;
+
+    public bool canPurchaseChest = false;
     
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         orbitManager = GetComponent<PlayerOrbitManager>();
+        currencyManager = GetComponent<CurrencyManager>();
 
         playerInput.actions["Move"].performed += MovePlayer;
         playerInput.actions["Move"].canceled += MovePlayer;
+
+        playerInput.actions["Purchase"].performed += PurchaseChest;
         
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.gravityScale = 0;
@@ -49,6 +57,22 @@ public class Player : MonoBehaviour
         if (collision.TryGetComponent<Mask>(out mask))
         {
             EquipMask(mask.maskSO);
+            
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.TryGetComponent<Chest>(out Chest chest))
+        {
+            chests.Add(chest);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent<Chest>(out Chest chest))
+        {
+            if (chests.Contains(chest))
+                chests.Remove(chest);
         }
     }
     
@@ -56,6 +80,18 @@ public class Player : MonoBehaviour
     {
         mask.Equip(this);
         
-        orbitManager.AddMask(mask.maskItem);
+        orbitManager.AddMask(mask.MakeMask(this));
+    }
+
+    private void PurchaseChest(InputAction.CallbackContext pContext)
+    {
+        if (chests.Count > 0)
+        {
+            if (currencyManager.Purchase(chests[0].price))
+            {
+                chests[0].Open();
+                chests.RemoveAt(0);
+            }
+        }
     }
 }

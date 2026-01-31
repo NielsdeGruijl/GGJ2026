@@ -1,16 +1,24 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Coin coinPrefab;
+    [SerializeField] private int coinValue;
+    
+    HealthManager healthManager;
+
+    private void Awake()
     {
+        healthManager = GetComponent<HealthManager>();
         
+        healthManager.OnDeath.AddListener(DropCoins);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void DropCoins()
     {
-        
+        Coin coinObject = Instantiate(coinPrefab, transform.position, transform.rotation);
+        coinObject.value = coinValue;
     }
+
 }

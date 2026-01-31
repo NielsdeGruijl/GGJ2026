@@ -7,9 +7,9 @@ public class ProjectileSO : ScriptableObject
 
     public int projectileCount;
 
-    public float damage;
     public float Speed;
-
+    public float damage;
+    
     public float delay;
     public float spread;
 }

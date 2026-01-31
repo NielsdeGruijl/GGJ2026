@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class InventoryMask :  MonoBehaviour
 {
-    [SerializeField] protected float moveSpeed;
-    [SerializeField] protected float cooldown;
-
+    [SerializeField] protected float baseMoveSpeed;
+    [SerializeField] protected float bonusMoveSpeed;
+    
+    [HideInInspector] public float cooldown;
     [HideInInspector] public int numInRing;
     [HideInInspector] public int ringCapacity;
     [HideInInspector] public float targetRadius;
+
+    private float moveSpeed;
     
     public virtual void Activate()
     {
-        
+        moveSpeed = baseMoveSpeed + (ringCapacity * bonusMoveSpeed);
     }
 
     private void Update()
