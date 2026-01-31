@@ -12,6 +12,9 @@ public class InventoryMask :  MonoBehaviour
     [HideInInspector] public int ringCapacity;
     [HideInInspector] public float targetRadius;
 
+    [HideInInspector] public int collisionDamage = 0;
+    [HideInInspector] public bool collisionDamageEnabled = false;
+    
     private float moveSpeed;
     
     public virtual void Activate()
@@ -35,5 +38,14 @@ public class InventoryMask :  MonoBehaviour
         float xPos = Mathf.Cos((Time.time * moveSpeed) + fract);
         float yPos = Mathf.Sin((Time.time * moveSpeed) + fract);
         return new Vector3(xPos, yPos, 0) * targetRadius;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out HealthManager enemy))
+        {
+            if(collisionDamageEnabled)
+                enemy.TakeDamage(collisionDamage);
+        }
     }
 }
