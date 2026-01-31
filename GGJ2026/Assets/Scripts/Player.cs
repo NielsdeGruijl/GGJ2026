@@ -38,4 +38,24 @@ public class Player : MonoBehaviour
     {
         rigidBody.AddForce(moveDirection * (moveSpeed * Time.fixedDeltaTime));
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Mask mask;
+        // doesn't work, pls fix
+        if (collision.TryGetComponent<Mask>(out mask))
+        {
+            EquipMask(mask.maskSO);
+        }
+    }
+    
+    private void EquipMask(MaskSO mask)
+    {
+        mask.Equip(this);
+    }
+
+    private void UnequipMask(MaskSO mask)
+    {
+        
+    }
 }
