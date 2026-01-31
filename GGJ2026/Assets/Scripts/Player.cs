@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,8 @@ public class Player : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed;
 
+    private PlayerOrbitManager orbitManager;
+    
     private PlayerInput playerInput;
 
     private Vector2 moveDirection;
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        orbitManager = GetComponent<PlayerOrbitManager>();
 
         playerInput.actions["Move"].performed += MovePlayer;
         playerInput.actions["Move"].canceled += MovePlayer;
@@ -42,7 +46,6 @@ public class Player : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         Mask mask;
-        // doesn't work, pls fix
         if (collision.TryGetComponent<Mask>(out mask))
         {
             EquipMask(mask.maskSO);
@@ -52,10 +55,7 @@ public class Player : MonoBehaviour
     private void EquipMask(MaskSO mask)
     {
         mask.Equip(this);
-    }
-
-    private void UnequipMask(MaskSO mask)
-    {
         
+        orbitManager.AddMask(mask.maskItem);
     }
 }

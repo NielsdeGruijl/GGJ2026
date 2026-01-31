@@ -15,6 +15,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 3660939817626499007, guid: 24985ab5fee6a694c9a46c1835d657de, type: 3}
   projectileCount: 1
   damage: 5
-  Speed: 10
+  Speed: 1000
   delay: 0
   spread: 0

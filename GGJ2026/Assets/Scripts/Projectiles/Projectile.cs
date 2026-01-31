@@ -5,8 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Vector2 velocity;
-    
-    private Rigidbody2D rigidBody;
+
+    protected float moveSpeed = 0;
+
+    protected Rigidbody2D rigidBody;
 
     private void Awake()
     {
@@ -17,5 +19,10 @@ public class Projectile : MonoBehaviour
     protected virtual void Start()
     {
         rigidBody.AddForce(velocity, ForceMode2D.Impulse);
+    }
+    
+    public virtual void SetSpeed(float pSpeed)
+    {
+        moveSpeed = pSpeed;
     }
 }
