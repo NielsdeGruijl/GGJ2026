@@ -25,4 +25,14 @@ public class HealthManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void AddHealth(float amount)
+    {
+        currentHealth += amount;
+        
+        if(currentHealth > maxHealth)
+            currentHealth = maxHealth;
+        
+        Debug.Log("Health: " + amount);
+    }
 }

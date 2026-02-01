@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Start()
     {
-        rigidBody.AddForce(velocity, ForceMode2D.Impulse);
+        rigidBody.AddForce(velocity * moveSpeed, ForceMode2D.Impulse);
     }
     
     public virtual void SetSpeed(float pSpeed)
@@ -31,5 +31,14 @@ public class Projectile : MonoBehaviour
     public virtual void SetDamage(float pDamage)
     {
         damage = pDamage;
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out HealthManager enemy))
+        {
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }

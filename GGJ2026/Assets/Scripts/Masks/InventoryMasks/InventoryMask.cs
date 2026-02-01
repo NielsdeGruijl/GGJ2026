@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class InventoryMask :  MonoBehaviour
 {
-    [SerializeField] protected float baseMoveSpeed;
-    [SerializeField] protected float bonusMoveSpeed;
+    [SerializeField] protected float baseMoveSpeed = 1;
+    [SerializeField] protected float bonusMoveSpeed = 0.1f;
     
     [HideInInspector] public float cooldown;
     [HideInInspector] public int numInRing;
     [HideInInspector] public int ringCapacity;
     [HideInInspector] public float targetRadius;
 
-    [HideInInspector] public int collisionDamage = 0;
+    [HideInInspector] public float collisionDamage = 0;
     [HideInInspector] public bool collisionDamageEnabled = false;
     
     private float moveSpeed;
@@ -40,10 +40,11 @@ public class InventoryMask :  MonoBehaviour
         return new Vector3(xPos, yPos, 0) * targetRadius;
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent(out HealthManager enemy))
         {
+            Debug.Log(collisionDamage + "" + collisionDamageEnabled);
             if(collisionDamageEnabled)
                 enemy.TakeDamage(collisionDamage);
         }

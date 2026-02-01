@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd4a5de6ac9b78747b2346209847b538, type: 3}
-  m_Name: Homing Missile SO
+  m_Script: {fileID: 11500000, guid: e37a2196eb2eed449bf7336d574c5f66, type: 3}
+  m_Name: DamagingMask
   m_EditorClassIdentifier: 
-  maskItem: {fileID: 1612334761132108270, guid: 47685e8b70466254aae880ec0df2dbee, type: 3}
-  cooldown: 3
-  damage: 1
-  damageMultiplier: 0
+  maskItem: {fileID: 2158674716094527555, guid: 7a4df3f0f7918874ea12ccf2802421e1, type: 3}
+  cooldown: 0
+  collisionDamagePerStack: 5

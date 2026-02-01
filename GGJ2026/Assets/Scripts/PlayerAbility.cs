@@ -34,7 +34,7 @@ public class PlayerAbility : MonoBehaviour
     {
         while (true)
         {
-            Use();
+            //Use();
             yield return new WaitForSeconds(cooldown);
         }
     }

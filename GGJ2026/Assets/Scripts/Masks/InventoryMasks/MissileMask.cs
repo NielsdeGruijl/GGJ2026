@@ -4,7 +4,7 @@ using UnityEngine;
 public class MissileMask : InventoryMask
 {
     [SerializeField] private ProjectileSO projectile;
-
+    
     [HideInInspector] public float damage;
 
     public override void Activate()
