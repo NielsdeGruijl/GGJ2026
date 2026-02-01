@@ -10,13 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6853469717338582594}
   - component: {fileID: 2545596821463029748}
-  - component: {fileID: 5789895494756769265}
   - component: {fileID: 451689299078536013}
   - component: {fileID: 2492417357028965079}
   - component: {fileID: 6779519355639478739}
   - component: {fileID: 2884340031294750767}
   - component: {fileID: 8332250920815635862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -53,20 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2000
   canPurchaseChest: 0
---- !u!114 &5789895494756769265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7739586670062328815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 644bf78609bb4b148ae02b3026c640d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileData: {fileID: 11400000, guid: ab8f8fe6afa737d4fbf9c399f35d4a8f, type: 2}
-  cooldown: 0.5
 --- !u!114 &451689299078536013
 MonoBehaviour:
   m_ObjectHideFlags: 0

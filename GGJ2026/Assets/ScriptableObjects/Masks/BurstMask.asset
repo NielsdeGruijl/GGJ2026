@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d22f098731ed84fbe6c49113cfcdcd, type: 3}
+  m_Name: BurstMask
+  m_EditorClassIdentifier: 
+  maskItem: {fileID: 5869171009353884839, guid: 90a7bbe52f0c39e4e8219ce4670c4ef8, type: 3}
+  cooldown: 1
+  bulletPrefab: {fileID: 5550591638646236349, guid: c07947c00c1a521498ec4b1eaf8c3044, type: 3}
+  damagePerBullet: 1
+  bulletsPerBurst: 1

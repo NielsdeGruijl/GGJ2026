@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.AddForce(moveDirection * (moveSpeed * Time.fixedDeltaTime));
+        rigidBody.AddForce(moveDirection * moveSpeed);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         {
             EquipMask(mask.maskSO);
             
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
 
         if (collision.TryGetComponent<Chest>(out Chest chest))
@@ -78,6 +78,7 @@ public class Player : MonoBehaviour
     
     private void EquipMask(MaskSO mask)
     {
+        // Call equip function on mask (essentially void Awake)
         mask.Equip(this);
         
         orbitManager.AddMask(mask.MakeMask(this));
