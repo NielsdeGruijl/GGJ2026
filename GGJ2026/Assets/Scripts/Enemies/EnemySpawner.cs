@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private float spawnCooldown;
 
-    private void Awake()
+    [SerializeField] private int baseSpawnCount;
+    
+    private void Start()
     {
         StartCoroutine(SpawnEnemies());
     }
@@ -22,12 +25,24 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            foreach (Transform spawnTransform in spawnPoints)
+            int spawnCount = (int)(baseSpawnCount * DifficultyManager.instance.enemySpawnCountMult);
+            int i = 0;
+            while (i < spawnCount)
             {
-                Enemy enemyObject = Instantiate(enemyPrefab, spawnTransform.position.ToVector2(), Quaternion.identity);
-                enemyObject.Initialize(player);
+                int randomSpawnpoint = Random.Range(0, spawnPoints.Count);
+                Enemy enemyObject = Instantiate(enemyPrefab, spawnPoints[randomSpawnpoint].position.ToVector2(), Quaternion.identity);
+                enemyObject.Initialize(player.transform);
+
+                i++;
+                yield return null;
             }
-            yield return new WaitForSeconds(spawnCooldown);
+
+            float cooldown = spawnCooldown / DifficultyManager.instance.enemySpawnIntervalMult;
+
+            if (cooldown <= 0.5f)
+                cooldown = 0.5f;
+
+            yield return new WaitForSeconds(cooldown);
         }
     }
 }

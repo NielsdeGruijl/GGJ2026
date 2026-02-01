@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 5550591638646236349, guid: c07947c00c1a521498ec4b1eaf8c3044, type: 3}
   projectileCount: 1
-  damage: 1
   Speed: 25
-  cooldown: 1
+  delay: 0
+  spread: 0

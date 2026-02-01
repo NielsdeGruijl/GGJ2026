@@ -3,6 +3,7 @@ using UnityEngine;
 public class MaskSO : ScriptableObject
 {
     [SerializeField] public InventoryMask maskItem;
+    [SerializeField] public Sprite maskSprite;
     
     [SerializeField] protected float cooldown;
 

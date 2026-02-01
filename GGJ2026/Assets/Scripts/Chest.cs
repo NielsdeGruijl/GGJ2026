@@ -9,12 +9,19 @@ public class Chest : MonoBehaviour
     [SerializeField] private List<MaskSO> masks;
 
     [SerializeField] private Mask maskWorldItemPrefab;
+
+    [SerializeField] private float basePrice;
     
-    public int price;
+    [HideInInspector] public int price;
+    
     
     private void Awake()
     {
+        price = (int)(basePrice * DifficultyManager.instance.chestCostMult);
+
         chestName.gameObject.SetActive(false);
+        
+        DifficultyManager.instance.OnDifficultyChanged.AddListener(IncreasePrice);
 
         chestName.text = $"E (${price})";
     }
@@ -24,11 +31,17 @@ public class Chest : MonoBehaviour
         int randomIndex = Random.Range(0, masks.Count);
         
         Mask maskObject = Instantiate(maskWorldItemPrefab, transform.position, Quaternion.identity);
-        maskObject.maskSO = masks[randomIndex];
+        maskObject.Initialize(masks[randomIndex]);
         
         Destroy(gameObject);
     }
 
+    private void IncreasePrice()
+    {
+        price = (int)(basePrice * DifficultyManager.instance.chestCostMult);
+        chestName.text = $"E (${price})";
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.TryGetComponent<Player>(out Player player))

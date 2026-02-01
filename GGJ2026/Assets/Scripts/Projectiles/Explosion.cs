@@ -6,6 +6,8 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] private Transform sprite;
     
+    [SerializeField] private ParticleSystem particles;
+    
     [HideInInspector] public float range;
     [HideInInspector] public float damage;
     [HideInInspector] public float fuzeTimer;
@@ -24,17 +26,23 @@ public class Explosion : MonoBehaviour
     private IEnumerator StartTimerCo()
     {
         yield return new WaitForSeconds(fuzeTimer);
+
+        Destroy(sprite.gameObject);
+        
+        particles.Play();
         
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range);
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.TryGetComponent(out HealthManager enemy))
+            if (collider.TryGetComponent(out HealthManager enemy) && !collider.CompareTag("Player"))
             {
                 enemy.TakeDamage(damage);
             }
         }
 
+        
+        yield return new WaitForSeconds(particles.main.duration);
         Destroy(gameObject);
     }
 }

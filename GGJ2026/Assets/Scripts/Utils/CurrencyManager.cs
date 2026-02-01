@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -23,6 +24,8 @@ public class CurrencyManager : MonoBehaviour
     {
         money += amount;
 
+        PlayerLevelManager.instance.AddXP(amount);
+
         UpdateUI();
     }
 
@@ -38,7 +41,6 @@ public class CurrencyManager : MonoBehaviour
     {
         Coin coin;
         
-        Debug.Log(collider.TryGetComponent<Coin>(out coin));
         if (collider.TryGetComponent<Coin>(out coin))
         {
             AddMoney(coin.value);

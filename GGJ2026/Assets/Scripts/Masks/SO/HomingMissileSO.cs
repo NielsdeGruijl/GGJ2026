@@ -4,7 +4,6 @@ using UnityEngine;
 public class HomingMissileSO : MaskSO
 {
     [SerializeField] protected float damage;
-    [SerializeField] protected float damageMultiplier;
 
     public override InventoryMask MakeMask(Player pPlayer)
     {
@@ -14,7 +13,7 @@ public class HomingMissileSO : MaskSO
             return null;
         
         mask.cooldown = cooldown;
-        mask.damage = damage * damageMultiplier;
+        mask.damage = damage;
 
         return mask;
     }
