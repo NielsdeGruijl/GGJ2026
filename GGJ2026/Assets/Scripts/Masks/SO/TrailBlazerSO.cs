@@ -5,10 +5,13 @@ public class TrailBlazerSO : MaskSO
 {
     [SerializeField] private GameObject grenade;
     [SerializeField] private Explosion explosionPrefab;
+    [SerializeField] private float grenadeSpeed;
+    [SerializeField] private float explosionDelay;
     [SerializeField] private float explosionCount;
     [SerializeField] private float explosionRange;
     [SerializeField] private float explosionDamage;
-
+    [SerializeField] private float fuzeTimer;
+    
     public override InventoryMask MakeMask(Player pPlayer)
     {
         TrailBlazerMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity) as TrailBlazerMask;
@@ -19,6 +22,9 @@ public class TrailBlazerSO : MaskSO
         mask.explosionCount = explosionCount;
         mask.explosionRange = explosionRange;
         mask.explosionDamage = explosionDamage;
+        mask.fuzeTimer = fuzeTimer;
+        mask.grenadeSpeed = grenadeSpeed;
+        mask.explosionDelay = explosionDelay;
         
         return mask;
     }

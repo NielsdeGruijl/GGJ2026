@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 424619767841557156}
   - component: {fileID: 8245994213531890596}
   - component: {fileID: 7840996215647988887}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 1955803553996745439}
   - component: {fileID: 1437939615479378034}
   - component: {fileID: 993040976484893748}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 2446025391926272952}
   - component: {fileID: 8662950776992207428}
   - component: {fileID: 7505887987230851013}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.12, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1925416970210073101}
@@ -288,7 +288,12 @@ MonoBehaviour:
   chestName: {fileID: 993040976484893748}
   masks:
   - {fileID: 11400000, guid: 0c2b213bb7fc02d43a626dfd216f2f62, type: 2}
+  - {fileID: 11400000, guid: 08e9074af56a6cb488661ef88aee4c05, type: 2}
+  - {fileID: 11400000, guid: 1be085d0b9b907647b8b8698ff4140bc, type: 2}
+  - {fileID: 11400000, guid: 1c637f085d64dff4c8e14581ff4938cd, type: 2}
+  - {fileID: 11400000, guid: 8b174c1adf08e1745a6ad23e3db964ac, type: 2}
   maskWorldItemPrefab: {fileID: 4143406506364547360, guid: 579f4cc6568d0444ab338b90aa2e3f99, type: 3}
+  basePrice: 5
   price: 5
 --- !u!58 &7505887987230851013
 CircleCollider2D:
@@ -336,7 +341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1925416970210073101}
   - component: {fileID: 7529176833689025212}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,8 +407,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4490565, g: 0.30987448, b: 0.2465574, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f6083c5b767edbc45884488b86b1168e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

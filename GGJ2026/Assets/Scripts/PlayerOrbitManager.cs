@@ -36,6 +36,12 @@ public class PlayerOrbitManager : MonoBehaviour
             DamagingMasks newMask = pMask as DamagingMasks;
             IncreaseCollisionDamage(newMask.damagePerStack);
         }
+
+        if (pMask is SpeedMask)
+        {
+            SpeedMask newMask = pMask as SpeedMask;
+            GetComponent<Player>().speedMult *= newMask.speedMult;
+        }
         
         if (currentRingItemNum >= currentRingCapacity)
             CreateNewOrbitRing();
@@ -51,12 +57,12 @@ public class PlayerOrbitManager : MonoBehaviour
 
     private void IncreaseCollisionDamage(float damageIncrease)
     {
+        maskCollisionDamage += damageIncrease;
+        
         foreach (InventoryMask mask in masks)
         {
             if(!mask.collisionDamageEnabled)
                 mask.collisionDamageEnabled = true;
-            
-            maskCollisionDamage += damageIncrease;
             
             mask.collisionDamage = maskCollisionDamage;
         }

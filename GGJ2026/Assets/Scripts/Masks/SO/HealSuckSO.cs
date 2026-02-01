@@ -4,6 +4,7 @@ using UnityEngine;
 public class HealSuckSO : MaskSO
 {
     [SerializeField] private float lifeSteal;
+    [SerializeField] private float healPercent;
     [SerializeField] private float succRange;
     [SerializeField] private float succDuration;
     
@@ -13,6 +14,7 @@ public class HealSuckSO : MaskSO
 
         mask.cooldown = cooldown;
         mask.damage = lifeSteal;
+        mask.healPrecent = healPercent;
         mask.succRange = succRange;
         mask.succDuration = succDuration;
         

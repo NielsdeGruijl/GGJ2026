@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryMask :  MonoBehaviour
 {
     [SerializeField] protected float baseMoveSpeed = 1;
-    [SerializeField] protected float bonusMoveSpeed = 0.1f;
+    protected float bonusMoveSpeed = 0.25f;
     
     [HideInInspector] public float cooldown;
     [HideInInspector] public int numInRing;
@@ -44,7 +44,6 @@ public class InventoryMask :  MonoBehaviour
     {
         if (other.TryGetComponent(out HealthManager enemy))
         {
-            Debug.Log(collisionDamage + "" + collisionDamageEnabled);
             if(collisionDamageEnabled)
                 enemy.TakeDamage(collisionDamage);
         }

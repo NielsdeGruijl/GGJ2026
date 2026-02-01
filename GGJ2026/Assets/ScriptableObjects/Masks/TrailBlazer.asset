@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: TrailBlazer
   m_EditorClassIdentifier: 
   maskItem: {fileID: 5527358570828765818, guid: 477aa2c27a94b0343b398bba000f9ce3, type: 3}
-  cooldown: 10
+  maskSprite: {fileID: 21300000, guid: 1d47bd77c3ddda64abe247dddc494c4c, type: 3}
+  cooldown: 4
   grenade: {fileID: 7213107351690057825, guid: 73a544a162dfbf3489c63c4e5ab424a6, type: 3}
   explosionPrefab: {fileID: 4840821342305155287, guid: 1717efbc7ee4abe428a769e397ff5b89, type: 3}
+  grenadeSpeed: 10
+  explosionDelay: 0.2
   explosionCount: 4
   explosionRange: 1.5
-  explosionDamage: 1
+  explosionDamage: 100
+  fuzeTimer: 0.5

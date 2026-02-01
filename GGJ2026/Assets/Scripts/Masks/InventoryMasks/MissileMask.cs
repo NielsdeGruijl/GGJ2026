@@ -19,7 +19,7 @@ public class MissileMask : InventoryMask
         {
             Projectile projectileObject = Instantiate(projectile.projectilePrefab, transform.position, Quaternion.identity);
             projectileObject.SetSpeed(projectile.Speed);
-            projectileObject.SetDamage(projectile.damage + damage);
+            projectileObject.SetDamage(damage);
             
             yield return new WaitForSeconds(cooldown);
         }
