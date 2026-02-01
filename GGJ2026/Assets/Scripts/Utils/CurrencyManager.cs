@@ -1,7 +1,10 @@
+using TMPro;
 using UnityEngine;
 
 public class CurrencyManager : MonoBehaviour
 {
+    [SerializeField] private TMP_Text moneyText;
+    
     public int money;
 
     public bool Purchase(int cost)
@@ -10,14 +13,25 @@ public class CurrencyManager : MonoBehaviour
             return false;
         
         money -= cost;
+        
+        UpdateUI();
+        
         return true;
     }
 
     public void AddMoney(int amount)
     {
         money += amount;
+
+        UpdateUI();
+    }
+
+    private void UpdateUI()
+    {
+        if (!moneyText)
+            return;
         
-        Debug.Log(money);
+        moneyText.text = $"${money}";
     }
 
     void OnTriggerEnter2D(Collider2D collider)

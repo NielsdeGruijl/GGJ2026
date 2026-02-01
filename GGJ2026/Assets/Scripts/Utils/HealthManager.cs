@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+    [SerializeField] private Slider healthbar;
+    
     [SerializeField] private float maxHealth;
-
+    
     public UnityEvent OnDeath;
     
     private float currentHealth;
@@ -13,6 +16,8 @@ public class HealthManager : MonoBehaviour
     private void Awake()
     {
         currentHealth = maxHealth;
+        
+        UpdateHealthBar();
     }
     
     public void TakeDamage(float damage)
@@ -24,6 +29,8 @@ public class HealthManager : MonoBehaviour
             OnDeath.Invoke();
             Destroy(gameObject);
         }
+
+        UpdateHealthBar();
     }
 
     public void AddHealth(float amount)
@@ -34,5 +41,15 @@ public class HealthManager : MonoBehaviour
             currentHealth = maxHealth;
         
         Debug.Log("Health: " + amount);
+
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        if (!healthbar)
+            return;
+        
+        healthbar.value = currentHealth / maxHealth;
     }
 }
