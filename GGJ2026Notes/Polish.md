@@ -1,0 +1,2 @@
+- Make missiles shoot outward vs upward by default
+- damage popups polish
