@@ -5,9 +5,9 @@ public class SpeedMaskSO : MaskSO
 {
     [SerializeField] private float speedMult = 1;
 
-    public override InventoryMask MakeMask(Player pPlayer)
+    public override InventoryMask MakeMask(Transform pPlayer)
     {
-        SpeedMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity) as SpeedMask;
+        SpeedMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as SpeedMask;
         mask.speedMult = speedMult;
         
         return mask;

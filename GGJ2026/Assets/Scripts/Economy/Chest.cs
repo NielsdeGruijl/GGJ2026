@@ -33,6 +33,7 @@ public class Chest : MonoBehaviour
         Mask maskObject = Instantiate(maskWorldItemPrefab, transform.position, Quaternion.identity);
         maskObject.Initialize(masks[randomIndex]);
         
+        
         Destroy(gameObject);
     }
 
@@ -44,18 +45,16 @@ public class Chest : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Player>(out Player player))
+        if (other.CompareTag("Player"))
         {
-            player.canPurchaseChest = true;
             chestName.gameObject.SetActive(true);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.CompareTag("Player"))
         {
-            player.canPurchaseChest = true;
             chestName.gameObject.SetActive(false);
         }
     }

@@ -45,8 +45,7 @@ public class TrailBlazerMask : InventoryMask
 
                 Explosion explosionObject = Instantiate(explosionPrefab, go.transform.position, Quaternion.identity);
                 explosionObject.Initialize(explosionRange, explosionDamage, fuzeTimer);
-            
-                Debug.Log(go.transform.position);
+
                 i++;
             }
         

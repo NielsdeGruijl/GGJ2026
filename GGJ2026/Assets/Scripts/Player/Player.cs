@@ -18,26 +18,21 @@ public class Player : MonoBehaviour
 
     [HideInInspector] public float speedMult = 1;
     
-    private PlayerOrbitManager orbitManager;
+    // Components
     private CurrencyManager currencyManager;
     private HealthManager healthManager;
     
+    private Rigidbody2D rigidBody;
     private PlayerInput playerInput;
-
+    
+    // private variables
     private List<Chest> chests = new List<Chest>();
     
     private Vector2 moveDirection;
 
-    private Rigidbody2D rigidBody;
-
-    private Vector2 velocity;
-
-    public bool canPurchaseChest = false;
-    
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        orbitManager = GetComponent<PlayerOrbitManager>();
         currencyManager = GetComponent<CurrencyManager>();
         healthManager = GetComponent<HealthManager>();
 
@@ -50,52 +45,40 @@ public class Player : MonoBehaviour
         
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.gravityScale = 0;
-
-        speedMult = 1;
     }
 
     void MovePlayer(InputAction.CallbackContext pContext)
     {
-        animator.SetBool("Walking", true);
-        
         moveDirection = pContext.ReadValue<Vector2>();
+        
+        // Animations
+        
+        animator.SetBool("Walking", true);
         
         if(moveDirection == Vector2.zero)
             animator.SetBool("Walking", false);
-        
         
         if(moveDirection.x < 0)
             animator.SetFloat("WalkDir", -1);
         else
             animator.SetFloat("WalkDir", 1);
-        
-        velocity = moveDirection * moveSpeed;
     }
 
     private void FixedUpdate()
     {
         rigidBody.AddForce(moveDirection * (moveSpeed * PlayerLevelManager.instance.playerSpeedMult * speedMult));
 
+        
+        // Move to coin script!!
         foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), succRadius, coinPullMask))
         {
             Vector2 moveDir = col.transform.position.ToVector2() - transform.position.ToVector2();
-            
-            //Debug.Log(moveDir * (moveSpeed * Time.fixedDeltaTime));
             
             col.transform.position = Vector2.MoveTowards(
                 col.transform.position, 
                 transform.position, 
                 (pullSpeed / moveDir.magnitude) * Time.fixedDeltaTime);
-            
-            //col.transform.Translate(((moveDir.normalized * pullSpeed / moveDir.magnitude) * Time.fixedDeltaTime));
         }
-    }
-
-    private void EquipMask(MaskSO mask)
-    {
-        mask.Equip(this);
-        
-        orbitManager.AddMask(mask.MakeMask(this));
     }
 
     private void PurchaseChest(InputAction.CallbackContext pContext)
@@ -114,13 +97,6 @@ public class Player : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Mask>(out Mask mask))
-        {
-            EquipMask(mask.maskSO);
-            
-            Destroy(collision.gameObject);
-        }
-
         if (collision.TryGetComponent<Chest>(out Chest chest))
         {
             chests.Add(chest);

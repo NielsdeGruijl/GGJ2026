@@ -30,7 +30,8 @@ public class EnemySpawner : MonoBehaviour
             while (i < spawnCount)
             {
                 int randomSpawnpoint = Random.Range(0, spawnPoints.Count);
-                Enemy enemyObject = Instantiate(enemyPrefab, spawnPoints[randomSpawnpoint].position.ToVector2(), Quaternion.identity);
+                Enemy enemyObject = ObjectPool.instance.Get("Enemies").GetComponent<Enemy>();
+                enemyObject.transform.position = spawnPoints[randomSpawnpoint].position.ToVector2();
                 enemyObject.Initialize(player.transform);
 
                 i++;

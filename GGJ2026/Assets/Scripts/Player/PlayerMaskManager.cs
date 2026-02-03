@@ -1,16 +1,17 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerOrbitManager : MonoBehaviour
+public class PlayerMaskManager : MonoBehaviour
 {
     public List<InventoryMask> masks;
 
-    [SerializeField] private int currentRingIndex = 0;
     [SerializeField] private int currentRingCapacity = 5;
     [SerializeField] private int RingCapacityIncrement = 2;
     [SerializeField] private float ringRadius = 1;
     [SerializeField] private float ringRadiusIncrement = 1;
 
+    private int currentRingIndex = 0;
     private int currentRingItemNum = 0;
 
     private float maskCollisionDamage = 0;
@@ -65,6 +66,16 @@ public class PlayerOrbitManager : MonoBehaviour
                 mask.collisionDamageEnabled = true;
             
             mask.collisionDamage = maskCollisionDamage;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.TryGetComponent(out Mask mask))
+        {
+            AddMask(mask.maskSO.MakeMask(transform));
+            
+            Destroy(other.gameObject);
         }
     }
 }

@@ -45,7 +45,7 @@ public class CurrencyManager : MonoBehaviour
         {
             AddMoney(coin.value);
             
-            Destroy(collider.gameObject);
+            ObjectPool.instance.PoolObject("Coins", coin.gameObject);
         }
     }
 }

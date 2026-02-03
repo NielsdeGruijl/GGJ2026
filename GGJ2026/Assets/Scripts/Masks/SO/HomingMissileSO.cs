@@ -5,9 +5,9 @@ public class HomingMissileSO : MaskSO
 {
     [SerializeField] protected float damage;
 
-    public override InventoryMask MakeMask(Player pPlayer)
+    public override InventoryMask MakeMask(Transform pPlayer)
     {
-        MissileMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity) as MissileMask;
+        MissileMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as MissileMask;
 
         if (!mask)
             return null;

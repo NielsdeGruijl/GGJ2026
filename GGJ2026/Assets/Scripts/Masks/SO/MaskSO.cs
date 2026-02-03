@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class MaskSO : ScriptableObject
 {
-    [SerializeField] public InventoryMask maskItem;
-    [SerializeField] public Sprite maskSprite;
+    public string maskName;
+    public InventoryMask maskItem;
+    public Sprite maskSprite;
     
     [SerializeField] protected float cooldown;
 
     protected bool isActive = false;
 
-    public virtual InventoryMask MakeMask(Player pPlayer)
+    public virtual InventoryMask MakeMask(Transform pPlayer)
     {
         return Instantiate(maskItem);
     }
