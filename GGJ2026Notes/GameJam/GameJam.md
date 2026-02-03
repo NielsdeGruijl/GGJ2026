@@ -9,6 +9,6 @@ Current todo:
 
 - Optimization > 
 	- collect all coin item?
-	- item pool?
+	- item pool? (Implement for coins)
 
 

@@ -57,10 +57,10 @@ public class HealSuckMask : InventoryMask
             
             while (timeElapsed < succDuration)
             {
-                if (!target)
+                if (!target.isActiveAndEnabled)
                     target = FindTarget();
 
-                if (!target)
+                if (!target.isActiveAndEnabled)
                     break;
                 
                 lineRenderer.SetPosition(0, transform.position);
@@ -69,8 +69,11 @@ public class HealSuckMask : InventoryMask
                 float actualDamage = damage * Time.deltaTime;
                 
                 // do enemy damage, heal player
-                target.TakeDamage(actualDamage, true);
-                player.AddHealth(actualDamage * healPrecent);
+                if (target.isActiveAndEnabled)
+                {
+                    target.TakeDamage(actualDamage, true);
+                    player.AddHealth(actualDamage * healPrecent);
+                }
                 
                 timeElapsed += Time.deltaTime;
                 yield return null;

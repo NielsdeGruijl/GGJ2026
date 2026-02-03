@@ -68,10 +68,12 @@ public class Enemy : MonoBehaviour
     
     private void DropCoins()
     {
-        Coin coinObject = Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        Coin coinObject = ObjectPool.instance.Get("Coins").GetComponent<Coin>();//Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        coinObject.transform.position = transform.position;
         coinObject.value = coinValue;
         
-        Destroy(gameObject);
+        ObjectPool.instance.PoolObject("Enemies", gameObject);
+        //Destroy(gameObject);
     }
 
     private void FixedUpdate()
@@ -88,6 +90,9 @@ public class Enemy : MonoBehaviour
     {
         while (target)
         {
+            if (!gameObject.activeSelf)
+                break;
+            
             Vector2 moveDirection = target.transform.position.ToVector2() - transform.position.ToVector2();
             moveDirection.Normalize();
             velocity = moveDirection * moveSpeed;

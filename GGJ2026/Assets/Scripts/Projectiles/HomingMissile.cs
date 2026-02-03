@@ -74,18 +74,6 @@ public class HomingMissile : Projectile
         float angleStep = dirNormal * turnspeed;
         transform.Rotate(0, 0, angleStep);
     }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        HealthManager enemyManager;
-
-        if (collider.TryGetComponent<HealthManager>(out enemyManager))
-        {
-            enemyManager.TakeDamage(damage);
-            
-            Destroy(gameObject);
-        }
-    }
     
     bool IsLeft(Vector2 A, Vector2 B)
     {

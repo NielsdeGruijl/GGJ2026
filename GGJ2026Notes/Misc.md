@@ -1,0 +1,6 @@
+- Add "time survived" to end screen.
+	- Make timer listen to player death event
+	- make player fetch time survived on death
+- Add mask damage values to end screen
+	- Make every mask keep track of their damage done
+	- Add it all up on player death

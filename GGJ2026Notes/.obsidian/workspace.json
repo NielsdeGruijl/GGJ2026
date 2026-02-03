@@ -11,20 +11,16 @@
             "id": "bac33d50bf66ca01",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PlayerController.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "PlayerController"
+              "title": "New tab"
             }
           }
         ]
       },
       {
-        "id": "2d0be7852b94a30d",
+        "id": "b981ae4be30a9f17",
         "type": "tabs",
         "children": [
           {
@@ -110,7 +106,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Mask system.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -120,7 +115,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Mask system"
+              "title": "Backlinks"
             }
           },
           {
@@ -201,12 +196,22 @@
   },
   "active": "bac33d50bf66ca01",
   "lastOpenFiles": [
+    "Post-GameJam.md",
+    "Misc.md",
+    "Masks.md",
+    "GameJam/UI.md",
+    "GameJam/Polish.md",
+    "GameJam/Mask system.md",
+    "GameJam/GameJam.md",
+    "GameJam/Enemies.md",
+    "GameJam/Art.md",
+    "GameJam",
+    "UI.md",
     "Polish.md",
-    "Main tasks.md",
-    "Art.md",
-    "Enemies.md",
     "Mask system.md",
-    "PlayerController.md",
-    "UI.md"
+    "Main tasks.md",
+    "Enemies.md",
+    "Art.md",
+    "PlayerController.md"
   ]
 }

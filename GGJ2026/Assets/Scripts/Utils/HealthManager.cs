@@ -13,6 +13,10 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float maxHealth;
 
     [SerializeField] private bool isEnemy;
+
+    [SerializeField] private bool canDie = true;
+
+    private bool isDead = false;
     
     public UnityEvent OnDeath;
 
@@ -46,8 +50,9 @@ public class HealthManager : MonoBehaviour
         
         currentHealth -= damage;
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && canDie && !isDead)
         {
+            isDead = true;
             OnDeath.Invoke();
         }
 

@@ -7,9 +7,9 @@ public class BurstMaskSO : MaskSO
     [SerializeField] private float damagePerBullet;
     [SerializeField] private int bulletsPerBurst;
     
-    public override InventoryMask MakeMask(Player pPlayer)
+    public override InventoryMask MakeMask(Transform pPlayer)
     {
-        BurstMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity) as BurstMask;
+        BurstMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as BurstMask;
         mask.bulletPrefab = bulletPrefab;
         mask.cooldown = cooldown;
         mask.damage = damagePerBullet;

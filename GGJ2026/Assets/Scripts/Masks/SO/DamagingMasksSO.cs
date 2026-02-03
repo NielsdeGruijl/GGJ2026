@@ -5,9 +5,9 @@ public class DamagingMasksSO : MaskSO
 {
     [SerializeField] private float collisionDamagePerStack;
     
-    public override InventoryMask MakeMask(Player pPlayer)
+    public override InventoryMask MakeMask(Transform pPlayer)
     {
-        DamagingMasks maskObject = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity) as DamagingMasks;
+        DamagingMasks maskObject = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as DamagingMasks;
 
         if (!maskObject)
             return null;

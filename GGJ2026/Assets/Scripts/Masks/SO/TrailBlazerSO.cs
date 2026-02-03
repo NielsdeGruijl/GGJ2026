@@ -12,9 +12,9 @@ public class TrailBlazerSO : MaskSO
     [SerializeField] private float explosionDamage;
     [SerializeField] private float fuzeTimer;
     
-    public override InventoryMask MakeMask(Player pPlayer)
+    public override InventoryMask MakeMask(Transform pPlayer)
     {
-        TrailBlazerMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity) as TrailBlazerMask;
+        TrailBlazerMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as TrailBlazerMask;
 
         mask.cooldown = cooldown;
         mask.grenade = grenade;

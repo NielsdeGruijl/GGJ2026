@@ -4,13 +4,15 @@
 	- Adds bullet to base ability
 	- Adds player damage aura
 	- Ricochets bullets
-	- Trailblazer
-	- life steal beams
 
 Done:
 - Shoot bullet at mouse position
 - masks do damage
 - Shoots missile actively following mouse
+- Trailblazer
+- life steal beams
+- Speed masks
+
 
 Player pickup mask object
 Player takes data from maskSO

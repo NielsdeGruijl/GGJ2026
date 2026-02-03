@@ -8,9 +8,9 @@ public class HealSuckSO : MaskSO
     [SerializeField] private float succRange;
     [SerializeField] private float succDuration;
     
-    public override InventoryMask MakeMask(Player pPlayer)
+    public override InventoryMask MakeMask(Transform pPlayer)
     {
-        HealSuckMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity) as HealSuckMask;
+        HealSuckMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as HealSuckMask;
 
         mask.cooldown = cooldown;
         mask.damage = lifeSteal;
