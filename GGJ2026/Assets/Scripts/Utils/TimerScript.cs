@@ -1,6 +1,6 @@
-using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TimerScript : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class TimerScript : MonoBehaviour
     private void Start()
     {
         StartTimer();
+
+        SceneManager.activeSceneChanged += SetSessionTimeSurvived;
     }
 
     public void StartTimer()
@@ -30,11 +32,11 @@ public class TimerScript : MonoBehaviour
         if (timerStarted)
         {
             timeElapsed += Time.deltaTime;
-            UpdateTimer();
+            timerText.text = GetTimerText();
         }
     }
 
-    private void UpdateTimer()
+    private string GetTimerText()
     {
         int secondsElapsed = (int)timeElapsed;
 
@@ -55,6 +57,14 @@ public class TimerScript : MonoBehaviour
         else
             secondsText = seconds.ToString();
         
-        timerText.text = $"{minutesText}:{secondsText}";
+        return $"{minutesText}:{secondsText}";
+    }
+
+    public void SetSessionTimeSurvived(Scene current, Scene next)
+    {
+        Debug.Log((SessionData.instance != null) + "at " + GetTimerText());
+        
+        if(SessionData.instance)
+            SessionData.instance.timeSurvived = GetTimerText();
     }
 }

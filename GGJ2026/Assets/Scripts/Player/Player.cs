@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,10 +18,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float succRadius;
 
     [HideInInspector] public float speedMult = 1;
-    
+
     // Components
     private CurrencyManager currencyManager;
     private HealthManager healthManager;
+    private PlayerMaskData playerMaskData;
     
     private Rigidbody2D rigidBody;
     private PlayerInput playerInput;
@@ -40,6 +42,8 @@ public class Player : MonoBehaviour
         playerInput.actions["Move"].canceled += MovePlayer;
 
         playerInput.actions["Purchase"].started += PurchaseChest;
+
+        playerInput.actions["Die"].started += TestDie;
         
         healthManager.OnDeath.AddListener(Die);
         
@@ -47,6 +51,12 @@ public class Player : MonoBehaviour
         rigidBody.gravityScale = 0;
     }
 
+    public void SetMaskData(PlayerMaskData maskData)
+    {
+        playerMaskData = maskData;
+    }
+    
+    
     void MovePlayer(InputAction.CallbackContext pContext)
     {
         moveDirection = pContext.ReadValue<Vector2>();
@@ -66,7 +76,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.AddForce(moveDirection * (moveSpeed * PlayerLevelManager.instance.playerSpeedMult * speedMult));
+        rigidBody.AddForce(moveDirection * (moveSpeed * PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult));
 
         
         // Move to coin script!!
@@ -90,9 +100,39 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void TestDie(InputAction.CallbackContext ctx)
+    {
+        Die();
+    }
+    
     private void Die()
     {
+        UpdateSessionData();
+        StartCoroutine(DieCo());
+    }
+
+    private IEnumerator DieCo()
+    {
+        yield return null;
         SceneManager.LoadScene(2);
+    }
+
+    private void UpdateSessionData()
+    {
+        foreach (string key in playerMaskData.maskKeys)
+        {
+            MaskData sessionMaskData = new MaskData();
+            sessionMaskData.damageDealt = playerMaskData.maskTypeDamageDealt[key];
+
+            if (sessionMaskData.damageDealt <= 0)
+                continue;
+            
+            sessionMaskData.maskName = playerMaskData.sortedMasks[key][0].maskData.maskName;
+            sessionMaskData.maskSprite = playerMaskData.sortedMasks[key][0].maskData.maskSprite;
+            sessionMaskData.maskCount = playerMaskData.sortedMasks[key].Count;
+            
+            SessionData.instance.maskData.Add(sessionMaskData);
+        }
     }
     
     void OnTriggerEnter2D(Collider2D collision)

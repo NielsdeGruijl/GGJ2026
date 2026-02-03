@@ -5,16 +5,16 @@ using UnityEngine.InputSystem;
 
 public class BurstMask : InventoryMask
 {
-    [HideInInspector] public Projectile bulletPrefab;
-    [HideInInspector] public float damage;
-    [HideInInspector] public int bulletCount;
-
     private Camera cam;
+
+    private BurstMaskSO newMaskData;
     
-    public override void Activate()
+    public override void Activate(PlayerMaskData playerMaskData)
     {
-        base.Activate();
+        base.Activate(playerMaskData);
         cam = Camera.main;
+        
+        newMaskData = maskData as BurstMaskSO;
         
         StartCoroutine(FireBurstCo());
     }
@@ -27,17 +27,19 @@ public class BurstMask : InventoryMask
             Vector2 shootDirection = cam.ScreenToWorldPoint(mousePosition) - transform.position;
             shootDirection.Normalize();
 
-            for (int i = 0; i < bulletCount; i++)
+            for (int i = 0; i < newMaskData.bulletsPerBurst; i++)
             {
-                Projectile bulletObject = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+                Projectile bulletObject = Instantiate(newMaskData.bulletPrefab, transform.position, Quaternion.identity);
                 bulletObject.velocity = shootDirection;
-                bulletObject.SetDamage(damage);
+                bulletObject.SetDamage(newMaskData.damagePerBullet);
                 
-                if(i != bulletCount - 1)
+                bulletObject.OnHit.AddListener(UpdateDamageDealt);
+                
+                if(i != newMaskData.bulletsPerBurst - 1)
                     yield return new WaitForSeconds(0.1f);
             }
 
-            yield return new WaitForSeconds(cooldown);
+            yield return new WaitForSeconds(maskData.cooldown);
         }
     }
 }

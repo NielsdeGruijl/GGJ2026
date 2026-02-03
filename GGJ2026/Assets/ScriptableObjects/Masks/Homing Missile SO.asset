@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4a5de6ac9b78747b2346209847b538, type: 3}
   m_Name: Homing Missile SO
   m_EditorClassIdentifier: 
+  maskName: Homing
   maskItem: {fileID: 1612334761132108270, guid: 47685e8b70466254aae880ec0df2dbee, type: 3}
   maskSprite: {fileID: 21300000, guid: b339f5b51bdada848a98f651ee5c1f2c, type: 3}
   cooldown: 2

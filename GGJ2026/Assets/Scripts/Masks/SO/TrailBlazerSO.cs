@@ -3,28 +3,30 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Masks/TrailBlazer")]
 public class TrailBlazerSO : MaskSO
 {
-    [SerializeField] private GameObject grenade;
-    [SerializeField] private Explosion explosionPrefab;
-    [SerializeField] private float grenadeSpeed;
-    [SerializeField] private float explosionDelay;
-    [SerializeField] private float explosionCount;
-    [SerializeField] private float explosionRange;
-    [SerializeField] private float explosionDamage;
-    [SerializeField] private float fuzeTimer;
+    public GameObject grenade;
+    public Explosion explosionPrefab;
+    public float grenadeSpeed;
+    public float explosionDelay;
+    public float explosionCount;
+    public float explosionRange;
+    public float explosionDamage;
+    public float fuzeTimer;
     
     public override InventoryMask MakeMask(Transform pPlayer)
     {
-        TrailBlazerMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as TrailBlazerMask;
+        TrailBlazerMask mask = base.MakeMask(pPlayer) as TrailBlazerMask;
 
-        mask.cooldown = cooldown;
-        mask.grenade = grenade;
+        if (!mask)
+            return null;
+        
+        /*mask.grenade = grenade;
         mask.explosionPrefab = explosionPrefab;
         mask.explosionCount = explosionCount;
         mask.explosionRange = explosionRange;
         mask.explosionDamage = explosionDamage;
         mask.fuzeTimer = fuzeTimer;
         mask.grenadeSpeed = grenadeSpeed;
-        mask.explosionDelay = explosionDelay;
+        mask.explosionDelay = explosionDelay;*/
         
         return mask;
     }

@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     private bool canAttack;
 
-    [HideInInspector] public Transform target;
+    private Transform target;
 
     private void Awake()
     {
@@ -38,17 +38,18 @@ public class Enemy : MonoBehaviour
         healthManager = GetComponent<HealthManager>();
         
         healthManager.OnDeath.AddListener(DropCoins);
+        
+        StartCoroutine(FindPathToPlayer());
     }
 
     private void Update()
     {
         if ((target.transform.position.ToVector2() - transform.position.ToVector2()).magnitude < attackRange && canAttack)
         {
-            if (target.TryGetComponent(out HealthManager manager))
+            if (target.TryGetComponent(out HealthManager targetHealth))
             {
-                manager.TakeDamage(damage * DifficultyManager.instance.enemyDamageMult);
+                targetHealth.TakeDamage(damage * DifficultyManager.instance.enemyDamageMult);
             }
-            //target.GetComponent<HealthManager>().TakeDamage(damage * DifficultyManager.instance.enemyDamageMult);
             canAttack = false;
             timeElapsed = 0;
         }
@@ -68,12 +69,11 @@ public class Enemy : MonoBehaviour
     
     private void DropCoins()
     {
-        Coin coinObject = ObjectPool.instance.Get("Coins").GetComponent<Coin>();//Instantiate(coinPrefab, transform.position, Quaternion.identity);
+        Coin coinObject = ObjectPool.instance.Get("Coins").GetComponent<Coin>();
         coinObject.transform.position = transform.position;
         coinObject.value = coinValue;
         
         ObjectPool.instance.PoolObject("Enemies", gameObject);
-        //Destroy(gameObject);
     }
 
     private void FixedUpdate()

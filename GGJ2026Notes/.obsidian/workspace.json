@@ -11,10 +11,14 @@
             "id": "bac33d50bf66ca01",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Post-GameJam.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Post-GameJam"
             }
           }
         ]
@@ -194,9 +198,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "bac33d50bf66ca01",
+  "active": "1b04716c79bed8dd",
   "lastOpenFiles": [
     "Post-GameJam.md",
+    "PlayerController.md",
+    "Data architecture.md",
     "Misc.md",
     "Masks.md",
     "GameJam/UI.md",
@@ -211,7 +217,6 @@
     "Mask system.md",
     "Main tasks.md",
     "Enemies.md",
-    "Art.md",
-    "PlayerController.md"
+    "Art.md"
   ]
 }

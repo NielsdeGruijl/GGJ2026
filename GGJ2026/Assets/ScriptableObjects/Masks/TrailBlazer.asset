@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a59025fc61e4774691904221502afdf, type: 3}
   m_Name: TrailBlazer
   m_EditorClassIdentifier: 
+  maskName: Trailblazer
   maskItem: {fileID: 5527358570828765818, guid: 477aa2c27a94b0343b398bba000f9ce3, type: 3}
   maskSprite: {fileID: 21300000, guid: 1d47bd77c3ddda64abe247dddc494c4c, type: 3}
   cooldown: 4
