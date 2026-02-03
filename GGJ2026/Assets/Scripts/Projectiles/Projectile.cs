@@ -1,5 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
+
+[Serializable]
+public class DamageEvent : UnityEvent<float>
+{
+}
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
@@ -11,6 +17,8 @@ public class Projectile : MonoBehaviour
     protected Rigidbody2D rigidBody;
 
     protected float damage;
+
+    public DamageEvent OnHit;
 
     private void Awake()
     {
@@ -38,6 +46,8 @@ public class Projectile : MonoBehaviour
         if (collision.TryGetComponent(out HealthManager enemy))
         {
             enemy.TakeDamage(damage);
+            OnHit.Invoke(damage);
+            OnHit.RemoveAllListeners();
             Destroy(gameObject);
         }
     }

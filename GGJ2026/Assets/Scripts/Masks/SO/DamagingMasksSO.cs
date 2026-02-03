@@ -3,18 +3,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Masks/Damaing Masks")]
 public class DamagingMasksSO : MaskSO
 {
-    [SerializeField] private float collisionDamagePerStack;
+    public float collisionDamagePerStack;
     
     public override InventoryMask MakeMask(Transform pPlayer)
     {
-        DamagingMasks maskObject = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as DamagingMasks;
+        DamagingMask mask = base.MakeMask(pPlayer) as DamagingMask;
 
-        if (!maskObject)
+        if (!mask)
             return null;
         
-        maskObject.cooldown = cooldown;
-        maskObject.damagePerStack = collisionDamagePerStack;
-        
-        return maskObject;
+        return mask;
     }
 }

@@ -6,19 +6,23 @@ public class InventoryMask :  MonoBehaviour
 {
     [SerializeField] protected float baseMoveSpeed = 1;
     protected float bonusMoveSpeed = 0.25f;
-    
-    [HideInInspector] public float cooldown;
-    [HideInInspector] public int numInRing;
-    [HideInInspector] public int ringCapacity;
-    [HideInInspector] public float targetRadius;
 
-    [HideInInspector] public float collisionDamage = 0;
-    [HideInInspector] public bool collisionDamageEnabled = false;
+    [HideInInspector] public MaskSO maskData;
+
+    private int numInRing;
+    private int ringCapacity;
+    private float targetRadius;
     
     private float moveSpeed;
+
+    private PlayerMaskData playerMaskData;
+
+    public DamageEvent OnAuraDamage;
     
-    public virtual void Activate()
+    public virtual void Activate(PlayerMaskData pPlayerMaskData)
     {
+        playerMaskData = pPlayerMaskData;
+        
         moveSpeed = baseMoveSpeed + (ringCapacity * bonusMoveSpeed);
     }
 
@@ -27,25 +31,40 @@ public class InventoryMask :  MonoBehaviour
         Move();
     }
 
-    private void Move()
+    public void Initialize(int pNumInRing, int pRingCapacity, float pTargetRadius)
     {
-        transform.localPosition = GetMovePos();
-    }
-    
-    private Vector3 GetMovePos()
-    {
-        float fract = (((float)numInRing * (Mathf.PI * 2)) / (float)ringCapacity);
-        float xPos = Mathf.Cos((Time.time * moveSpeed) + fract);
-        float yPos = Mathf.Sin((Time.time * moveSpeed) + fract);
-        return new Vector3(xPos, yPos, 0) * targetRadius;
+        numInRing = pNumInRing;
+        ringCapacity = pRingCapacity;
+        targetRadius = pTargetRadius;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    private void Move()
     {
+        transform.localPosition = GetMovePosition();
+    }
+
+    protected void UpdateDamageDealt(float damage)
+    {
+        playerMaskData.maskTypeDamageDealt[maskData.maskName] += damage;
+    }
+    
+    private Vector3 GetMovePosition()
+    {
+        float fract = (((float)numInRing * (Mathf.PI * 2)) / (float)ringCapacity);
+        float xPosition = Mathf.Cos((Time.time * moveSpeed) + fract);
+        float yPosition = Mathf.Sin((Time.time * moveSpeed) + fract);
+        return new Vector3(xPosition, yPosition, 0) * targetRadius;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (playerMaskData.maskCollisionDamage <= 0)
+            return;
+     
         if (other.TryGetComponent(out HealthManager enemy))
-        {
-            if(collisionDamageEnabled)
-                enemy.TakeDamage(collisionDamage);
+        { 
+            enemy.TakeDamage(playerMaskData.maskCollisionDamage);
+            OnAuraDamage.Invoke(playerMaskData.maskCollisionDamage / playerMaskData.sortedMasks["DamagingAura"].Count);
         }
     }
 }

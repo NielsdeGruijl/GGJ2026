@@ -12,6 +12,8 @@ public class Explosion : MonoBehaviour
     [HideInInspector] public float damage;
     [HideInInspector] public float fuzeTimer;
 
+    public DamageEvent OnHit;
+    
     public void Initialize(float pRange, float pDamage, float pFuzeTimer)
     {
         range = pRange;
@@ -38,11 +40,12 @@ public class Explosion : MonoBehaviour
             if (collider.TryGetComponent(out HealthManager enemy) && !collider.CompareTag("Player"))
             {
                 enemy.TakeDamage(damage);
+                OnHit.Invoke(damage);
             }
         }
-
         
         yield return new WaitForSeconds(particles.main.duration);
+        OnHit.RemoveAllListeners();
         Destroy(gameObject);
     }
 }

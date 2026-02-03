@@ -5,14 +5,12 @@ using UnityEngine.Analytics;
 
 public class HomingMissile : Projectile
 {
-    [SerializeField] private float turnspeed = 15;
+    [SerializeField] private float turnSpeed = 15;
     
     private Collider2D activeTarget;
     
-    private float trackingRadius = 200;
+    private const float trackingRadius = 200;
 
-    private bool canRotate = true;
-    
     protected override void Start()
     {
         StartCoroutine(TrackTargetCo());
@@ -58,6 +56,9 @@ public class HomingMissile : Projectile
 
     private void RotateToTarget()
     {
+        if (!activeTarget || !activeTarget.isActiveAndEnabled)
+            activeTarget = FindTarget();
+
         if (!activeTarget)
             return;
         
@@ -71,7 +72,11 @@ public class HomingMissile : Projectile
         else
             dirNormal = -1;
         
-        float angleStep = dirNormal * turnspeed;
+        float angleStep = dirNormal * turnSpeed;
+        
+        if(diffAngle < turnSpeed)
+            angleStep = diffAngle * dirNormal;
+        
         transform.Rotate(0, 0, angleStep);
     }
     
