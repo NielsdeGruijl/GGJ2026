@@ -1,4 +1,0 @@
-- Player healthbar X
-- Player money X
-- Damage numbers X
-- heal numbers X

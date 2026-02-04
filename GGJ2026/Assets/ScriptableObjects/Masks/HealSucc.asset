@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31be61f2353298e48be2aad9ea8d69fa, type: 3}
   m_Name: HealSucc
   m_EditorClassIdentifier: 
+  maskName: Lifesteal
+  maskDescription: Sucks the life out of your foes
   maskItem: {fileID: 473088982335870634, guid: 96be5c48d3e9534448f6608621ff9af1, type: 3}
+  maskPrefab: {fileID: 0}
   maskSprite: {fileID: 21300000, guid: cfad9058d51c3af448f6c14fcb693e69, type: 3}
   cooldown: 5
   lifeSteal: 50

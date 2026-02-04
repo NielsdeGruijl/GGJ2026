@@ -2,5 +2,14 @@ using UnityEngine;
 
 public class SpeedMask : InventoryMask
 {
-    [HideInInspector] public float speedMult;
+    private SpeedMaskSO newMaskData;
+    
+    public override void Activate(PlayerMaskData playerMaskData)
+    {
+        base.Activate(playerMaskData);
+        
+        newMaskData = maskData as SpeedMaskSO;
+        
+        playerMaskData.playerMoveSpeedMult *= newMaskData.speedMult;
+    }
 }

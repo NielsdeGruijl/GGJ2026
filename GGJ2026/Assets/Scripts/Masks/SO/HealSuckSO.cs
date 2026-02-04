@@ -3,20 +3,22 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Masks/HealSucc")]
 public class HealSuckSO : MaskSO
 {
-    [SerializeField] private float lifeSteal;
-    [SerializeField] private float healPercent;
-    [SerializeField] private float succRange;
-    [SerializeField] private float succDuration;
+    public float lifeSteal;
+    public float healPercent;
+    public float succRange;
+    public float succDuration;
     
     public override InventoryMask MakeMask(Transform pPlayer)
     {
-        HealSuckMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity) as HealSuckMask;
+        HealSuckMask mask = base.MakeMask(pPlayer) as HealSuckMask;
 
-        mask.cooldown = cooldown;
-        mask.damage = lifeSteal;
+        if (!mask)
+            return null;
+        
+        /*mask.damage = lifeSteal;
         mask.healPrecent = healPercent;
         mask.succRange = succRange;
-        mask.succDuration = succDuration;
+        mask.succDuration = succDuration;*/
         
         return mask;
     }

@@ -55,7 +55,6 @@ MonoBehaviour:
   moveSpeed: 5
   attackRange: 1.5
   attackCooldown: 2
-  target: {fileID: 0}
 --- !u!58 &312843824609217552
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -218,7 +217,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 750997765
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8596640243658272642, guid: e1502828edac3a74797fb1099b5a430c, type: 3}

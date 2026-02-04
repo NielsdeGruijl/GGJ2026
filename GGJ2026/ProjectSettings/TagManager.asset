@@ -41,8 +41,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Enemie
+  - name: Background
+    uniqueID: 3256506251
+    locked: 0
+  - name: VFX
+    uniqueID: 1021653801
+    locked: 0
+  - name: GroundItems
+    uniqueID: 2697248485
+    locked: 0
+  - name: Entities
     uniqueID: 750997765
+    locked: 0
+  - name: Projectiles
+    uniqueID: 3490056021
     locked: 0
   - name: UI
     uniqueID: 371803435

@@ -3,18 +3,14 @@ using UnityEngine;
 
 public class TrailBlazerMask : InventoryMask
 {
-    [HideInInspector] public GameObject grenade;
-    [HideInInspector] public Explosion explosionPrefab;
-    [HideInInspector] public float explosionCount;
-    [HideInInspector] public float explosionDelay;
-    [HideInInspector] public float explosionRange;
-    [HideInInspector] public float explosionDamage;
-    [HideInInspector] public float fuzeTimer;
-    [HideInInspector] public float grenadeSpeed;
-
-    public override void Activate()
+    private TrailBlazerSO newMaskData;
+    
+    public override void Activate(PlayerMaskData playerMaskData)
     {
-        base.Activate();
+        base.Activate(playerMaskData);
+        
+        newMaskData = maskData as TrailBlazerSO;
+        
         StartCoroutine(SpawnExplosionsCo());
     }
 
@@ -24,7 +20,7 @@ public class TrailBlazerMask : InventoryMask
         
         while (true)
         {
-            GameObject go = Instantiate(grenade, transform.position, transform.rotation);
+            GameObject go = Instantiate(newMaskData.grenade, transform.position, transform.rotation);
             Vector2 moveDirection = Vector2.up;
             
             foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, 20))
@@ -36,22 +32,23 @@ public class TrailBlazerMask : InventoryMask
                 }
             }
             
-            go.GetComponent<Rigidbody2D>().AddForce(moveDirection * grenadeSpeed, ForceMode2D.Impulse);
+            go.GetComponent<Rigidbody2D>().AddForce(moveDirection * newMaskData.grenadeSpeed, ForceMode2D.Impulse);
         
             int i = 0;
-            while (i < explosionCount)
+            while (i < newMaskData.explosionCount)
             {
-                yield return new WaitForSeconds(explosionDelay);
+                yield return new WaitForSeconds(newMaskData.explosionDelay);
 
-                Explosion explosionObject = Instantiate(explosionPrefab, go.transform.position, Quaternion.identity);
-                explosionObject.Initialize(explosionRange, explosionDamage, fuzeTimer);
+                Explosion explosionObject = Instantiate(newMaskData.explosionPrefab, go.transform.position, Quaternion.identity);
+                explosionObject.Initialize(newMaskData.explosionRange, newMaskData.explosionDamage, newMaskData.fuzeTimer);
+                explosionObject.OnHit.AddListener(UpdateDamageDealt);
 
                 i++;
             }
         
             Destroy(go);
 
-            yield return new WaitForSeconds(cooldown);
+            yield return new WaitForSeconds(maskData.cooldown);
         }
     }
 }

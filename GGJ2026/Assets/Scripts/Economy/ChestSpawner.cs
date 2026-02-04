@@ -19,8 +19,6 @@ public class ChestSpawner : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(SpawnChestsCo());
-        
-        
     }
 
     private void SpawnChests(int chestCountToSpawn)

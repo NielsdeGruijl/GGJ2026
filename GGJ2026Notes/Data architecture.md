@@ -1,0 +1,2 @@
+- Can inventory masks be simplified further?
+	- One prefab with dynamic component addition?
