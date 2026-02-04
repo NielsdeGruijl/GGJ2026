@@ -14,9 +14,6 @@ public class BurstMaskSO : MaskSO
         if (!mask)
             return null;
         
-        /*mask.bulletPrefab = bulletPrefab;
-        mask.damage = damagePerBullet;
-        mask.bulletCount = bulletsPerBurst;*/
         return mask;
     }
 }

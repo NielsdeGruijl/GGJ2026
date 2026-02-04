@@ -14,9 +14,4 @@ public class HomingMissileSO : MaskSO
         
         return mask;
     }
-    
-    public override void Equip(Player pPlayer)
-    {
-        base.Equip(pPlayer);
-    }
 }

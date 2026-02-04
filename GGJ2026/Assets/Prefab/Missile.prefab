@@ -53,7 +53,7 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  turnSpeed: 7.5
+  turnSpeed: 5
 --- !u!50 &3700443128745337570
 Rigidbody2D:
   serializedVersion: 5
@@ -207,8 +207,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -804911275
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 7c8ea0cd8d6ebf844a291370daab4c6d, type: 3}

@@ -18,12 +18,12 @@ public class PopupManager : MonoBehaviour
         cam = Camera.main;
     }
 
-    public void CreatePopup(Vector2 position, float value)
+    public void CreatePopup(Vector2 position, float value, PopupType type = PopupType.Default)
     {
         Vector2 canvasPosition = cam.WorldToScreenPoint(position).ToVector2();
         
         DamagePopup popupObject = Instantiate(popup, canvasPosition, Quaternion.identity);
-        popupObject.Initialize(value);
+        popupObject.Initialize(value, type);
         popupObject.transform.SetParent(transform);
     }
 }

@@ -1,0 +1,1 @@
+- Mask orbit rings seemingly do not increase capacity

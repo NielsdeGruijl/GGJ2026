@@ -1,0 +1,2 @@
+- Mega magnet
+	- Picks up all available gems
