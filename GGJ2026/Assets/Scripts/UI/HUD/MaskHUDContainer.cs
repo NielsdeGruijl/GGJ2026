@@ -18,6 +18,7 @@ public class MaskHUDContainer : MonoBehaviour
         
         maskElements.Add(tag, Instantiate(maskHUDPrefab, transform));
         MaskHUD element = maskElements[tag];
+        element.transform.SetAsFirstSibling();
         element.Initialize(maskData);
     }
 }

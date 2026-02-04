@@ -264,3 +264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MaskHUD
   maskImage: {fileID: 7779595469957775610}
   maskCountText: {fileID: 6647304252238897663}
+  toolTip: {fileID: 0}
+  toolTipTitle: {fileID: 0}
+  toolTipBody: {fileID: 0}

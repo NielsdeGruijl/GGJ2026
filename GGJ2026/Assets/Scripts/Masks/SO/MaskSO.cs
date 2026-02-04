@@ -4,6 +4,7 @@ public class MaskSO : ScriptableObject
 {
     [Header("Base mask values")]
     public string maskName;
+    public string maskDescription;
     public InventoryMask maskItem;
     public GameObject maskPrefab;
     public Sprite maskSprite;

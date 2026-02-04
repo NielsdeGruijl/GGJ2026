@@ -1257,6 +1257,7 @@ GameObject:
   - component: {fileID: 1117240827}
   - component: {fileID: 1117240826}
   - component: {fileID: 1117240828}
+  - component: {fileID: 1117240829}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1311,6 +1312,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SessionData
   timeSurvived: 0
+--- !u!114 &1117240829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117240825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4bf08b04db382dcbd4cd10c97c9955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTipManager
+  tooltipCanvas: {fileID: 1876468111}
+  tooltipPrefab: {fileID: 6335698011120690955, guid: 9ab8676184a78f5e6aecbf2e0a13884e, type: 3}
 --- !u!1 &1182531013
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,6 +2986,6 @@ SceneRoots:
   - {fileID: 989228675988806744}
   - {fileID: 1191894573}
   - {fileID: 860172921}
-  - {fileID: 1876468112}
   - {fileID: 1559145102}
+  - {fileID: 1876468112}
   - {fileID: 5982148817891016566}
