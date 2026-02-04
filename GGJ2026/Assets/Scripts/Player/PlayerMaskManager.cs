@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerMaskManager : MonoBehaviour
 {
     [SerializeField] private int currentRingCapacity = 5;
-    [SerializeField] private int RingCapacityIncrement = 2;
+    [SerializeField] private float RingCapacityIncrement = 1.5f;
     [SerializeField] private float ringRadius = 1;
     [SerializeField] private float ringRadiusIncrement = 1;
 
+    [SerializeField] private MaskHUDContainer maskHUD;
+    
     private PlayerMaskData playerMaskData;
 
     private int currentRingIndex = 0;
@@ -19,8 +21,6 @@ public class PlayerMaskManager : MonoBehaviour
         playerMaskData = new PlayerMaskData();
         
         GetComponent<Player>().SetMaskData(playerMaskData);
-        
-        //Debug.Log("CollisionDamage: " + playerMaskData.maskCollisionDamage);
     }
 
     public void AddMask(InventoryMask pMask)
@@ -37,7 +37,6 @@ public class PlayerMaskManager : MonoBehaviour
         
         currentRingItemNum++;
         
-        
         if (currentRingItemNum >= currentRingCapacity)
             CreateNewOrbitRing();
     }
@@ -46,12 +45,14 @@ public class PlayerMaskManager : MonoBehaviour
     {
         currentRingIndex++;
         ringRadius += ringRadiusIncrement;
-        currentRingCapacity += RingCapacityIncrement;
+        currentRingCapacity = Mathf.FloorToInt(currentRingCapacity * RingCapacityIncrement);
         currentRingItemNum = 0;
     }
     
     private void UpdateEquippedMasks(InventoryMask newMask)
     {
+        maskHUD.AddMask(newMask.maskData);
+        
         if (playerMaskData.sortedMasks.ContainsKey(newMask.maskData.maskName))
         {
             playerMaskData.sortedMasks[newMask.maskData.maskName].Add(newMask);

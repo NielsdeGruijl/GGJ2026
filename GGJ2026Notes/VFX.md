@@ -1,0 +1,3 @@
+- Homing missile explosion
+- enemy death
+- Open chest VFX
