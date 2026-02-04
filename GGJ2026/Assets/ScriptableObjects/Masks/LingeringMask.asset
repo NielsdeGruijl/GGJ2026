@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: LingeringMask
   m_EditorClassIdentifier: Assembly-CSharp::LingeringMaskSO
   maskName: Lingering
+  maskDescription: Creates lingering pools that damage enemies
   maskItem: {fileID: 1223698929555089687, guid: 996b9528a04e34e438ac42179ba256cd, type: 3}
   maskPrefab: {fileID: 0}
   maskSprite: {fileID: 21300000, guid: 123288f487d762c45be5ad910db06460, type: 3}
