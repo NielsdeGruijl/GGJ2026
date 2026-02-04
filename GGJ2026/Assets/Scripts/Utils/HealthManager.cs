@@ -10,7 +10,7 @@ public class HealthManager : MonoBehaviour
     
     [SerializeField] private DamagePopup popup;
     
-    [SerializeField] private float maxHealth;
+    public float maxHealth;
 
     [SerializeField] private bool isEnemy;
 
@@ -58,7 +58,7 @@ public class HealthManager : MonoBehaviour
 
         if (!continuous)
         {
-            PopupManager.instance.CreatePopup(transform.position, damage);
+            CreateDamagePopup(damage);
         }
         else
         {
@@ -78,8 +78,6 @@ public class HealthManager : MonoBehaviour
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;
         
-        //Debug.Log("Health: " + amount);
-
         UpdateHealthBar();
     }
 
@@ -96,9 +94,20 @@ public class HealthManager : MonoBehaviour
         canStartPopup = false;
         yield return new WaitForSeconds(0.2f);
         
-        PopupManager.instance.CreatePopup(transform.position, damagePopupValue);
+        CreateDamagePopup(damagePopupValue);
         
         damagePopupValue = 0;
         canStartPopup = true;
+    }
+
+    private void CreateDamagePopup(float damage)
+    {
+        if (!isEnemy)
+        {
+            PopupManager.instance.CreatePopup(transform.position, damage, PopupType.Player);
+            return;
+        }
+        
+        PopupManager.instance.CreatePopup(transform.position, damage);
     }
 }

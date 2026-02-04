@@ -1,15 +1,19 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MissileMask : InventoryMask
 {
     [SerializeField] private ProjectileSO projectile;
     
-    [HideInInspector] public float damage;
-
-    public override void Activate()
+    private HomingMissileSO newMaskData;
+    
+    public override void Activate(PlayerMaskData playerMaskData)
     {
-        base.Activate();
+        base.Activate(playerMaskData);
+        
+        newMaskData = maskData as HomingMissileSO;
+        
         StartCoroutine(ShootMissileCo());
     }
     
@@ -19,9 +23,10 @@ public class MissileMask : InventoryMask
         {
             Projectile projectileObject = Instantiate(projectile.projectilePrefab, transform.position, Quaternion.identity);
             projectileObject.SetSpeed(projectile.Speed);
-            projectileObject.SetDamage(damage);
+            projectileObject.SetDamage(newMaskData.damage);
+            projectileObject.OnHit.AddListener(UpdateDamageDealt);
             
-            yield return new WaitForSeconds(cooldown);
+            yield return new WaitForSeconds(newMaskData.cooldown);
         }
     }
 }

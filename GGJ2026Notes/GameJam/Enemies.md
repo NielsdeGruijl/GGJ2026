@@ -1,5 +1,0 @@
-- Basic enemy 
-	- Runs at player
-	- Meele damage?
-	- Explodes on arrival?
-	- Ranged attacks?

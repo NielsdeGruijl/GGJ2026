@@ -2,21 +2,20 @@ using UnityEngine;
 
 public class MaskSO : ScriptableObject
 {
+    [Header("Base mask values")]
     public string maskName;
+    public string maskDescription;
     public InventoryMask maskItem;
+    public GameObject maskPrefab;
     public Sprite maskSprite;
     
-    [SerializeField] protected float cooldown;
-
-    protected bool isActive = false;
+    [Header("Mask stats")]
+    public float cooldown;
 
     public virtual InventoryMask MakeMask(Transform pPlayer)
     {
-        return Instantiate(maskItem);
-    }
-    
-    public virtual void Equip(Player pPlayer)
-    {
-        isActive = true;
+        InventoryMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity);
+        mask.maskData = this;
+        return mask;
     }
 }

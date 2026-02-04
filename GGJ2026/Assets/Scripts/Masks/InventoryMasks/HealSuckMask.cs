@@ -4,29 +4,37 @@ using UnityEngine;
 
 public class HealSuckMask : InventoryMask
 {
+    /*
     [HideInInspector] public float damage;
     [HideInInspector] public float healPrecent;
     [HideInInspector] public float succRange;
     [HideInInspector] public float succDuration;
+    */
     
     private LineRenderer lineRenderer;
     
     private HealthManager player;
+
+    private HealSuckSO newMaskData;
 
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    public override void Activate()
+    public override void Activate(PlayerMaskData playerMaskData)
     {
-        base.Activate();
+        base.Activate(playerMaskData);
+        
+        newMaskData = maskData as HealSuckSO;
+        
         StartCoroutine(StartSuccCo());
     }
 
     private HealthManager FindTarget()
     {            
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, succRange);
+        
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, newMaskData.succRange);
 
         HealthManager target = null;
             
@@ -55,24 +63,26 @@ public class HealSuckMask : InventoryMask
             
             lineRenderer.enabled = true;
             
-            while (timeElapsed < succDuration)
+            while (timeElapsed < newMaskData.succDuration)
             {
-                if (!target.isActiveAndEnabled)
+                if (!target || !target.isActiveAndEnabled)
                     target = FindTarget();
 
-                if (!target.isActiveAndEnabled)
+                if (!target)
                     break;
+                
                 
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, target.transform.position);
                 
-                float actualDamage = damage * Time.deltaTime;
+                float actualDamage = newMaskData.lifeSteal * Time.deltaTime;
                 
                 // do enemy damage, heal player
                 if (target.isActiveAndEnabled)
                 {
                     target.TakeDamage(actualDamage, true);
-                    player.AddHealth(actualDamage * healPrecent);
+                    player.AddHealth(actualDamage * newMaskData.healPercent);
+                    UpdateDamageDealt(actualDamage);
                 }
                 
                 timeElapsed += Time.deltaTime;
@@ -81,7 +91,7 @@ public class HealSuckMask : InventoryMask
             
             lineRenderer.enabled = false;
             
-            yield return new WaitForSeconds(cooldown);
+            yield return new WaitForSeconds(maskData.cooldown);
         }
     }
 }
