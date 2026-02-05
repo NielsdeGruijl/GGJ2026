@@ -31,16 +31,24 @@ public class HealthManager : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
-
-        if (isEnemy)
-        {
-            if (DifficultyManager.instance)
-                maxHealth *= DifficultyManager.instance.enemyHealthMult;
-        }
         
         currentHealth = maxHealth;
         
         UpdateHealthBar();
+    }
+
+    private void OnEnable()
+    {
+        if (isEnemy)
+        {
+            if (DifficultyManager.instance)
+                maxHealth *= DifficultyManager.instance.enemyHealthMult;
+            
+            currentHealth = maxHealth;
+            
+            isDead = false;
+        }
+        
     }
 
     public void TakeDamage(float damage, bool continuous = false)
@@ -52,6 +60,7 @@ public class HealthManager : MonoBehaviour
 
         if (currentHealth <= 0 && canDie && !isDead)
         {
+            StopAllCoroutines();
             isDead = true;
             OnDeath.Invoke();
         }
@@ -64,7 +73,7 @@ public class HealthManager : MonoBehaviour
         {
             damagePopupValue += damage;
             
-            if(canStartPopup)
+            if(canStartPopup && gameObject.activeSelf)
                 StartCoroutine(ShowPopup());
         }
         

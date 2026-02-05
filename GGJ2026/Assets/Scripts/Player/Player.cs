@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     
     [SerializeField] private LayerMask coinPullMask;
     [SerializeField] private float pullSpeed;
@@ -67,11 +68,11 @@ public class Player : MonoBehaviour
         
         if(moveDirection == Vector2.zero)
             animator.SetBool("Walking", false);
-        
+
         if(moveDirection.x < 0)
-            animator.SetFloat("WalkDir", -1);
-        else
-            animator.SetFloat("WalkDir", 1);
+            spriteRenderer.flipX = true;
+        if (moveDirection.x > 0)
+            spriteRenderer.flipX = false;
     }
 
     private void FixedUpdate()
