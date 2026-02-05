@@ -1,14 +1,26 @@
+This is the current asset list for the game, containing mostly sprites and animations. The VFX asset list can be found here: [[VFX]]
+
 
 - Come up with a theme for the game (kitsune -> japanese?)
 
 
-- Background art
+
 - Better player sprite
+	- Idle animation X
+	- Run animation X
+	- Death animation
+
 - Better enemy sprite
-- Level props
-	- Bushes
-	- Trees?
-	- Rocks?
+	- Run animation
+	- Death animation
+	- Attack animation?
+
+- Level
+	- Background art
+	- Props
+		- Bushes
+		- Trees?
+		- Rocks?
 
 UI:
 - Improved healthbar

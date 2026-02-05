@@ -1,3 +1,13 @@
-- Homing missile explosion
-- enemy death
+- Homing missile
+	- New homing missile sprite/effect
+	- Missle explosion effect?
+	
+- enemy damage
 - Open chest VFX
+
+
+
+- Mask ability effect
+	- short buildup leading to ability used
+	- Some kind of energy particle suck-in effect?
+- DamagingAura mask effect applied to all masks or only to those masks?
