@@ -6,7 +6,6 @@
       {
         "id": "f8f2204f68442b8e",
         "type": "tabs",
-        "dimension": 49.95670995670996,
         "children": [
           {
             "id": "bac33d50bf66ca01",
@@ -14,23 +13,37 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Assets.md",
+                "file": "Aggressive Masks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Assets"
+              "title": "Aggressive Masks"
+            }
+          },
+          {
+            "id": "1aed46436383a3e6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Legendary masks.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Legendary masks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       },
       {
-        "id": "514fbbdfcf72ba3c",
+        "id": "9fbbbe31c14330ac",
         "type": "tabs",
-        "dimension": 50.04329004329004,
         "children": [
           {
-            "id": "93cf6cd4454b194d",
+            "id": "384cf6c4cbd81031",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -200,21 +213,25 @@
       "bases:Create new base": false
     }
   },
-  "active": "bac33d50bf66ca01",
+  "active": "1aed46436383a3e6",
   "lastOpenFiles": [
+    "Aggressive Masks.md",
+    "Heal beam.md",
+    "Legendary masks.md",
     "Items.md",
-    "Enemies.md",
+    "Assets.md",
+    "Passive masks.md",
+    "Masks.md",
     "Data architecture.md",
     "Bug report.md",
-    "Misc.md",
-    "UI.md",
-    "Post-GameJam.md",
-    "Masks.md",
-    "Assets.md",
+    "Enemies.md",
     "VFX.md",
-    "GameJam/Art.md",
+    "Post-GameJam.md",
     "GameJam/GameJam.md",
     "GameJam/Mask system.md",
+    "UI.md",
+    "Misc.md",
+    "GameJam/Art.md",
     "GameJam/PlayerController.md",
     "GameJam/Polish.md",
     "GameJam",

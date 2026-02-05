@@ -3,6 +3,6 @@
 - Damage numbers X
 - heal numbers X
 
-- Add equipped masks to HUD
-	- mouse hover shows tooltip of mask ability
+- Add equipped masks to HUD X 
+	- mouse hover shows tooltip of mask ability X
 - 
