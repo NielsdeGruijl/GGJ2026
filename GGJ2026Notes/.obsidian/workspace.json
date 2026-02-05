@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Misc.md",
+                "file": "Assets.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Misc"
+              "title": "Assets"
             }
           }
         ]
@@ -202,15 +202,15 @@
   },
   "active": "bac33d50bf66ca01",
   "lastOpenFiles": [
+    "Items.md",
+    "Enemies.md",
+    "Data architecture.md",
+    "Bug report.md",
+    "Misc.md",
     "UI.md",
     "Post-GameJam.md",
     "Masks.md",
     "Assets.md",
-    "Misc.md",
-    "Enemies.md",
-    "Items.md",
-    "Data architecture.md",
-    "Bug report.md",
     "VFX.md",
     "GameJam/Art.md",
     "GameJam/GameJam.md",

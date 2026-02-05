@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class HealSuckMask : InventoryMask
 {
-    /*
-    [HideInInspector] public float damage;
-    [HideInInspector] public float healPrecent;
-    [HideInInspector] public float succRange;
-    [HideInInspector] public float succDuration;
-    */
-    
     private LineRenderer lineRenderer;
     
     private HealthManager player;
