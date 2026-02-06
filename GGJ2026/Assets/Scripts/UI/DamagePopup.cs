@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,14 @@ public class DamagePopup : MonoBehaviour
     [SerializeField] private float duration;
 
     private float timeElapsed = 0;
+
+    private float updateInterval = 0.1f;
+    
+    private void OnEnable()
+    {
+        text.alpha = 1;
+        timeElapsed = 0;
+    }
 
     public void Initialize(float value, PopupType type)
     {
@@ -36,21 +45,22 @@ public class DamagePopup : MonoBehaviour
         }
         
         text.text = ((int)value).ToString();
-        
+
+        StartCoroutine(UpdatePopupCo());
     }
 
-    private void Update()
+    private IEnumerator UpdatePopupCo()
     {
-        transform.Translate(Vector2.up * (100* Time.deltaTime));
-
-        if (timeElapsed <= duration)
+        while (timeElapsed <= duration)
         {
+            transform.Translate(Vector2.up * (100 * updateInterval));
+ 
             text.alpha = Mathf.Lerp(1, 0, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
+            timeElapsed += updateInterval;
+  
+            yield return new WaitForSeconds(updateInterval);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-    } 
+        
+        ObjectPool.instance.PoolObject(ObjectTypes.DamagePopups, gameObject);
+    }
 }

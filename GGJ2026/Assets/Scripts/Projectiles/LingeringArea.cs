@@ -21,7 +21,7 @@ public class LingeringArea : MonoBehaviour
         radius = areaRadius;
         duration = effectDuration;
 
-        areaSprite.localScale *= radius * 2;
+        areaSprite.localScale = new Vector2(1, 1) * (radius * 2);
 
         StartCoroutine(DealDamageCo());
     }
@@ -61,6 +61,8 @@ public class LingeringArea : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
         
-        Destroy(gameObject);
+        ObjectPool.instance.PoolObject(ObjectTypes.LingeringAreas, gameObject);
+        
+        //Destroy(gameObject);
     }
 }

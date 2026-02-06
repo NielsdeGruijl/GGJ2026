@@ -20,13 +20,12 @@ public class HealSuckMask : InventoryMask
         base.Activate(playerMaskData);
         
         newMaskData = maskData as HealSuckSO;
-        
+
         StartCoroutine(StartSuccCo());
     }
 
     private HealthManager FindTarget()
     {            
-        
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, newMaskData.succRange);
 
         HealthManager target = null;
@@ -64,7 +63,6 @@ public class HealSuckMask : InventoryMask
                 if (!target)
                     break;
                 
-                
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, target.transform.position);
                 
@@ -84,7 +82,7 @@ public class HealSuckMask : InventoryMask
             
             lineRenderer.enabled = false;
             
-            yield return new WaitForSeconds(maskData.cooldown);
+            yield return waitForCooldown;
         }
     }
 }

@@ -16,8 +16,12 @@ public class ChestSpawner : MonoBehaviour
     
     private List<Chest> chests;
 
+    private WaitForSeconds waitForSpawnInterval;
+
     private void Awake()
     {
+        waitForSpawnInterval = new WaitForSeconds(10);
+        
         StartCoroutine(SpawnChestsCo());
     }
 
@@ -44,7 +48,7 @@ public class ChestSpawner : MonoBehaviour
                 SpawnChests(Random.Range(diff - 5, diff + 5));
             }
             
-            yield return new WaitForSeconds(10);
+            yield return waitForSpawnInterval;
         }
     }
 }

@@ -17,7 +17,8 @@ public class BoggedDebuff : BaseDebuff
         float timeElapsed = 0;
         while (timeElapsed < debuffData.duration)
         {
-            LingeringArea area = Instantiate(NewData.bogPrefab, transform.position, Quaternion.identity);
+            LingeringArea area = ObjectPool.instance.Get(ObjectTypes.LingeringAreas).GetComponent<LingeringArea>();
+            area.transform.position = transform.position;
             area.Initialize(NewData.damage, NewData.areaRadius, NewData.areaDuration);
             
             yield return new WaitForSeconds(NewData.cooldown);

@@ -24,6 +24,8 @@ public class DifficultyManager : MonoBehaviour
     [HideInInspector] public float enemyDamageMult = 1;
     
     public UnityEvent OnDifficultyChanged;
+
+    private WaitForSeconds waitInterval;
     
     private void Awake()
     {
@@ -33,13 +35,15 @@ public class DifficultyManager : MonoBehaviour
             instance = this;
 
         StartCoroutine(ScaleCo());
+
+        waitInterval = new WaitForSeconds(scalingInterval);
     }
 
     private IEnumerator ScaleCo()
     {
         while (true)
         {
-            yield return new WaitForSeconds(scalingInterval);
+            yield return waitInterval;
 
             enemyHealthMult *= enemyHealthScaling;
 

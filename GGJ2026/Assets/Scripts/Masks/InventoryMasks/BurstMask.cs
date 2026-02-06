@@ -8,6 +8,8 @@ public class BurstMask : InventoryMask
     private Camera cam;
 
     private BurstMaskSO newMaskData;
+
+    private WaitForSeconds waitBulletDelay;
     
     public override void Activate(PlayerMaskData playerMaskData)
     {
@@ -15,6 +17,8 @@ public class BurstMask : InventoryMask
         cam = Camera.main;
         
         newMaskData = maskData as BurstMaskSO;
+
+        waitBulletDelay = new WaitForSeconds(0.1f);
         
         StartCoroutine(FireBurstCo());
     }
@@ -36,10 +40,10 @@ public class BurstMask : InventoryMask
                 bulletObject.OnHit.AddListener(UpdateDamageDealt);
                 
                 if(i != newMaskData.bulletsPerBurst - 1)
-                    yield return new WaitForSeconds(0.1f);
+                    yield return waitBulletDelay;
             }
 
-            yield return new WaitForSeconds(maskData.cooldown);
+            yield return waitForCooldown;
         }
     }
 }

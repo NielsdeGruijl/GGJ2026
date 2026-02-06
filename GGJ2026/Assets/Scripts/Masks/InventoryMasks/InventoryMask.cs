@@ -18,7 +18,14 @@ public class InventoryMask :  MonoBehaviour
     protected PlayerMaskData playerMaskData;
 
     public DamageEvent OnAuraDamage;
-    
+
+    protected WaitForSeconds waitForCooldown;
+
+    private void Awake()
+    {
+        waitForCooldown = new WaitForSeconds(maskData.cooldown);
+    }
+
     public virtual void Activate(PlayerMaskData pPlayerMaskData)
     {
         playerMaskData = pPlayerMaskData;

@@ -5,16 +5,25 @@ using UnityEngine;
 [System.Serializable]
 public class Pool
 {
-    public string tag;
+    public ObjectTypes tag;
     public GameObject prefab;
     public int baseSize;
 }
+
+public enum ObjectTypes
+{
+    Enemies,
+    Coins,
+    LingeringAreas,
+    DamagePopups
+}
+
 
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private List<Pool> pools;    
     
-    private Dictionary<string, Queue<GameObject>> objectPools;
+    private Dictionary<ObjectTypes, Queue<GameObject>> objectPools;
     public static ObjectPool instance;
     
     private void Awake()
@@ -24,7 +33,7 @@ public class ObjectPool : MonoBehaviour
         else
             instance = this;
 
-        objectPools = new Dictionary<string, Queue<GameObject>>();
+        objectPools = new Dictionary<ObjectTypes, Queue<GameObject>>();
 
         foreach (Pool pool in pools)
         {
@@ -40,8 +49,8 @@ public class ObjectPool : MonoBehaviour
             objectPools.Add(pool.tag, objectQueue);
         }
     }
-
-    public GameObject Get(string poolTag)
+   
+    public GameObject Get(ObjectTypes poolTag)
     {
         Queue<GameObject> currentPool = objectPools[poolTag];
 
@@ -50,16 +59,26 @@ public class ObjectPool : MonoBehaviour
 
         GameObject obj = currentPool.Dequeue();
         obj.SetActive(true);
+        
+        if(poolTag == ObjectTypes.DamagePopups)
+            Debug.Log(obj.activeSelf);
+        
         return obj;
     }
 
-    public void PoolObject(string tag, GameObject objectToPool)
+    public void PoolObject(ObjectTypes tag, GameObject objectToPool)
     {
+        if (!objectPools.ContainsKey(tag))
+        {
+            Debug.LogError("Tag not found!");
+            return;
+        }
+        
         objectToPool.SetActive(false);
         objectPools[tag].Enqueue(objectToPool);
     }
 
-    private void GrowPool(string tag)
+    private void GrowPool(ObjectTypes tag)
     {
         Pool poolToGrow = null;
         foreach (Pool pool in pools)
@@ -69,7 +88,7 @@ public class ObjectPool : MonoBehaviour
             
             poolToGrow = pool;
         }
-
+        
         if (poolToGrow != null)
         {
             objectPools[tag].Enqueue(Instantiate(poolToGrow.prefab));

@@ -26,7 +26,7 @@ public class MissileMask : InventoryMask
             projectileObject.SetDamage(newMaskData.damage);
             projectileObject.OnHit.AddListener(UpdateDamageDealt);
             
-            yield return new WaitForSeconds(newMaskData.cooldown);
+            yield return waitForCooldown;
         }
     }
 }

@@ -4,12 +4,16 @@ using UnityEngine;
 public class TrailBlazerMask : InventoryMask
 {
     private TrailBlazerSO newMaskData;
+
+    private WaitForSeconds waitForExplosionDelay;
     
     public override void Activate(PlayerMaskData playerMaskData)
     {
         base.Activate(playerMaskData);
         
         newMaskData = maskData as TrailBlazerSO;
+
+        waitForExplosionDelay = new WaitForSeconds(newMaskData.explosionDelay);
         
         StartCoroutine(SpawnExplosionsCo());
     }
@@ -37,7 +41,7 @@ public class TrailBlazerMask : InventoryMask
             int i = 0;
             while (i < newMaskData.explosionCount)
             {
-                yield return new WaitForSeconds(newMaskData.explosionDelay);
+                yield return waitForExplosionDelay;
 
                 Explosion explosionObject = Instantiate(newMaskData.explosionPrefab, go.transform.position, Quaternion.identity);
                 explosionObject.Initialize(newMaskData.explosionRange, newMaskData.explosionDamage, newMaskData.fuzeTimer);
@@ -48,7 +52,7 @@ public class TrailBlazerMask : InventoryMask
         
             Destroy(go);
 
-            yield return new WaitForSeconds(maskData.cooldown);
+            yield return waitForCooldown;
         }
     }
 }

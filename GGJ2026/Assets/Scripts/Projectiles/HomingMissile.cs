@@ -11,8 +11,12 @@ public class HomingMissile : Projectile
     
     private const float trackingRadius = 200;
 
+    private WaitForSeconds waitTrackTarget;
+    
     protected override void Start()
     {
+        waitTrackTarget = new WaitForSeconds(0.5f);
+        
         StartCoroutine(TrackTargetCo());
     }
 
@@ -26,7 +30,7 @@ public class HomingMissile : Projectile
                 activeTarget = target;
             }
             
-            yield return new WaitForSeconds(0.5f);
+            yield return waitTrackTarget;
         }
     }
 

@@ -85,7 +85,6 @@ public class Player : MonoBehaviour
         
         animator.SetFloat("WalkSpeed", PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult);
 
-        
         // Move to coin script!!
         foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), succRadius, coinPullMask))
         {

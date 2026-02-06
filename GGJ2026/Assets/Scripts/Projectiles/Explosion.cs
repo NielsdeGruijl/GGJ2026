@@ -13,13 +13,19 @@ public class Explosion : MonoBehaviour
     [HideInInspector] public float fuzeTimer;
 
     public DamageEvent OnHit;
-    
+
+    private WaitForSeconds waitFuze;
+    private WaitForSeconds waitParticle;
+
     public void Initialize(float pRange, float pDamage, float pFuzeTimer)
     {
         range = pRange;
         damage = pDamage;
         fuzeTimer = pFuzeTimer;
 
+        waitFuze = new WaitForSeconds(fuzeTimer);
+        waitParticle = new WaitForSeconds(particles.main.duration);
+        
         sprite.localScale *= range * 2;
         
         StartCoroutine(StartTimerCo());
@@ -27,7 +33,7 @@ public class Explosion : MonoBehaviour
 
     private IEnumerator StartTimerCo()
     {
-        yield return new WaitForSeconds(fuzeTimer);
+        yield return waitFuze;
 
         Destroy(sprite.gameObject);
         
@@ -43,8 +49,8 @@ public class Explosion : MonoBehaviour
                 OnHit.Invoke(damage);
             }
         }
-        
-        yield return new WaitForSeconds(particles.main.duration);
+
+        yield return waitParticle;
         OnHit.RemoveAllListeners();
         Destroy(gameObject);
     }

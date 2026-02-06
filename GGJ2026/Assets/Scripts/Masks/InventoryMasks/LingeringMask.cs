@@ -18,14 +18,15 @@ public class LingeringMask : InventoryMask
     {
         while (true)
         {
-            LingeringArea area = Instantiate(newMaskData.areaPrefab, transform.position, Quaternion.identity);
+            LingeringArea area = ObjectPool.instance.Get(ObjectTypes.LingeringAreas).GetComponent<LingeringArea>();//Instantiate(newMaskData.areaPrefab, transform.position, Quaternion.identity);
+            area.transform.position = transform.position;
             
             if(newMaskData.debuff)
                 area.SetDebuffData(newMaskData.debuff, playerMaskData.lingeringProcChance);
             
             area.Initialize(newMaskData.damagePerSecond, newMaskData.areaRadius, newMaskData.effectDuration);
             
-            yield return new WaitForSeconds(newMaskData.cooldown);
+            yield return waitForCooldown;
         }
     }
 }

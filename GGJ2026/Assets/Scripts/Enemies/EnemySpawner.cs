@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnCooldown;
 
     [SerializeField] private int baseSpawnCount;
-    
+
     private void Start()
     {
         StartCoroutine(SpawnEnemies());
@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
             while (i < spawnCount)
             {
                 int randomSpawnpoint = Random.Range(0, spawnPoints.Count);
-                Enemy enemyObject = ObjectPool.instance.Get("Enemies").GetComponent<Enemy>();
+                Enemy enemyObject = ObjectPool.instance.Get(ObjectTypes.Enemies).GetComponent<Enemy>();
                 enemyObject.transform.position = spawnPoints[randomSpawnpoint].position.ToVector2();
                 enemyObject.Initialize(player.transform);
 

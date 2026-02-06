@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,27 +13,23 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private bool showDamageVFX;
     
     public float maxHealth;
+    public UnityEvent OnDeath;
 
     [SerializeField] private bool isEnemy;
-
     [SerializeField] private bool canDie = true;
 
     private bool isDead = false;
     
-    public UnityEvent OnDeath;
-
     private float currentHealth;
 
     private float damagePopupValue = 0;
-
     private bool canStartPopup = true;
 
-    private Camera cam;
+    private WaitForSeconds waitFlash = new WaitForSeconds(0.1f);
+    private WaitForSeconds waitPopup = new WaitForSeconds(0.2f);
 
     private void Awake()
     {
-        cam = Camera.main;
-        
         currentHealth = maxHealth;
         
         UpdateHealthBar();
@@ -52,7 +47,8 @@ public class HealthManager : MonoBehaviour
             isDead = false;
             whiteFlash.SetActive(false);
         }
-        
+
+        canStartPopup = true;
     }
 
     public void TakeDamage(float damage, bool continuous = false)
@@ -113,14 +109,14 @@ public class HealthManager : MonoBehaviour
     private IEnumerator ShowFlashCo()
     {
         whiteFlash.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
+        yield return waitFlash;
         whiteFlash.SetActive(false);
     }
     
     private IEnumerator ShowPopup()
     {
         canStartPopup = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return waitPopup;
         
         CreateDamagePopup(damagePopupValue);
         
