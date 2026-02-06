@@ -1,0 +1,2 @@
+- Trailblazer too strong
+	- reduce damage?

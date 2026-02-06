@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6104be179e558dc4982de27707fbf9a2, type: 3}
+  m_Name: Bogged
+  m_EditorClassIdentifier: Assembly-CSharp::BoggedSO
+  debuffPrefab: {fileID: 2131655029623548983, guid: 6244d3aa9c2acd32284a16706ec4fb47, type: 3}
+  affectedStats: 02000000
+  statModificationType: 0
+  modificationValue: 0
+  duration: 3
+  cooldown: 1
+  bogPrefab: {fileID: 8352817468960798549, guid: 8c5099a51377e3f5b81f6c0da71a07a5, type: 3}
+  areaRadius: 1
+  areaDuration: 3
+  damage: 5

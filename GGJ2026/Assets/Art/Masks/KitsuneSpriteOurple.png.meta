@@ -171,6 +171,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       KitsuneSpriteOurple_0: 3311297096347198740
   mipmapLimitGroupName: 

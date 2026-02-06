@@ -60,6 +60,8 @@ MonoBehaviour:
     m_Bits: 0
   pullSpeed: 0
   succRadius: 0
+  knockbackRadius: 0
+  knockbackForce: 0
   speedMult: 1
 --- !u!114 &451689299078536013
 MonoBehaviour:
@@ -74,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRingCapacity: 5
-  RingCapacityIncrement: 2
+  RingCapacityMult: 1.5
   ringRadius: 1
   ringRadiusIncrement: 0.75
   maskHUD: {fileID: 0}

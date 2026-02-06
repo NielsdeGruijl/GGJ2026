@@ -9,6 +9,9 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private Slider healthbar;
     
     [SerializeField] private DamagePopup popup;
+
+    [SerializeField] private GameObject whiteFlash;
+    [SerializeField] private bool showDamageVFX;
     
     public float maxHealth;
 
@@ -47,6 +50,7 @@ public class HealthManager : MonoBehaviour
             currentHealth = maxHealth;
             
             isDead = false;
+            whiteFlash.SetActive(false);
         }
         
     }
@@ -68,6 +72,8 @@ public class HealthManager : MonoBehaviour
         if (!continuous)
         {
             CreateDamagePopup(damage);
+            if(showDamageVFX)
+                ShowWhiteFlash();
         }
         else
         {
@@ -98,12 +104,28 @@ public class HealthManager : MonoBehaviour
         healthbar.value = currentHealth / maxHealth;
     }
 
+    private void ShowWhiteFlash()
+    {
+        if(gameObject.activeSelf)
+            StartCoroutine(ShowFlashCo());
+    }
+
+    private IEnumerator ShowFlashCo()
+    {
+        whiteFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        whiteFlash.SetActive(false);
+    }
+    
     private IEnumerator ShowPopup()
     {
         canStartPopup = false;
         yield return new WaitForSeconds(0.2f);
         
         CreateDamagePopup(damagePopupValue);
+        
+        if(showDamageVFX)
+            ShowWhiteFlash();
         
         damagePopupValue = 0;
         canStartPopup = true;

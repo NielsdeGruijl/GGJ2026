@@ -18,6 +18,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float pullSpeed;
     [SerializeField] private float succRadius;
 
+    [SerializeField] private float knockbackRadius;
+    [SerializeField] private float knockbackForce;
+    
+    
     [HideInInspector] public float speedMult = 1;
 
     // Components
@@ -78,6 +82,8 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rigidBody.AddForce(moveDirection * (moveSpeed * PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult));
+        
+        animator.SetFloat("WalkSpeed", PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult);
 
         
         // Move to coin script!!
@@ -97,7 +103,17 @@ public class Player : MonoBehaviour
         if (chests.Count > 0)
         {
             if (currencyManager.Purchase(chests[0].price))
+            {
+                foreach (Collider2D collider in Physics2D.OverlapCircleAll(chests[0].transform.position, knockbackRadius))
+                {
+                    if (collider.TryGetComponent(out Enemy enemy))
+                    {
+                        enemy.ApplyKnockback((enemy.transform.position - chests[0].transform.position).normalized * knockbackForce);
+                    }
+                }
+                
                 chests[0].Open();
+            }
         }
     }
 

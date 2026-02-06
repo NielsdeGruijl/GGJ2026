@@ -6,7 +6,6 @@ public class MaskSO : ScriptableObject
     public string maskName;
     public string maskDescription;
     public InventoryMask maskItem;
-    public GameObject maskPrefab;
     public Sprite maskSprite;
     
     [Header("Mask stats")]

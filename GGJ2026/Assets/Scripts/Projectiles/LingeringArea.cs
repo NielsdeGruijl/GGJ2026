@@ -4,11 +4,16 @@ using UnityEngine;
 public class LingeringArea : MonoBehaviour
 {
     [SerializeField] private Transform areaSprite;
-
+    
     private float dps;
     private float radius;
 
     private float duration;
+
+    private float interval = 0.2f;
+    
+    private BoggedSO debuff;
+    private float debuffProcChance;
 
     public void Initialize(float damagePerSecond, float areaRadius, float effectDuration)
     {
@@ -21,6 +26,12 @@ public class LingeringArea : MonoBehaviour
         StartCoroutine(DealDamageCo());
     }
 
+    public void SetDebuffData(BoggedSO debuff, float debuffProcChance)
+    {
+        this.debuff = debuff;
+        this.debuffProcChance = debuffProcChance;
+    }
+
     private IEnumerator DealDamageCo()
     {
         float timeElapsed = 0;
@@ -28,13 +39,26 @@ public class LingeringArea : MonoBehaviour
         {
             foreach (Collider2D target in Physics2D.OverlapCircleAll(transform.position, radius))
             {
-                if (!target.CompareTag("Player") && target.TryGetComponent(out HealthManager manager))
+                if (target.CompareTag("Player"))
+                    continue;
+                
+                if (target.TryGetComponent(out HealthManager manager))
                 {
-                    manager.TakeDamage(dps * Time.deltaTime, true);
+                    manager.TakeDamage(dps * interval, true);
+                    
+                    if (debuff && Random.Range(0f, 1f) < debuffProcChance)
+                    {
+                        if (target.TryGetComponent(out EntityDebuffManager debuffManager))
+                        {
+                            if(!debuffManager.HasDebuff(debuff))
+                                debuffManager.ApplyDebuff(debuff);
+                        }
+                    }
                 }
             }
-            timeElapsed += Time.deltaTime;
-            yield return null;
+
+            timeElapsed += interval;
+            yield return new WaitForSeconds(interval);
         }
         
         Destroy(gameObject);

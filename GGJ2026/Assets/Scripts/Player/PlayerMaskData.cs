@@ -6,6 +6,9 @@ public class PlayerMaskData
     public float maskCollisionDamage = 0;
     
     public float playerMoveSpeedMult = 1;
+
+    public DebuffSO lingeringDebuff;
+    public float lingeringProcChance = 0;
     
     public List<string> maskKeys = new();
     public Dictionary<string, List<InventoryMask>> sortedMasks = new();

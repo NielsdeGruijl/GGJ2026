@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMaskManager : MonoBehaviour
 {
     [SerializeField] private int currentRingCapacity = 5;
-    [SerializeField] private float RingCapacityIncrement = 1.5f;
+    [SerializeField] private float RingCapacityMult = 1.5f;
     [SerializeField] private float ringRadius = 1;
     [SerializeField] private float ringRadiusIncrement = 1;
 
@@ -45,7 +45,7 @@ public class PlayerMaskManager : MonoBehaviour
     {
         currentRingIndex++;
         ringRadius += ringRadiusIncrement;
-        currentRingCapacity = Mathf.FloorToInt(currentRingCapacity * RingCapacityIncrement);
+        currentRingCapacity = Mathf.FloorToInt(currentRingCapacity * RingCapacityMult);
         currentRingItemNum = 0;
     }
     

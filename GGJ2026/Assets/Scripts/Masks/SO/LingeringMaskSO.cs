@@ -4,7 +4,8 @@ using UnityEngine;
 public class LingeringMaskSO : MaskSO
 {
     public LingeringArea areaPrefab;
-    
+    public BoggedSO debuff;
+
     public float damagePerSecond;
     public float areaRadius;
     public float effectDuration;

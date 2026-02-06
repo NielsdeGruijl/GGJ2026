@@ -15,7 +15,7 @@ public class InventoryMask :  MonoBehaviour
     
     private float moveSpeed;
 
-    private PlayerMaskData playerMaskData;
+    protected PlayerMaskData playerMaskData;
 
     public DamageEvent OnAuraDamage;
     

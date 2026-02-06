@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
 {
@@ -17,7 +19,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private float attackCooldown;
 
-    
     private HealthManager healthManager;
     
     private Rigidbody2D rigidBody;
@@ -65,6 +66,11 @@ public class Enemy : MonoBehaviour
     {
         target = pTarget;
         StartCoroutine(FindPathToPlayer());
+    }
+
+    public void ApplyKnockback(Vector2 force)
+    {
+        rigidBody.AddForce(force, ForceMode2D.Impulse);
     }
     
     private void DropCoins()

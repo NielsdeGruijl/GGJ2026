@@ -1,8 +1,9 @@
 - Homing missile
 	- New homing missile sprite/effect
 	- Missle explosion effect?
-	
-- enemy damage
+
+- enemy damage X
+
 - Open chest VFX
 
 

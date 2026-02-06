@@ -7,10 +7,15 @@
 [[Bug report]]
 [[Enemies]]
 [[UI]]
+[[Balancing]]
 
 
-- Design player agency system
-	- Players should have more agency of what masks to equip
-	- Different chest types drop different items:
-		- Agressive chest type
-		- passive chest type
+
+- Implement debuff system
+	- Debuffmanager
+
+DebuffManager
+
+DebuffSO
+
+Debuff
