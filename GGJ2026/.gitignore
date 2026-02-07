@@ -12,8 +12,8 @@
 /[Uu]ser[Ss]ettings/
 *.log
 
-# Unity Profiler
-ProfilerCaptures/
+#Unity Profiler
+/[Pp]rofilerCaptures/
 
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
 *.blend1
