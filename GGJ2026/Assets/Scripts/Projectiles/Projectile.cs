@@ -12,8 +12,6 @@ public class Projectile : MonoBehaviour
 {
     public Vector2 velocity;
 
-    public float moveSpeed = 0;
-
     protected Rigidbody2D rigidBody;
 
     protected float damage;
@@ -26,29 +24,25 @@ public class Projectile : MonoBehaviour
         rigidBody.gravityScale = 0;
     }
 
-    protected virtual void Start()
+    public void Initialize(Vector2 moveDirection, float moveSpeed)
     {
+        velocity = moveDirection * moveSpeed;
         rigidBody.AddForce(velocity * moveSpeed, ForceMode2D.Impulse);
     }
-    
-    public virtual void SetSpeed(float pSpeed)
-    {
-        moveSpeed = pSpeed;
-    }
 
-    public virtual void SetDamage(float pDamage)
+    public void SetDamage(float pDamage)
     {
         damage = pDamage;
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out HealthManager enemy))
         {
             enemy.TakeDamage(damage);
             OnHit.Invoke(damage);
             OnHit.RemoveAllListeners();
-            Destroy(gameObject);
+            ObjectPool.instance.PoolObject(ObjectTypes.Projectiles, gameObject);
         }
     }
 }

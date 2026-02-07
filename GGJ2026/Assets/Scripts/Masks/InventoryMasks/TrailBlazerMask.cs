@@ -43,7 +43,8 @@ public class TrailBlazerMask : InventoryMask
             {
                 yield return waitForExplosionDelay;
 
-                Explosion explosionObject = Instantiate(newMaskData.explosionPrefab, go.transform.position, Quaternion.identity);
+                Explosion explosionObject = ObjectPool.instance.Get(ObjectTypes.Explosions).GetComponent<Explosion>();
+                explosionObject.transform.position = go.transform.position;
                 explosionObject.Initialize(newMaskData.explosionRange, newMaskData.explosionDamage, newMaskData.fuzeTimer);
                 explosionObject.OnHit.AddListener(UpdateDamageDealt);
 

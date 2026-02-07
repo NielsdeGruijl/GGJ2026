@@ -8,10 +8,4 @@ public class Coin : MonoBehaviour
     
     public int value;
     
-    
-
-    private void Update()
-    {
-        transform.Translate(new Vector2(0, Mathf.Sin(Time.fixedTime * floatSpeed) * floatMagnitude));
-    }
 }

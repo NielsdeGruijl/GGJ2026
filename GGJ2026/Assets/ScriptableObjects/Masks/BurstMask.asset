@@ -20,3 +20,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5550591638646236349, guid: c07947c00c1a521498ec4b1eaf8c3044, type: 3}
   damagePerBullet: 80
   bulletsPerBurst: 1
+  bulletSpeed: 5

@@ -17,16 +17,24 @@ public class Explosion : MonoBehaviour
     private WaitForSeconds waitFuze;
     private WaitForSeconds waitParticle;
 
+    private Vector2 baseScale;
+    
+    private void Awake()
+    {
+        waitFuze = new WaitForSeconds(fuzeTimer);
+        waitParticle = new WaitForSeconds(particles.main.duration);
+
+        baseScale = new Vector2(1, 1);
+    }
+
     public void Initialize(float pRange, float pDamage, float pFuzeTimer)
     {
         range = pRange;
         damage = pDamage;
         fuzeTimer = pFuzeTimer;
-
-        waitFuze = new WaitForSeconds(fuzeTimer);
-        waitParticle = new WaitForSeconds(particles.main.duration);
         
-        sprite.localScale *= range * 2;
+        sprite.gameObject.SetActive(true);
+        sprite.localScale = baseScale * (range * 2);
         
         StartCoroutine(StartTimerCo());
     }
@@ -34,8 +42,8 @@ public class Explosion : MonoBehaviour
     private IEnumerator StartTimerCo()
     {
         yield return waitFuze;
-
-        Destroy(sprite.gameObject);
+        
+        sprite.gameObject.SetActive(false);
         
         particles.Play();
         
@@ -52,6 +60,6 @@ public class Explosion : MonoBehaviour
 
         yield return waitParticle;
         OnHit.RemoveAllListeners();
-        Destroy(gameObject);
+        ObjectPool.instance.PoolObject(ObjectTypes.Explosions, gameObject);
     }
 }

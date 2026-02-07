@@ -48,12 +48,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f1ce5f8d8a2f440b58dbce782c3269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0}
-  moveSpeed: 0
+  turnSpeed: 15
+  rotateInterval: 0.05
+  filter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 1024
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  turnSpeed: 5
 --- !u!50 &3700443128745337570
 Rigidbody2D:
   serializedVersion: 5

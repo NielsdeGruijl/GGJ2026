@@ -5,7 +5,7 @@ public class BoggedDebuff : BaseDebuff
 {
     [HideInInspector] public BoggedSO NewData;
 
-    protected override void ApplyCustomDebuff(EntityDebuffData entityDebuffValues)
+    /*protected override void ApplyCustomDebuff(EntityDebuffData entityDebuffValues)
     {
         base.ApplyCustomDebuff(entityDebuffValues);
 
@@ -15,7 +15,7 @@ public class BoggedDebuff : BaseDebuff
     private IEnumerator SpawnBogCo()
     {
         float timeElapsed = 0;
-        while (timeElapsed < debuffData.duration)
+        while (timeElapsed < StatModifierData.duration)
         {
             LingeringArea area = ObjectPool.instance.Get(ObjectTypes.LingeringAreas).GetComponent<LingeringArea>();
             area.transform.position = transform.position;
@@ -26,5 +26,5 @@ public class BoggedDebuff : BaseDebuff
         }
         
         Destroy(gameObject);
-    }
+    }*/
 }

@@ -15,7 +15,10 @@ public enum ObjectTypes
     Enemies,
     Coins,
     LingeringAreas,
-    DamagePopups
+    DamagePopups,
+    Projectiles,
+    Explosions,
+    Missiles
 }
 
 
@@ -41,7 +44,7 @@ public class ObjectPool : MonoBehaviour
             
             for (int i = 0; i < pool.baseSize; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.prefab, transform);
                 obj.SetActive(false);
                 objectQueue.Enqueue(obj);
             }
@@ -76,6 +79,7 @@ public class ObjectPool : MonoBehaviour
         }
         
         objectToPool.SetActive(false);
+        objectToPool.transform.SetParent(transform);
         objectPools[tag].Enqueue(objectToPool);
     }
 

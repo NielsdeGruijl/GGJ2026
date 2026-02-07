@@ -19,7 +19,7 @@ public enum StatModificationType
     Custom
 }
 
-public class DebuffSO : ScriptableObject
+public class StatModifierSO : ScriptableObject
 {
     public BaseDebuff debuffPrefab;
     
@@ -32,7 +32,7 @@ public class DebuffSO : ScriptableObject
     public virtual BaseDebuff MakeDebuff()
     {
         BaseDebuff debuff = new BaseDebuff();
-        debuff.debuffData = this;
+        debuff.StatModifierData = this;
         return debuff;
     }
 }

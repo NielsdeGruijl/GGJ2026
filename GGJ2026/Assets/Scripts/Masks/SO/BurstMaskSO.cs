@@ -6,6 +6,7 @@ public class BurstMaskSO : MaskSO
     public Projectile bulletPrefab;
     public float damagePerBullet;
     public int bulletsPerBurst;
+    public float bulletSpeed;
     
     public override InventoryMask MakeMask(Transform pPlayer)
     {

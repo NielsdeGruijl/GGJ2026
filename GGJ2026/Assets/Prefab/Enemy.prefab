@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8953340587837885101}
   - component: {fileID: 312843824609217552}
   - component: {fileID: 6654037893830515226}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -55,7 +55,8 @@ MonoBehaviour:
   damage: 0
   moveSpeed: 5
   attackRange: 1.5
-  attackCooldown: 2
+  attackCooldown: 1
+  pathFindingTickSpeed: 1
 --- !u!114 &4666267240486557114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +85,7 @@ MonoBehaviour:
   popup: {fileID: 0}
   whiteFlash: {fileID: 4668093333374895871}
   showDamageVFX: 1
-  maxHealth: 50
+  maxHealth: 500
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -165,7 +166,7 @@ GameObject:
   - component: {fileID: 4790606215445549278}
   - component: {fileID: 5422532016514616965}
   - component: {fileID: 9180106425303351558}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +281,7 @@ SpriteMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2603336924841604277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -342,7 +343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3567398662279254318}
   - component: {fileID: 3900505388603834681}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

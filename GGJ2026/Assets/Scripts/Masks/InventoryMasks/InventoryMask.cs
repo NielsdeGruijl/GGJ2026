@@ -20,6 +20,8 @@ public class InventoryMask :  MonoBehaviour
     public DamageEvent OnAuraDamage;
 
     protected WaitForSeconds waitForCooldown;
+    private WaitForSeconds waitForAuraCooldown;
+    private bool canDamageAura = true;
 
     public virtual void Activate(PlayerMaskData pPlayerMaskData)
     {
@@ -28,6 +30,7 @@ public class InventoryMask :  MonoBehaviour
         moveSpeed = baseMoveSpeed + (ringCapacity * bonusMoveSpeed);
         
         waitForCooldown = new WaitForSeconds(maskData.cooldown);
+        waitForAuraCooldown = new WaitForSeconds(3);
     }
 
     private void Update()
@@ -60,6 +63,12 @@ public class InventoryMask :  MonoBehaviour
         return new Vector3(xPosition, yPosition, 0) * targetRadius;
     }
 
+    private IEnumerator DamagingAuraCooldownCo()
+    {
+        canDamageAura = false;
+        yield return waitForAuraCooldown;
+        canDamageAura = true;
+    }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -70,6 +79,7 @@ public class InventoryMask :  MonoBehaviour
         { 
             enemy.TakeDamage(playerMaskData.maskCollisionDamage);
             OnAuraDamage.Invoke(playerMaskData.maskCollisionDamage / playerMaskData.sortedMasks["DamagingAura"].Count);
+            //StartCoroutine(DamagingAuraCooldownCo());
         }
     }
 }

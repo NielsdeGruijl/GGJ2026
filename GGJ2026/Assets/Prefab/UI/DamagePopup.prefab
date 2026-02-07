@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 5312870532941025174}
   - component: {fileID: 4367976500726235023}
   m_Layer: 5
-  m_Name: CanvasPopups
+  m_Name: DamagePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,3 +188,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 4147533747076718337}
   duration: 0.3
+  moveUpSpeed: 1

@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Debuffs/Bogged")]
-public class BoggedSO : DebuffSO
+public class BoggedSO : StatModifierSO
 {
     public float cooldown;
     
@@ -12,13 +12,11 @@ public class BoggedSO : DebuffSO
     [Space(10)]
     public float damage;
 
-    public override BaseDebuff MakeDebuff(Transform parent)
+    public override BaseDebuff MakeDebuff()
     {
-       BoggedDebuff debuff = base.MakeDebuff(parent) as BoggedDebuff;
-
-       if(!debuff)
+        if(base.MakeDebuff() is not BoggedDebuff debuff)
            return null;
-       
+        
        debuff.NewData = this;
 
        return debuff;

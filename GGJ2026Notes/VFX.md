@@ -2,7 +2,9 @@
 	- New homing missile sprite/effect
 	- Missle explosion effect?
 
-- enemy damage X
+- enemy damage
+- Damage popup
+	- how to optimize?
 
 - Open chest VFX
 

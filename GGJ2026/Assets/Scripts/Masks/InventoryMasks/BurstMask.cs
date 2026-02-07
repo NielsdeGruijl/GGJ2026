@@ -33,8 +33,9 @@ public class BurstMask : InventoryMask
 
             for (int i = 0; i < newMaskData.bulletsPerBurst; i++)
             {
-                Projectile bulletObject = Instantiate(newMaskData.bulletPrefab, transform.position, Quaternion.identity);
-                bulletObject.velocity = shootDirection;
+                Projectile bulletObject = ObjectPool.instance.Get(ObjectTypes.Projectiles).GetComponent<Projectile>();
+                bulletObject.transform.position = transform.position;
+                bulletObject.Initialize(shootDirection, newMaskData.bulletSpeed);
                 bulletObject.SetDamage(newMaskData.damagePerBullet);
                 
                 bulletObject.OnHit.AddListener(UpdateDamageDealt);

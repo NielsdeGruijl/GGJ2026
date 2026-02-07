@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MissileMask : InventoryMask
 {
-    [SerializeField] private ProjectileSO projectile;
     
     private HomingMissileSO newMaskData;
     
@@ -21,8 +20,9 @@ public class MissileMask : InventoryMask
     {
         while (true)
         {
-            Projectile projectileObject = Instantiate(projectile.projectilePrefab, transform.position, Quaternion.identity);
-            projectileObject.SetSpeed(projectile.Speed);
+            HomingMissile projectileObject = ObjectPool.instance.Get(ObjectTypes.Missiles).GetComponent<HomingMissile>();
+            projectileObject.transform.position = transform.position;
+            projectileObject.Initialize(Vector2.up, newMaskData.missileSpeed);
             projectileObject.SetDamage(newMaskData.damage);
             projectileObject.OnHit.AddListener(UpdateDamageDealt);
             

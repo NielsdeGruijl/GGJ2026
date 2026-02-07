@@ -15,10 +15,9 @@ MonoBehaviour:
   maskName: Lifesteal
   maskDescription: Sucks the life out of your foes
   maskItem: {fileID: 473088982335870634, guid: 96be5c48d3e9534448f6608621ff9af1, type: 3}
-  maskPrefab: {fileID: 0}
   maskSprite: {fileID: 21300000, guid: cfad9058d51c3af448f6c14fcb693e69, type: 3}
   cooldown: 5
   lifeSteal: 50
   healPercent: 0.5
-  succRange: 25
+  succRange: 8
   succDuration: 5

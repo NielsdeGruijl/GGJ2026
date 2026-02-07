@@ -15,10 +15,13 @@ public class DamagePopup : MonoBehaviour
     [SerializeField] private TMP_Text text;
 
     [SerializeField] private float duration;
-
+    [SerializeField] private float moveUpSpeed;
+    
     private float timeElapsed = 0;
 
     private float updateInterval = 0.01f;
+
+    private float currentvalue;
     
     private void OnEnable()
     {
@@ -43,7 +46,8 @@ public class DamagePopup : MonoBehaviour
                 text.color = Color.white;
                 break;
         }
-        
+
+        currentvalue = value;
         text.text = ((int)value).ToString();
 
         StartCoroutine(UpdatePopupCo());
@@ -53,9 +57,9 @@ public class DamagePopup : MonoBehaviour
     {
         while (timeElapsed <= duration)
         {
-            transform.Translate(Vector2.up * (100 * updateInterval));
+            transform.Translate(Vector2.up * (moveUpSpeed * updateInterval));
  
-            text.alpha = Mathf.Lerp(1, 0, timeElapsed / duration);
+            //text.alpha = Mathf.Lerp(1, 0, timeElapsed / duration);
             timeElapsed += updateInterval;
   
             yield return new WaitForSeconds(updateInterval);

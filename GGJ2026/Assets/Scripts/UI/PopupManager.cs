@@ -28,4 +28,13 @@ public class PopupManager : MonoBehaviour
         popupObject.Initialize(value, type);
         popupObject.transform.SetParent(transform);
     }
+
+    public void CreateWorldPopup(Vector2 position, float value, PopupType type = PopupType.Default)
+    {
+        DamagePopup popupObject = ObjectPool.instance.Get(ObjectTypes.DamagePopups).GetComponent<DamagePopup>();
+        popupObject.transform.SetParent(transform);
+        popupObject.transform.localPosition = position;
+        
+        popupObject.Initialize(value, type);
+    }
 }

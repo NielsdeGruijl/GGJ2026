@@ -7,31 +7,31 @@ public class EntityDebuffManager : MonoBehaviour
 
     private List<BaseDebuff> activeDebuffs = new();
     
-    public void ApplyDebuff(DebuffSO debuffToApply)
+    public void ApplyDebuff(StatModifierSO statModifierToApply)
     {
-        BaseDebuff debuff = debuffToApply.MakeDebuff(transform);
+        BaseDebuff debuff = statModifierToApply.MakeDebuff();
         debuff.Apply(debuffValues);
         activeDebuffs.Add(debuff);
     }
 
-    public bool HasDebuff(DebuffSO debuffToCheck)
+    public bool HasDebuff(StatModifierSO statModifierToCheck)
     {
         int count = 0;
         foreach (BaseDebuff debuff in activeDebuffs)
         {
-            if (debuff.debuffData == debuffToCheck)
+            if (debuff.StatModifierData == statModifierToCheck)
                 return true;
         }
 
         return false;
     }
     
-    public bool HasDebuff(DebuffSO debuffToCheck, out int stacks)
+    public bool HasDebuff(StatModifierSO statModifierToCheck, out int stacks)
     {
         int count = 0;
         foreach (BaseDebuff debuff in activeDebuffs)
         {
-            if (debuff.debuffData == debuffToCheck)
+            if (debuff.StatModifierData == statModifierToCheck)
             {
                 count++;
             }                

@@ -10,6 +10,6 @@ public class StickyGoop : InventoryMask
         newData = maskData as StickyGoopSO;
 
         pPlayerMaskData.lingeringProcChance += newData.procChance / pPlayerMaskData.sortedMasks[newData.maskName].Count;
-        pPlayerMaskData.lingeringDebuff = newData.debuff;
+        pPlayerMaskData.LingeringStatModifier = newData.statModifier;
     }
 }

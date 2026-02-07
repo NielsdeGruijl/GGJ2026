@@ -3,20 +3,43 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Analytics;
 
-public class HomingMissile : Projectile
+[RequireComponent(typeof(Rigidbody2D))]
+public class HomingMissile : MonoBehaviour
 {
     [SerializeField] private float turnSpeed = 15;
-    
+    [SerializeField] private float rotateInterval;
+    [SerializeField] private ContactFilter2D filter;
+
     private Collider2D activeTarget;
-    
+
+    private Rigidbody2D rigidBody;
+
     private const float trackingRadius = 200;
 
     private WaitForSeconds waitTrackTarget;
-    
-    protected override void Start()
+
+    private float moveSpeed;
+
+    private WaitForSeconds waitForRotateInterval;
+
+    private Collider2D[] targets = new Collider2D[16];
+
+    private float damage;
+
+    public DamageEvent OnHit;
+
+    private void Start()
     {
         waitTrackTarget = new WaitForSeconds(0.5f);
-        
+        waitForRotateInterval = new WaitForSeconds(rotateInterval);
+
+        rigidBody = GetComponent<Rigidbody2D>();
+    }
+
+    public void Initialize(Vector2 moveDirection, float moveSpeed)
+    {
+        this.moveSpeed = moveSpeed;
+        StartCoroutine(RotateToTargetCo());
         StartCoroutine(TrackTargetCo());
     }
 
@@ -25,33 +48,38 @@ public class HomingMissile : Projectile
         Collider2D target;
         while (true)
         {
-            if (target = FindTarget())
+            if (!activeTarget || !activeTarget.isActiveAndEnabled)
             {
-                activeTarget = target;
+                if (target = FindTarget())
+                    activeTarget = target;
             }
-            
+
             yield return waitTrackTarget;
         }
     }
 
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
+
     private Collider2D FindTarget()
     {
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position.ToVector2(), trackingRadius);
+        Physics2D.OverlapCircle(transform.position.ToVector2(), trackingRadius, filter, targets);
 
         float distance = Mathf.Infinity;
-        
         Collider2D closestCollider = null;
         
         foreach (Collider2D target in targets)
         {
-            if (target.GetComponent<Enemy>())
+            if (!target.CompareTag("Enemy"))
+                continue;
+            
+            float tempDistance = (target.transform.position.ToVector2() -  transform.position.ToVector2()).magnitude;
+            if (tempDistance < distance)
             {
-                float tempDistance = (target.transform.position.ToVector2() -  transform.position.ToVector2()).magnitude;
-                if (tempDistance < distance)
-                {
-                    closestCollider = target;
-                    distance = tempDistance;
-                }
+                closestCollider = target;
+                distance = tempDistance;
             }
         }
 
@@ -83,6 +111,16 @@ public class HomingMissile : Projectile
         
         transform.Rotate(0, 0, angleStep);
     }
+
+    private IEnumerator RotateToTargetCo()
+    {
+        while (true)
+        {
+            RotateToTarget();
+            
+            yield return waitForRotateInterval;
+        }
+    }
     
     bool IsLeft(Vector2 A, Vector2 B)
     {
@@ -91,7 +129,18 @@ public class HomingMissile : Projectile
     
     private void FixedUpdate()
     {
-        rigidBody.AddForce(transform.up * (moveSpeed * Time.deltaTime));
-        RotateToTarget();
+        rigidBody.AddForce(transform.up * (moveSpeed * Time.fixedDeltaTime));
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out HealthManager enemy))
+        {
+            enemy.TakeDamage(damage);
+            OnHit.Invoke(damage);
+            OnHit.RemoveAllListeners();
+            
+            ObjectPool.instance.PoolObject(ObjectTypes.Missiles, gameObject);
+        }
     }
 }
