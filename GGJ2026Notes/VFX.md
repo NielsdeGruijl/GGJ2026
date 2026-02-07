@@ -6,7 +6,7 @@
 
 - Open chest VFX
 
-
+- Lightning
 
 - Mask ability effect
 	- short buildup leading to ability used

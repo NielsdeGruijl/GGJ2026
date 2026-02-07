@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Masks/TrailBlazer")]
+[CreateAssetMenu(menuName = "Masks/Aggressive/TrailBlazer")]
 public class TrailBlazerSO : MaskSO
 {
     public GameObject grenade;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Masks/BurstMask")]
+[CreateAssetMenu(menuName = "Masks/Aggressive/BurstMask")]
 public class BurstMaskSO : MaskSO
 {
     public Projectile bulletPrefab;

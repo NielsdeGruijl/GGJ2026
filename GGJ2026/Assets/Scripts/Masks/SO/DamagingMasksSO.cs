@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Masks/Damaing Masks")]
+[CreateAssetMenu(menuName = "Masks/Aggressive/Damaing Masks")]
 public class DamagingMasksSO : MaskSO
 {
     public float collisionDamagePerStack;

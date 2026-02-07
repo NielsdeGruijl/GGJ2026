@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6654037893830515226}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ MonoBehaviour:
   popup: {fileID: 0}
   whiteFlash: {fileID: 4668093333374895871}
   showDamageVFX: 1
-  maxHealth: 1000
+  maxHealth: 50
   OnDeath:
     m_PersistentCalls:
       m_Calls: []

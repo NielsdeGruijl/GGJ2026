@@ -18,7 +18,7 @@ public class DamagePopup : MonoBehaviour
 
     private float timeElapsed = 0;
 
-    private float updateInterval = 0.1f;
+    private float updateInterval = 0.01f;
     
     private void OnEnable()
     {

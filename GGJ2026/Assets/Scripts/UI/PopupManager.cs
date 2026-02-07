@@ -23,7 +23,6 @@ public class PopupManager : MonoBehaviour
         Vector2 canvasPosition = cam.WorldToScreenPoint(position).ToVector2();
 
         DamagePopup popupObject = ObjectPool.instance.Get(ObjectTypes.DamagePopups).GetComponent<DamagePopup>();
-        Debug.Log(popupObject.gameObject.activeSelf + "," + popupObject.gameObject.activeInHierarchy);
         popupObject.transform.position = canvasPosition;
         
         popupObject.Initialize(value, type);

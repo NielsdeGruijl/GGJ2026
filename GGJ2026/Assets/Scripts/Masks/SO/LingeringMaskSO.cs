@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Masks/LingeringMask")]
+[CreateAssetMenu(menuName = "Masks/Aggressive/LingeringMask")]
 public class LingeringMaskSO : MaskSO
 {
     public LingeringArea areaPrefab;

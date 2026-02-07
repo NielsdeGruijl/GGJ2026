@@ -58,10 +58,11 @@ public class ObjectPool : MonoBehaviour
             GrowPool(poolTag);
 
         GameObject obj = currentPool.Dequeue();
-        obj.SetActive(true);
         
-        if(poolTag == ObjectTypes.DamagePopups)
-            Debug.Log(obj.activeSelf);
+        if(!obj)
+            Debug.LogError("Pooled object is non-existent");
+        
+        obj.SetActive(true);
         
         return obj;
     }

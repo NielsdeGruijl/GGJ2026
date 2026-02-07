@@ -75,11 +75,13 @@ public class Enemy : MonoBehaviour
     
     private void DropCoins()
     {
-        Coin coinObject = ObjectPool.instance.Get(ObjectTypes.Coins).GetComponent<Coin>();
+        GameObject obj = ObjectPool.instance.Get(ObjectTypes.Coins);
+        Coin coinObject = obj.GetComponent<Coin>();
+
         coinObject.transform.position = transform.position;
         coinObject.value = coinValue;
         
-        ObjectPool.instance.PoolObject(ObjectTypes.Coins, gameObject);
+        ObjectPool.instance.PoolObject(ObjectTypes.Enemies, gameObject);
     }
 
     private void FixedUpdate()

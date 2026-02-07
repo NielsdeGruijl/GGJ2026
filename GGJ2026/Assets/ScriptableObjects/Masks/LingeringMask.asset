@@ -19,7 +19,6 @@ MonoBehaviour:
   cooldown: 2
   areaPrefab: {fileID: 8352817468960798549, guid: 8c5099a51377e3f5b81f6c0da71a07a5, type: 3}
   debuff: {fileID: 11400000, guid: 6ac089885cc9f1c7f8d23b09b46eb87c, type: 2}
-  debuffProcChance: 1
   damagePerSecond: 30
   areaRadius: 2
   effectDuration: 3

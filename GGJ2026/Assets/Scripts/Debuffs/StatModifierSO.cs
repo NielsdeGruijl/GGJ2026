@@ -5,13 +5,18 @@ public enum StatType
 {
     MoveSpeed,
     AttackDamage,
-    Custom
+    Health,
+    CritChance,
+    CritBonus,
+    Luck
 }
 
 public enum StatModificationType
 {
     flat,
-    multiplier
+    multiplier,
+    DOT,
+    Custom
 }
 
 public class DebuffSO : ScriptableObject
@@ -24,9 +29,9 @@ public class DebuffSO : ScriptableObject
     public float modificationValue;
     public float duration;
 
-    public virtual BaseDebuff MakeDebuff(Transform parent)
+    public virtual BaseDebuff MakeDebuff()
     {
-        BaseDebuff debuff = Instantiate(debuffPrefab, parent);
+        BaseDebuff debuff = new BaseDebuff();
         debuff.debuffData = this;
         return debuff;
     }

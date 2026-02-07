@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Masks/HomingMissile")]
+[CreateAssetMenu(menuName = "Masks/Aggressive/HomingMissile")]
 public class HomingMissileSO : MaskSO
 {
     public float damage;

@@ -81,15 +81,15 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 23df72234aca1f8918432ba652ab9795, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.9375, y: 1.5}
+  m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
 --- !u!1 &8200659786222824090
 GameObject:
@@ -101,8 +101,9 @@ GameObject:
   m_Component:
   - component: {fileID: 937689785194317495}
   - component: {fileID: -2843464723316322552}
+  - component: {fileID: 5364967412609472354}
   m_Layer: 0
-  m_Name: BaseInventoryMask
+  m_Name: LighningInventoryMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,3 +161,20 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &5364967412609472354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8200659786222824090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5478efe85cf51c8da8505d847e4709a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightningMask
+  baseMoveSpeed: 1
+  maskData: {fileID: 0}
+  OnAuraDamage:
+    m_PersistentCalls:
+      m_Calls: []

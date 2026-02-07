@@ -10,6 +10,3 @@
 [[Balancing]]
 
 
-- Apply objectpooling to damage popups
-	- change instantiate and destroy lines
-

@@ -3,6 +3,10 @@ This is the current asset list for the game, containing mostly sprites and anima
 
 - Come up with a theme for the game (kitsune -> japanese?)
 
+- Overhaul masks
+- Masks
+	- Lightning mask
+
 - Better player sprite
 	- Idle animation X
 	- Run animation X

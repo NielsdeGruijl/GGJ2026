@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Masks/HealSucc")]
+[CreateAssetMenu(menuName = "Masks/Aggressive/HealSucc")]
 public class HealSuckSO : MaskSO
 {
     public float lifeSteal;

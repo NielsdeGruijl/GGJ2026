@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Masks/SpeedMask")] 
+[CreateAssetMenu(menuName = "Masks/Passive/SpeedMask")] 
 public class SpeedMaskSO : MaskSO
 {
     public float speedMult = 1;

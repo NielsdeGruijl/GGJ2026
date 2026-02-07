@@ -21,16 +21,13 @@ public class InventoryMask :  MonoBehaviour
 
     protected WaitForSeconds waitForCooldown;
 
-    private void Awake()
-    {
-        waitForCooldown = new WaitForSeconds(maskData.cooldown);
-    }
-
     public virtual void Activate(PlayerMaskData pPlayerMaskData)
     {
         playerMaskData = pPlayerMaskData;
         
         moveSpeed = baseMoveSpeed + (ringCapacity * bonusMoveSpeed);
+        
+        waitForCooldown = new WaitForSeconds(maskData.cooldown);
     }
 
     private void Update()
@@ -63,6 +60,7 @@ public class InventoryMask :  MonoBehaviour
         return new Vector3(xPosition, yPosition, 0) * targetRadius;
     }
 
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (playerMaskData.maskCollisionDamage <= 0)

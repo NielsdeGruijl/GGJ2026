@@ -60,8 +60,8 @@ public class HealthManager : MonoBehaviour
 
         if (currentHealth <= 0 && canDie && !isDead)
         {
-            StopAllCoroutines();
             isDead = true;
+            StopAllCoroutines();
             OnDeath.Invoke();
         }
 
@@ -129,12 +129,12 @@ public class HealthManager : MonoBehaviour
 
     private void CreateDamagePopup(float damage)
     {
-        if (!isEnemy)
+        /*if (!isEnemy)
         {
             PopupManager.instance.CreatePopup(transform.position, damage, PopupType.Player);
             return;
         }
         
-        PopupManager.instance.CreatePopup(transform.position, damage);
+        PopupManager.instance.CreatePopup(transform.position, damage);*/
     }
 }
