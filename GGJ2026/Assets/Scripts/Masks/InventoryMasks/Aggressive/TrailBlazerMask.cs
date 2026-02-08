@@ -45,7 +45,7 @@ public class TrailBlazerMask : InventoryMask
 
                 Explosion explosionObject = ObjectPool.instance.Get(ObjectTypes.Explosions).GetComponent<Explosion>();
                 explosionObject.transform.position = go.transform.position;
-                explosionObject.Initialize(newData.explosionRange, newData.explosionDamage, newData.fuzeTimer);
+                explosionObject.Initialize(newData.explosionRange, newData.explosionDamage * playerMaskData.playerDamageMult, newData.fuzeTimer);
                 explosionObject.OnHit.AddListener(UpdateDamageDealt);
 
                 i++;

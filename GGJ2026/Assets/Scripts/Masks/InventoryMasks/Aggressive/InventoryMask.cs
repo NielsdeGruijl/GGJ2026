@@ -27,6 +27,8 @@ public class InventoryMask :  MonoBehaviour
     {
         playerMaskData = pPlayerMaskData;
         
+        playerMaskData.OnCooldownChanged.AddListener(UpdateCooldown);
+        
         moveSpeed = baseMoveSpeed + (ringCapacity * bonusMoveSpeed);
         
         waitForCooldown = new WaitForSeconds(maskData.cooldown);
@@ -50,6 +52,11 @@ public class InventoryMask :  MonoBehaviour
         transform.localPosition = GetMovePosition();
     }
 
+    private void UpdateCooldown()
+    {
+        waitForCooldown = new WaitForSeconds(maskData.cooldown * playerMaskData.cooldownMult);
+    }
+    
     protected void UpdateDamageDealt(float damage)
     {
         playerMaskData.maskTypeDamageDealt[maskData.maskName] += damage;

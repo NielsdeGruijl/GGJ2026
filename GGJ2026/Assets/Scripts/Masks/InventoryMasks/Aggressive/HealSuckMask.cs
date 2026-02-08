@@ -66,7 +66,7 @@ public class HealSuckMask : InventoryMask
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, target.transform.position);
                 
-                float actualDamage = newData.lifeSteal * Time.deltaTime;
+                float actualDamage = newData.lifeSteal * playerMaskData.playerDamageMult * Time.deltaTime;
                 
                 // do enemy damage, heal player
                 if (target.isActiveAndEnabled)

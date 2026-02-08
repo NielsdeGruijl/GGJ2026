@@ -21,10 +21,10 @@ public class HealthManager : MonoBehaviour
     private float currentHealth;
 
     private float damagePopupValue = 0;
-    private bool canStartPopup = true;
+    private bool isGeneratingPopup = false;
 
     private WaitForSeconds waitForDOTInterval;
-    private WaitForSeconds waitForPopup = new WaitForSeconds(0.1f);
+    private WaitForSeconds waitForPopup = new WaitForSeconds(1);
 
     private void Awake()
     {
@@ -46,7 +46,7 @@ public class HealthManager : MonoBehaviour
             whiteFlash.SetActive(false);
         }
 
-        canStartPopup = true;
+        isGeneratingPopup = false;
     }
 
     public void ApplyDamage(float damage, bool continuous = false)
@@ -56,18 +56,22 @@ public class HealthManager : MonoBehaviour
         
         currentHealth -= damage;
 
+        damagePopupValue += damage;
+        
         if (currentHealth <= 0 && canDie && !isDead)
         {
             isDead = true;
+            
+            if(isGeneratingPopup || currentHealth + damage >= maxHealth)
+                CreateDamagePopup();
+            
             StopAllCoroutines();
             OnDeath.Invoke();
         }
-
-        if(canStartPopup && gameObject.activeSelf)
+        
+        if (!isGeneratingPopup && gameObject.activeSelf)
             StartCoroutine(ShowPopup());
 
-        damagePopupValue += damage;
-        
         UpdateHealthBar();
     }
 
@@ -93,23 +97,24 @@ public class HealthManager : MonoBehaviour
 
     private IEnumerator ShowPopup()
     {
-        canStartPopup = false;
+        isGeneratingPopup = true;
         yield return waitForPopup;
         
-        CreateDamagePopup(damagePopupValue);
+        CreateDamagePopup();
         
-        damagePopupValue = 0;
-        canStartPopup = true;
+        isGeneratingPopup = false;
     }
 
-    private void CreateDamagePopup(float damage)
+    private void CreateDamagePopup()
     {
         if (!isEnemy)
         {
-            PopupManager.instance.CreateWorldPopup(transform.position, damage, PopupType.Player);
+            PopupManager.instance.CreateWorldPopup(transform.position, damagePopupValue, PopupType.Player);
             return;
         }
         
-        PopupManager.instance.CreateWorldPopup(transform.position, damage);
+        PopupManager.instance.CreateWorldPopup(transform.position, damagePopupValue);
+        
+        damagePopupValue = 0;
     }
 }

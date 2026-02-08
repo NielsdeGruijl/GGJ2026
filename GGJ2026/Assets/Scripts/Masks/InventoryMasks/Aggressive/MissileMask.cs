@@ -23,7 +23,7 @@ public class MissileMask : InventoryMask
             HomingMissile projectileObject = ObjectPool.instance.Get(ObjectTypes.Missiles).GetComponent<HomingMissile>();
             projectileObject.transform.position = transform.position;
             projectileObject.Initialize(Vector2.up, newData.missileSpeed);
-            projectileObject.SetDamage(newData.damage);
+            projectileObject.SetDamage(newData.damage * playerMaskData.playerDamageMult);
             projectileObject.OnHit.AddListener(UpdateDamageDealt);
             
             yield return waitForCooldown;

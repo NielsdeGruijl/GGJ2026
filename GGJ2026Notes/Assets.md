@@ -6,6 +6,8 @@ This is the current asset list for the game, containing mostly sprites and anima
 - Overhaul masks
 - Masks
 	- Lightning mask
+	- Increase damage mask
+	- Fire rate mask
 
 - Better player sprite
 	- Idle animation X

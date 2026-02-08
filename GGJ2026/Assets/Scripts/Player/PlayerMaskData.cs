@@ -18,11 +18,15 @@ public class PlayerMaskData
     public float playerMagnetRange;
     public float playerMagnetForce;
 
+    public float playerDamageMult = 1;
+
     public float luck = 0;
+
+    public UnityEvent OnCooldownChanged = new();
+    public float cooldownMult = 1;
 
     public BaseDebuffSO LingeringBaseDebuff;
     public float lingeringProcChance = 0;
-
     
     public List<string> maskKeys = new();
     public Dictionary<string, List<InventoryMask>> sortedMasks = new();

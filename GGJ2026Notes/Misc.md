@@ -1,19 +1,18 @@
 
 - Allow players to choose a starting mask
 
-- Shrine to summon da big boye
-	- Summons big enemy/enemies that drop good loot
-
 - Play animation to open chest
-	- Mask goes up in sky and falls down
+	- Mask goes up in sky and falls down X
 
 - Design player agency system
 	- Player must interact with mask on ground to pickup
 	- Different chest types drop different items:
 		- General chest
-		- Agressive chest type
-		- passive chest type
-		- Legendary
+		- Agressive chest type X
+		- passive chest type X
+		- Legendary X
+
+- Revisit popup system
 
 ===== Done =====
 

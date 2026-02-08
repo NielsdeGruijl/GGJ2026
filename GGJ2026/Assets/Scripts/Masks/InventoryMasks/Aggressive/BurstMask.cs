@@ -36,7 +36,7 @@ public class BurstMask : InventoryMask
                 Projectile bulletObject = ObjectPool.instance.Get(ObjectTypes.Projectiles).GetComponent<Projectile>();
                 bulletObject.transform.position = transform.position;
                 bulletObject.Initialize(shootDirection, newData.bulletSpeed);
-                bulletObject.SetDamage(newData.damagePerBullet);
+                bulletObject.SetDamage(newData.damagePerBullet * playerMaskData.playerDamageMult);
                 
                 bulletObject.OnHit.AddListener(UpdateDamageDealt);
                 

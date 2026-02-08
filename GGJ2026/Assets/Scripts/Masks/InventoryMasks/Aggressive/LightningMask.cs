@@ -19,7 +19,7 @@ public class LightningMask : InventoryMask
         while (true)
         {
             Lightning lightning = Instantiate(newData.lightningPrefab, transform.position, Quaternion.identity);
-            lightning.Initialize(newData.totalBounces, newData.damagePerBounce);
+            lightning.Initialize(newData.totalBounces, newData.damagePerBounce * playerMaskData.playerDamageMult);
             yield return waitForCooldown;
         }
     }

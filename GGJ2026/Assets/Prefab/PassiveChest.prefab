@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: masks.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: 'masks.Array.data[0]'
@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: 'masks.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: 9d3e31a2d321511e883cf271b43da091, type: 2}
+    - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
+      propertyPath: 'masks.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f7c755b1810617db921d0706e552656, type: 2}
+    - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
+      propertyPath: 'masks.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 143d13f2f1de1c47e91959c8662f5606, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
