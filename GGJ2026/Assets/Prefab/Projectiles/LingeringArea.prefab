@@ -138,10 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LingeringArea
   areaSprite: {fileID: 8230493264061884489}
-  layermask:
-    serializedVersion: 2
-    m_Bits: 0
-  interval: 0.2
+  baseDebuff: {fileID: 11400000, guid: b71ff2982558ea103b2168e41bc38d64, type: 2}
 --- !u!58 &-849123831024385862
 CircleCollider2D:
   m_ObjectHideFlags: 0

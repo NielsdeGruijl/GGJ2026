@@ -1,49 +1,112 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EntityDebuffManager : MonoBehaviour
 {
-    private EntityDebuffData debuffValues;
-
-    private List<BaseDebuff> activeDebuffs = new();
+    [SerializeField] private float debuffTick;
     
-    public void ApplyDebuff(StatModifierSO statModifierToApply)
+    private EntityStatModifiers debuffValues;
+
+    private List<BaseDebuff> activeDebuffs;
+
+    private Coroutine debuffTickCoroutine;
+    private WaitForSeconds waitForDebuffTick;
+
+    private void Awake()
     {
-        BaseDebuff debuff = statModifierToApply.MakeDebuff();
-        debuff.Apply(debuffValues);
-        activeDebuffs.Add(debuff);
+        activeDebuffs = new List<BaseDebuff>();
+        waitForDebuffTick = new WaitForSeconds(debuffTick);
     }
 
-    public bool HasDebuff(StatModifierSO statModifierToCheck)
+    private void OnEnable()
     {
-        int count = 0;
-        foreach (BaseDebuff debuff in activeDebuffs)
+        debuffTickCoroutine = StartCoroutine(DebuffTickCo());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(debuffTickCoroutine);
+
+        for (int i = 0; i < activeDebuffs.Count; i++)
         {
-            if (debuff.StatModifierData == statModifierToCheck)
-                return true;
+            activeDebuffs[i].Remove();
         }
 
-        return false;
+        activeDebuffs.Clear();
+    }
+
+    public void ApplyDebuff(BaseDebuffSO debuff)
+    {
+        switch (debuff.stackingRule)
+        {
+            case StackingRule.Refresh:
+                RefreshDebuff(debuff);
+                break;
+            case StackingRule.Stack:
+                AddDebuff(debuff);
+                break;
+            case StackingRule.Ignore:
+                // Only add a debuff if none of its type exists
+                if(FindDebuff(debuff) == null)
+                    AddDebuff(debuff);
+                break;
+        }
+    }
+
+    private void AddDebuff(BaseDebuffSO debuff)
+    {
+        BaseDebuff instance = debuff.MakeDebuff();
+        instance.Apply(this);
+        instance.Tick(debuffTick);
+        activeDebuffs.Add(instance);
+    }
+
+    private void RefreshDebuff(BaseDebuffSO debuff)
+    {
+        BaseDebuff foundDebuff = FindDebuff(debuff);
+        if(foundDebuff != null)
+            foundDebuff.Refresh();
+        else
+            AddDebuff(debuff);
     }
     
-    public bool HasDebuff(StatModifierSO statModifierToCheck, out int stacks)
+    private BaseDebuff FindDebuff(BaseDebuffSO debuff)
     {
-        int count = 0;
-        foreach (BaseDebuff debuff in activeDebuffs)
+        for (int i = 0; i < activeDebuffs.Count; i++)
         {
-            if (debuff.StatModifierData == statModifierToCheck)
+            if (activeDebuffs[i] == null)
+                continue;
+
+            if (activeDebuffs[i].CompareTag(debuff.debuffTag))
+                return activeDebuffs[i];
+        }
+
+        return null;
+    }
+    
+    public void RemoveDebuff(BaseDebuff debuffToRemove)
+    {
+        if (activeDebuffs.Contains(debuffToRemove))
+        {
+            activeDebuffs.Remove(debuffToRemove);
+        }
+    }
+    
+    private IEnumerator DebuffTickCo()
+    {
+        while (true)
+        {
+            for (int i = 0; i < activeDebuffs.Count; i++)
             {
-                count++;
-            }                
+                if (activeDebuffs[i] == null)
+                    continue;
+                
+                activeDebuffs[i].Tick(debuffTick);
+            }
+            
+            yield return waitForDebuffTick;
         }
-
-        if (count > 0)
-        {
-            stacks = count;
-            return true;
-        }
-
-        stacks = 0;
-        return false;
     }
 }

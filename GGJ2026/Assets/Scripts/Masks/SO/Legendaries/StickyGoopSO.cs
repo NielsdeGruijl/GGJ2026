@@ -4,7 +4,7 @@ using UnityEngine;
 public class StickyGoopSO : MaskSO
 {
     public float procChance;
-    public StatModifierSO statModifier;
+    public BaseDebuffSO BoggedDebuff;
 
     public override InventoryMask MakeMask(Transform player)
     {

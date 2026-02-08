@@ -6,3 +6,12 @@
 - Created setup for randomized tile generation
 - Optimized coroutines
 - Added animation to items from chests
+
+07/02/2026
+
+- Significantly improved performance
+	- Added sprite atlas
+	- Improved coroutines
+	- Improved damage popups
+- Reworked debuff system to be more dynamic
+	- Lingering areas now apply a DOT debuff instead of dealing damage directly

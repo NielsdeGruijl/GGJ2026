@@ -18,5 +18,5 @@ MonoBehaviour:
   maskItem: {fileID: 9046324442099674922, guid: 719f563e988d1c761a0137d2c3ebd1cb, type: 3}
   maskSprite: {fileID: 21300000, guid: 23df72234aca1f8918432ba652ab9795, type: 3}
   cooldown: 0
-  procChance: 25
-  debuff: {fileID: 11400000, guid: 6ac089885cc9f1c7f8d23b09b46eb87c, type: 2}
+  procChance: 10
+  BoggedDebuff: {fileID: 11400000, guid: 6ac089885cc9f1c7f8d23b09b46eb87c, type: 2}

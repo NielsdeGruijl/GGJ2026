@@ -7,7 +7,7 @@ public class PlayerMaskData
     
     public float playerMoveSpeedMult = 1;
 
-    public StatModifierSO LingeringStatModifier;
+    public BaseDebuffSO LingeringBaseDebuff;
     public float lingeringProcChance = 0;
     
     public List<string> maskKeys = new();

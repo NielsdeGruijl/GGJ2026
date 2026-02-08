@@ -10,4 +10,8 @@
 [[Balancing]]
 [[Economy]]
 
-- Lingering area should give enemies "poisoned" debuff instead of dealing damage directly
+
+- Bogged debuff not removed OnDisable of debuffManager
+- Come up with better bogged lingering area solution
+	- currently uses exact same prefab - same debuff data
+	- can't change data (damage) independently

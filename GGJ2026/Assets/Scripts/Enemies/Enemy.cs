@@ -102,7 +102,7 @@ public class Enemy : MonoBehaviour
             if ((target.transform.position.ToVector2() - transform.position.ToVector2()).magnitude < attackRange)
             {
                 if (targetHealth)
-                    targetHealth.TakeDamage(damage * DifficultyManager.instance.enemyDamageMult);
+                    targetHealth.ApplyDamage(damage * DifficultyManager.instance.enemyDamageMult);
             }
             
             yield return waitForAttack;

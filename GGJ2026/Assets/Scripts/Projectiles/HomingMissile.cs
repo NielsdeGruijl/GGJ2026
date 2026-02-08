@@ -136,7 +136,7 @@ public class HomingMissile : MonoBehaviour
     {
         if (collision.TryGetComponent(out HealthManager enemy))
         {
-            enemy.TakeDamage(damage);
+            enemy.ApplyDamage(damage);
             OnHit.Invoke(damage);
             OnHit.RemoveAllListeners();
             

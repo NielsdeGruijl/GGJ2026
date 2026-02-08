@@ -23,8 +23,8 @@ public class HealthManager : MonoBehaviour
     private float damagePopupValue = 0;
     private bool canStartPopup = true;
 
-    private WaitForSeconds waitFlash = new WaitForSeconds(0.1f);
-    private WaitForSeconds waitPopup = new WaitForSeconds(0.1f);
+    private WaitForSeconds waitForDOTInterval;
+    private WaitForSeconds waitForPopup = new WaitForSeconds(0.1f);
 
     private void Awake()
     {
@@ -49,7 +49,7 @@ public class HealthManager : MonoBehaviour
         canStartPopup = true;
     }
 
-    public void TakeDamage(float damage, bool continuous = false)
+    public void ApplyDamage(float damage, bool continuous = false)
     {
         if (isEnemy)
             damage *= PlayerLevelManager.instance.playerDamageMult;
@@ -81,6 +81,8 @@ public class HealthManager : MonoBehaviour
         UpdateHealthBar();
     }
 
+    // ===== UI =====
+    
     private void UpdateHealthBar()
     {
         if (!healthbar)
@@ -89,23 +91,10 @@ public class HealthManager : MonoBehaviour
         healthbar.value = currentHealth / maxHealth;
     }
 
-    private void ShowWhiteFlash()
-    {
-        if(gameObject.activeSelf)
-            StartCoroutine(ShowFlashCo());
-    }
-
-    private IEnumerator ShowFlashCo()
-    {
-        //whiteFlash.SetActive(true);
-        yield return waitFlash;
-        //whiteFlash.SetActive(false);
-    }
-    
     private IEnumerator ShowPopup()
     {
         canStartPopup = false;
-        yield return waitPopup;
+        yield return waitForPopup;
         
         CreateDamagePopup(damagePopupValue);
         

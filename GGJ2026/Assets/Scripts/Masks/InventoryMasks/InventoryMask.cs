@@ -77,7 +77,7 @@ public class InventoryMask :  MonoBehaviour
      
         if (other.TryGetComponent(out HealthManager enemy))
         { 
-            enemy.TakeDamage(playerMaskData.maskCollisionDamage);
+            enemy.ApplyDamage(playerMaskData.maskCollisionDamage);
             OnAuraDamage.Invoke(playerMaskData.maskCollisionDamage / playerMaskData.sortedMasks["DamagingAura"].Count);
             //StartCoroutine(DamagingAuraCooldownCo());
         }

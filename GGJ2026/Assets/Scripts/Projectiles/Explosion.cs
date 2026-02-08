@@ -53,7 +53,7 @@ public class Explosion : MonoBehaviour
         {
             if (collider.TryGetComponent(out HealthManager enemy) && !collider.CompareTag("Player"))
             {
-                enemy.TakeDamage(damage);
+                enemy.ApplyDamage(damage);
                 OnHit.Invoke(damage);
             }
         }

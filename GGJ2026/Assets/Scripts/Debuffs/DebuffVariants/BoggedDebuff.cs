@@ -1,30 +1,22 @@
-using System.Collections;
-using UnityEngine;
 
 public class BoggedDebuff : BaseDebuff
 {
-    [HideInInspector] public BoggedSO NewData;
-
-    /*protected override void ApplyCustomDebuff(EntityDebuffData entityDebuffValues)
+    private float radius;
+    private float areaDuration;
+    
+    public BoggedDebuff(string debuffTag, float duration, float radius, float areaDuration) 
+        : base(debuffTag, duration)
     {
-        base.ApplyCustomDebuff(entityDebuffValues);
-
-        StartCoroutine(SpawnBogCo());
+        this.radius = radius;
+        this.areaDuration = areaDuration;
     }
 
-    private IEnumerator SpawnBogCo()
+    public override void Tick(float interval)
     {
-        float timeElapsed = 0;
-        while (timeElapsed < StatModifierData.duration)
-        {
-            LingeringArea area = ObjectPool.instance.Get(ObjectTypes.LingeringAreas).GetComponent<LingeringArea>();
-            area.transform.position = transform.position;
-            area.Initialize(NewData.damage, NewData.areaRadius, NewData.areaDuration);
-            
-            yield return new WaitForSeconds(NewData.cooldown);
-            timeElapsed += NewData.cooldown;
-        }
-        
-        Destroy(gameObject);
-    }*/
+        base.Tick(interval);
+
+        LingeringArea area = ObjectPool.instance.Get(ObjectTypes.LingeringAreas).GetComponent<LingeringArea>();
+        area.transform.position = target.transform.position;
+        area.Initialize(radius, areaDuration);
+    }
 }

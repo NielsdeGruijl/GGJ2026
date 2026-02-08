@@ -7,59 +7,45 @@ using Random = UnityEngine.Random;
 public class LingeringArea : MonoBehaviour
 {
     [SerializeField] private Transform areaSprite;
-
-    [Space(10)]
-    [SerializeField] private float interval = 0.2f;
+    [SerializeField] private DOTDebuffSO baseDebuff;
     
-    private List<HealthManager> targets = new();
+    private List<EntityDebuffManager> targets = new();
     
-    private float dps;
     private float radius;
     private float duration;
 
-    private BoggedSO debuff;
+    private BoggedSO legendaryDebuff;
     private float debuffProcChance;
 
-    
-    public void Initialize(float damagePerSecond, float areaRadius, float effectDuration)
+    private Vector2 baseScale = new Vector2(1, 1);
+
+    private void OnDisable()
     {
-        dps = damagePerSecond;
+        legendaryDebuff = null;
+        debuffProcChance = 0;
+        
+        targets.Clear();
+    }
+
+    public void Initialize(float areaRadius, float duration)
+    {
         radius = areaRadius;
-        duration = effectDuration;
+        this.duration = duration;
 
-        areaSprite.localScale = new Vector2(1, 1) * (radius * 2);
+        transform.localScale = baseScale * (radius * 2);
 
-        StartCoroutine(DealDamageCo());
+        StartCoroutine(LifeTimeCo());
     }
 
     public void SetDebuffData(BoggedSO debuff, float debuffProcChance)
     {
-        this.debuff = debuff;
+        legendaryDebuff = debuff;
         this.debuffProcChance = debuffProcChance;
     }
 
-    private IEnumerator DealDamageCo()
+    private IEnumerator LifeTimeCo()
     {
-        float timeElapsed = 0;
-        while (timeElapsed < duration)
-        {
-            for (int i = 0; i < targets.Count; i++)
-            {
-                targets[i].TakeDamage(dps * interval, true);
-                    
-                if (debuff && Random.Range(0f, 1f) < debuffProcChance)
-                {
-                    if (targets[i].TryGetComponent(out EntityDebuffManager debuffManager))
-                    {
-                        if(!debuffManager.HasDebuff(debuff))
-                            debuffManager.ApplyDebuff(debuff);
-                    }
-                }
-            }
-
-            yield return new WaitForSeconds(interval);
-            timeElapsed += interval;
-        }
+        yield return new WaitForSeconds(duration);
         
         ObjectPool.instance.PoolObject(ObjectTypes.LingeringAreas, gameObject);
     }
@@ -68,14 +54,22 @@ public class LingeringArea : MonoBehaviour
     {
         if (!other.CompareTag("Enemy"))
             return;
-        
-        if(other.TryGetComponent(out HealthManager manager))
-            targets.Add(manager);
+
+        if (other.TryGetComponent(out EntityDebuffManager debuffManager))
+        {
+            targets.Add(debuffManager);
+            debuffManager.ApplyDebuff(baseDebuff);
+            
+            if (legendaryDebuff && Random.Range(0f, 100) < debuffProcChance)
+            {
+                debuffManager.ApplyDebuff(legendaryDebuff);
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent(out HealthManager manager))
+        if (other.TryGetComponent(out EntityDebuffManager manager))
         {
             if (targets.Contains(manager))
             {

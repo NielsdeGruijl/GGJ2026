@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c1cd0d079b5b8172b70351de15e6ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityDebuffManager
+  debuffTick: 0.5
 --- !u!114 &8953340587837885101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
-  popup: {fileID: 0}
   whiteFlash: {fileID: 4668093333374895871}
   showDamageVFX: 1
   maxHealth: 500

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Data architecture.md",
+                "file": "Stand down.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Data architecture"
+              "title": "Stand down"
             }
           }
         ]
@@ -201,21 +201,21 @@
   "active": "93cf6cd4454b194d",
   "lastOpenFiles": [
     "Post-GameJam.md",
-    "Data architecture.md",
+    "Misc.md",
+    "Passive masks.md",
+    "Stand down.md",
+    "UI.md",
     "VFX.md",
-    "Economy.md",
-    "Bug report.md",
-    "Balancing.md",
     "Assets.md",
     "Aggressive Masks.md",
-    "Stand down.md",
-    "Enemies.md",
-    "UI.md",
-    "Passive masks.md",
-    "Items.md",
+    "Balancing.md",
+    "Bug report.md",
+    "Data architecture.md",
     "Legendary masks.md",
     "Masks.md",
-    "Misc.md",
+    "Economy.md",
+    "Enemies.md",
+    "Items.md",
     "Heal beam.md",
     "GameJam/Art.md",
     "GameJam/GameJam.md",
