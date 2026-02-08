@@ -9,9 +9,9 @@
 [[UI]]
 [[Balancing]]
 [[Economy]]
+[[World-interactables]]
+[[Play tests]]
 
-
-- Bogged debuff not removed OnDisable of debuffManager
 - Come up with better bogged lingering area solution
 	- currently uses exact same prefab - same debuff data
 	- can't change data (damage) independently

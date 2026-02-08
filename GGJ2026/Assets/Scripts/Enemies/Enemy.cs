@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         
         healthManager = GetComponent<HealthManager>();
         
-        healthManager.OnDeath.AddListener(DropCoins);
+        healthManager.OnDeath.AddListener(Die);
 
         if (DifficultyManager.instance)
             DifficultyManager.instance.OnDifficultyChanged.AddListener(UpdateVelocity);
@@ -71,15 +71,15 @@ public class Enemy : MonoBehaviour
         rigidBody.AddForce(force, ForceMode2D.Impulse);
     }
     
-    private void DropCoins()
+    private void Die()
     {
         GameObject obj = ObjectPool.instance.Get(ObjectTypes.Coins);
         Coin coinObject = obj.GetComponent<Coin>();
 
         coinObject.transform.position = transform.position;
         coinObject.value = coinValue;
-        
-        ObjectPool.instance.PoolObject(ObjectTypes.Enemies, gameObject);
+
+        StartCoroutine(PoolObjectCo());
     }
 
     private void FixedUpdate()
@@ -92,6 +92,13 @@ public class Enemy : MonoBehaviour
         velocityMult = DifficultyManager.instance.enemyMoveSpeedMult;
     }
 
+    private IEnumerator PoolObjectCo()
+    {
+        yield return null;
+        
+        ObjectPool.instance.PoolObject(ObjectTypes.Enemies, gameObject);
+    }
+    
     private IEnumerator TryAttackPlayerCo()
     {
         while (target)

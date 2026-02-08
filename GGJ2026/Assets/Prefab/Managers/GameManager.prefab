@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6128931254888360544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410615551175019217}
+  - component: {fileID: 3788693209431208830}
+  - component: {fileID: 2040308353746517946}
+  - component: {fileID: 6084386061714686481}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &410615551175019217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128931254888360544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3788693209431208830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128931254888360544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9516c335e92c25e77869792a3a2a8a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  pools:
+  - tag: 0
+    prefab: {fileID: 2145497220908810131, guid: 26d25c14df7d1f844962423e7c77d7a4, type: 3}
+    baseSize: 50
+  - tag: 1
+    prefab: {fileID: 1249695522771599593, guid: be71082f30297734ab040fc4ba5799bc, type: 3}
+    baseSize: 500
+  - tag: 2
+    prefab: {fileID: 6430555516389312579, guid: 8c5099a51377e3f5b81f6c0da71a07a5, type: 3}
+    baseSize: 50
+  - tag: 3
+    prefab: {fileID: 6066782917373028996, guid: 5a87a7a803e99094683c2e8ea59d28ae, type: 3}
+    baseSize: 100
+  - tag: 4
+    prefab: {fileID: 3105137591890020189, guid: c07947c00c1a521498ec4b1eaf8c3044, type: 3}
+    baseSize: 50
+  - tag: 5
+    prefab: {fileID: 3894101463869125429, guid: 1717efbc7ee4abe428a769e397ff5b89, type: 3}
+    baseSize: 50
+  - tag: 6
+    prefab: {fileID: 5907491010488970924, guid: 24985ab5fee6a694c9a46c1835d657de, type: 3}
+    baseSize: 25
+--- !u!114 &2040308353746517946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128931254888360544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0477deb9773c15daa1e87daeb451c1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SessionData
+  timeSurvived: 0
+--- !u!114 &6084386061714686481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6128931254888360544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4bf08b04db382dcbd4cd10c97c9955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToolTipManager
+  tooltipCanvas: {fileID: 0}
+  tooltipPrefab: {fileID: 6335698011120690955, guid: 9ab8676184a78f5e6aecbf2e0a13884e, type: 3}

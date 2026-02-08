@@ -13,7 +13,7 @@ public class MaskSO : ScriptableObject
 
     public virtual InventoryMask MakeMask(Transform pPlayer)
     {
-        InventoryMask mask = Instantiate(maskItem, pPlayer.transform.position, Quaternion.identity);
+        InventoryMask mask = Instantiate(maskItem, pPlayer.position, Quaternion.identity);
         mask.maskData = this;
         return mask;
     }

@@ -52,7 +52,7 @@ MonoBehaviour:
   animator: {fileID: 5422532016514616965}
   coinPrefab: {fileID: 5097419895040924053, guid: be71082f30297734ab040fc4ba5799bc, type: 3}
   coinValue: 1
-  damage: 0
+  damage: 5
   moveSpeed: 5
   attackRange: 1.5
   attackCooldown: 1
@@ -85,7 +85,7 @@ MonoBehaviour:
   healthbar: {fileID: 0}
   whiteFlash: {fileID: 4668093333374895871}
   showDamageVFX: 1
-  maxHealth: 500
+  maxHealth: 50
   OnDeath:
     m_PersistentCalls:
       m_Calls: []

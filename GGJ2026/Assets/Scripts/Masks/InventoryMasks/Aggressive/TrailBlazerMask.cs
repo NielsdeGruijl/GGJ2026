@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TrailBlazerMask : InventoryMask
 {
-    private TrailBlazerSO newMaskData;
+    private TrailBlazerSO newData;
 
     private WaitForSeconds waitForExplosionDelay;
     
@@ -11,9 +11,9 @@ public class TrailBlazerMask : InventoryMask
     {
         base.Activate(playerMaskData);
         
-        newMaskData = maskData as TrailBlazerSO;
+        newData = maskData as TrailBlazerSO;
 
-        waitForExplosionDelay = new WaitForSeconds(newMaskData.explosionDelay);
+        waitForExplosionDelay = new WaitForSeconds(newData.explosionDelay);
         
         StartCoroutine(SpawnExplosionsCo());
     }
@@ -24,7 +24,7 @@ public class TrailBlazerMask : InventoryMask
         
         while (true)
         {
-            GameObject go = Instantiate(newMaskData.grenade, transform.position, transform.rotation);
+            GameObject go = Instantiate(newData.grenade, transform.position, transform.rotation);
             Vector2 moveDirection = Vector2.up;
             
             foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, 20))
@@ -36,16 +36,16 @@ public class TrailBlazerMask : InventoryMask
                 }
             }
             
-            go.GetComponent<Rigidbody2D>().AddForce(moveDirection * newMaskData.grenadeSpeed, ForceMode2D.Impulse);
+            go.GetComponent<Rigidbody2D>().AddForce(moveDirection * newData.grenadeSpeed, ForceMode2D.Impulse);
         
             int i = 0;
-            while (i < newMaskData.explosionCount)
+            while (i < newData.explosionCount)
             {
                 yield return waitForExplosionDelay;
 
                 Explosion explosionObject = ObjectPool.instance.Get(ObjectTypes.Explosions).GetComponent<Explosion>();
                 explosionObject.transform.position = go.transform.position;
-                explosionObject.Initialize(newMaskData.explosionRange, newMaskData.explosionDamage, newMaskData.fuzeTimer);
+                explosionObject.Initialize(newData.explosionRange, newData.explosionDamage, newData.fuzeTimer);
                 explosionObject.OnHit.AddListener(UpdateDamageDealt);
 
                 i++;

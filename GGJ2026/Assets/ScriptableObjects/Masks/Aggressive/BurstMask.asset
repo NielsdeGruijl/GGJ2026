@@ -16,7 +16,7 @@ MonoBehaviour:
   maskDescription: Fires projectiles towards cursor
   maskItem: {fileID: 5869171009353884839, guid: 90a7bbe52f0c39e4e8219ce4670c4ef8, type: 3}
   maskSprite: {fileID: 21300000, guid: 6237472c86123a202b8830641893f5f3, type: 3}
-  cooldown: 0.5
+  cooldown: 1.5
   bulletPrefab: {fileID: 5550591638646236349, guid: c07947c00c1a521498ec4b1eaf8c3044, type: 3}
   damagePerBullet: 80
   bulletsPerBurst: 1

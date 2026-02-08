@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Chest : MonoBehaviour
 {
@@ -13,7 +14,10 @@ public class Chest : MonoBehaviour
     [SerializeField] private float basePrice;
     
     [HideInInspector] public int price;
-    
+
+    public float weight;
+
+    public UnityEvent OnOpen;
     
     private void Awake()
     {
@@ -21,25 +25,37 @@ public class Chest : MonoBehaviour
 
         chestName.gameObject.SetActive(false);
         
-        DifficultyManager.instance.OnDifficultyChanged.AddListener(IncreasePrice);
-
         chestName.text = $"E (${price})";
     }
 
-    public void Open()
+    public void Open(float playerLuck)
     {
-        int randomIndex = Random.Range(0, masks.Count);
+        int itemCount = 1;
+        itemCount += Mathf.FloorToInt(playerLuck / 100);
         
-        Mask maskObject = Instantiate(maskWorldItemPrefab, transform.position, Quaternion.identity);
-        maskObject.Initialize(masks[randomIndex]);
+        Debug.Log("Items: " + itemCount);
         
+        if (Random.Range(0f, 100) < playerLuck % 100)
+            itemCount++;
+        
+        Debug.Log("Items: " + itemCount);
+        
+        for (int i = 0; i < itemCount; i++)
+        {
+            int randomIndex = Random.Range(0, masks.Count);
+        
+            Mask maskObject = Instantiate(maskWorldItemPrefab, transform.position, Quaternion.identity);
+            maskObject.Initialize(masks[randomIndex]);
+        }
+
+        OnOpen.Invoke();
         
         Destroy(gameObject);
     }
 
-    private void IncreasePrice()
+    public void IncreasePrice(float newMult)
     {
-        price = (int)(basePrice * DifficultyManager.instance.chestCostMult);
+        price = (int)(basePrice * newMult);
         chestName.text = $"E (${price})";
     }
     

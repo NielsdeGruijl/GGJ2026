@@ -12,6 +12,8 @@
 	- Throws projectile that leaves a trail of explosions
 - [[Lingering mask]]
 	- Creates lingering pools that damage enemies
+- [[Bouncing]]
+	- Attack that bounces between enemies
 
 ===== concepts =====
 
@@ -19,5 +21,3 @@
 	- Attacks target enemy with most hp
 - [[Airstrike]]
 	- Calls in meteors/lighting/object from sky at random locations
-- [[Bouncing]]
-	- Attack that bounces between enemies

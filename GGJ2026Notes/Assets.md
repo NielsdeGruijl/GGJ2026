@@ -19,6 +19,8 @@ This is the current asset list for the game, containing mostly sprites and anima
 
 - Level
 	- Background art
+		- Grass tiles X
+		- Tiles with flowers
 	- Props
 		- Bushes
 		- Trees?

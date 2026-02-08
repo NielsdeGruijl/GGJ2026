@@ -1,5 +1,12 @@
 All the enemy design concepts for the game, enemies would ideally remain very simple with minimal to no pathfinding necessary.
 
+
+### EnemySpawner:
+- 
+
+- Research yokai designs
+	  https://yokai.com/latest/
+
 - Basic enemy 
 	- Runs at player
 	- Meele damage?

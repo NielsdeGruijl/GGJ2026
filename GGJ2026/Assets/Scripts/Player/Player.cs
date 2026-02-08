@@ -61,7 +61,6 @@ public class Player : MonoBehaviour
         playerMaskData = maskData;
     }
     
-    
     void MovePlayer(InputAction.CallbackContext pContext)
     {
         moveDirection = pContext.ReadValue<Vector2>();
@@ -86,14 +85,14 @@ public class Player : MonoBehaviour
         animator.SetFloat("WalkSpeed", PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult);
 
         // Move to coin script!!
-        foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), succRadius, coinPullMask))
+        foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), succRadius + playerMaskData.playerMagnetRange, coinPullMask))
         {
             Vector2 moveDir = col.transform.position.ToVector2() - transform.position.ToVector2();
             
             col.transform.position = Vector2.MoveTowards(
                 col.transform.position, 
                 transform.position, 
-                (pullSpeed / moveDir.magnitude) * Time.fixedDeltaTime);
+                ((pullSpeed + playerMaskData.playerMagnetForce) / moveDir.magnitude) * Time.fixedDeltaTime);
         }
     }
 
@@ -111,7 +110,7 @@ public class Player : MonoBehaviour
                     }
                 }
                 
-                chests[0].Open();
+                chests[0].Open(playerMaskData.luck);
             }
         }
     }

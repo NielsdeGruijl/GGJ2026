@@ -70,7 +70,7 @@ public class InventoryMask :  MonoBehaviour
         canDamageAura = true;
     }
     
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (playerMaskData.maskCollisionDamage <= 0)
             return;
@@ -79,6 +79,8 @@ public class InventoryMask :  MonoBehaviour
         { 
             enemy.ApplyDamage(playerMaskData.maskCollisionDamage);
             OnAuraDamage.Invoke(playerMaskData.maskCollisionDamage / playerMaskData.sortedMasks["DamagingAura"].Count);
+            enemy.GetComponent<Enemy>().ApplyKnockback((enemy.transform.position - transform.position).normalized * 10);
+            
             //StartCoroutine(DamagingAuraCooldownCo());
         }
     }

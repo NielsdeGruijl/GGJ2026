@@ -4,16 +4,16 @@ public class DamagingMask : InventoryMask
 {
     [HideInInspector] public float damagePerStack;
 
-    private DamagingMasksSO newMaskData;
+    private DamagingMasksSO newData;
     
     public override void Activate(PlayerMaskData playerMaskData)
     {
         base.Activate(playerMaskData);
         
-        newMaskData = maskData as DamagingMasksSO;
-        
+        newData = maskData as DamagingMasksSO;
+
         OnAuraDamage.AddListener(UpdateDamageDealt);
         
-        playerMaskData.maskCollisionDamage += newMaskData.collisionDamagePerStack;
+        playerMaskData.maskCollisionDamage += newData.collisionDamagePerStack;
     }
 }

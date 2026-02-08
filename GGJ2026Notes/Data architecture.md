@@ -12,6 +12,9 @@ https://www.youtube.com/watch?v=cc5l66FwpQ4
 	- Enable storing objects of types to avoid Get Component calls
 
 
+
+===== done =====
+
 - Debuff System:
 	- EntityDebuffManager
 	- BaseDebuff C# class

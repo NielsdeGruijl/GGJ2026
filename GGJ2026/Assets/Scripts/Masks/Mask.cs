@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Mask : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class Mask : MonoBehaviour
     [SerializeField] private BoxCollider2D collider;
     
     [SerializeField] private SpriteRenderer spriteRenderer;
+
+    [SerializeField] private float randomHorizontalMovement;
+    [SerializeField] private float randomVerticalMovement;
     
     
     public MaskSO maskSO;
@@ -14,6 +18,9 @@ public class Mask : MonoBehaviour
     private Vector2 startPosition;
     
     private float timeElapsed;
+
+    private float horizontal;
+    private float vertical;
     
     private void Awake()
     {
@@ -29,12 +36,17 @@ public class Mask : MonoBehaviour
         maskSO = pMaskSO;
         if (maskSO)
             spriteRenderer.sprite = maskSO.maskSprite;
+        
+        horizontal = Random.Range(-randomHorizontalMovement, 0);
+        vertical = Random.Range(1, randomVerticalMovement);
     }
 
     private void Update()
     {
+
+        
         if(curve.keys[curve.length - 1].time > timeElapsed)
-            transform.position = startPosition + new Vector2(timeElapsed,  curve.Evaluate(timeElapsed)) * 2;
+            transform.position = startPosition + new Vector2(timeElapsed * horizontal,  curve.Evaluate(timeElapsed) * vertical);
         else
             collider.enabled = true;
 

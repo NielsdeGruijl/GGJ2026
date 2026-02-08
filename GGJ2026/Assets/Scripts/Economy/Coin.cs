@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,5 +9,4 @@ public class Coin : MonoBehaviour
     [SerializeField] private float floatMagnitude;
     
     public int value;
-    
 }

@@ -5,13 +5,13 @@ using UnityEngine;
 public class MissileMask : InventoryMask
 {
     
-    private HomingMissileSO newMaskData;
+    private HomingMissileSO newData;
     
     public override void Activate(PlayerMaskData playerMaskData)
     {
         base.Activate(playerMaskData);
-        
-        newMaskData = maskData as HomingMissileSO;
+
+        newData = maskData as HomingMissileSO;
         
         StartCoroutine(ShootMissileCo());
     }
@@ -22,8 +22,8 @@ public class MissileMask : InventoryMask
         {
             HomingMissile projectileObject = ObjectPool.instance.Get(ObjectTypes.Missiles).GetComponent<HomingMissile>();
             projectileObject.transform.position = transform.position;
-            projectileObject.Initialize(Vector2.up, newMaskData.missileSpeed);
-            projectileObject.SetDamage(newMaskData.damage);
+            projectileObject.Initialize(Vector2.up, newData.missileSpeed);
+            projectileObject.SetDamage(newData.damage);
             projectileObject.OnHit.AddListener(UpdateDamageDealt);
             
             yield return waitForCooldown;

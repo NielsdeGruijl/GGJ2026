@@ -16,25 +16,36 @@ public class EntityDebuffManager : MonoBehaviour
 
     private void Awake()
     {
-        activeDebuffs = new List<BaseDebuff>();
         waitForDebuffTick = new WaitForSeconds(debuffTick);
+
+        GetComponent<HealthManager>().OnDeath.AddListener(ClearDebuffs);
     }
 
     private void OnEnable()
     {
+        activeDebuffs = new List<BaseDebuff>();
+        Debug.Log("Active debuffs on enable death: " + activeDebuffs.Count);
+        
         debuffTickCoroutine = StartCoroutine(DebuffTickCo());
+
+        Debug.Log( "DebuffCount: " + activeDebuffs.Count);
     }
 
-    private void OnDisable()
+    private void ClearDebuffs()
     {
         StopCoroutine(debuffTickCoroutine);
 
         for (int i = 0; i < activeDebuffs.Count; i++)
         {
+            if (activeDebuffs[i] == null)
+                continue;
+            
             activeDebuffs[i].Remove();
         }
 
         activeDebuffs.Clear();
+
+        Debug.Log("Active debuffs before death: " + activeDebuffs.Count);
     }
 
     public void ApplyDebuff(BaseDebuffSO debuff)

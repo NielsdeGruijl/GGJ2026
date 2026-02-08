@@ -27,6 +27,7 @@ public class CurrencyManager : MonoBehaviour
         PlayerLevelManager.instance.AddXP(amount);
 
         UpdateUI();
+        
     }
 
     private void UpdateUI()

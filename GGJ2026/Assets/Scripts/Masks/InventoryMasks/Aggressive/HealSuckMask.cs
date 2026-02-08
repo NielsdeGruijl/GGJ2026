@@ -8,7 +8,7 @@ public class HealSuckMask : InventoryMask
     
     private HealthManager player;
 
-    private HealSuckSO newMaskData;
+    private HealSuckSO newData;
 
     private void Awake()
     {
@@ -19,14 +19,14 @@ public class HealSuckMask : InventoryMask
     {
         base.Activate(playerMaskData);
         
-        newMaskData = maskData as HealSuckSO;
+        newData =maskData as HealSuckSO;
 
         StartCoroutine(StartSuccCo());
     }
 
     private HealthManager FindTarget()
     {            
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, newMaskData.succRange);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, newData.succRange);
 
         HealthManager target = null;
             
@@ -55,7 +55,7 @@ public class HealSuckMask : InventoryMask
             
             lineRenderer.enabled = true;
             
-            while (timeElapsed < newMaskData.succDuration)
+            while (timeElapsed < newData.succDuration)
             {
                 if (!target || !target.isActiveAndEnabled)
                     target = FindTarget();
@@ -66,13 +66,13 @@ public class HealSuckMask : InventoryMask
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, target.transform.position);
                 
-                float actualDamage = newMaskData.lifeSteal * Time.deltaTime;
+                float actualDamage = newData.lifeSteal * Time.deltaTime;
                 
                 // do enemy damage, heal player
                 if (target.isActiveAndEnabled)
                 {
                     target.ApplyDamage(actualDamage, true);
-                    player.AddHealth(actualDamage * newMaskData.healPercent);
+                    player.AddHealth(actualDamage * newData.healPercent);
                     UpdateDamageDealt(actualDamage);
                 }
                 

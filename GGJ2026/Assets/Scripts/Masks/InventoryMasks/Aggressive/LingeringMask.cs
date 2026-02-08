@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class LingeringMask : InventoryMask
 {
-    private LingeringMaskSO newMaskData;
+    private LingeringMaskSO newData;
     
     public override void Activate(PlayerMaskData pPlayerMaskData)
     {
         base.Activate(pPlayerMaskData);
         
-        newMaskData = maskData as LingeringMaskSO;
+        newData = maskData as LingeringMaskSO;
         
         StartCoroutine(SpawnLingeringAreaCo());
     }
@@ -18,13 +18,13 @@ public class LingeringMask : InventoryMask
     {
         while (true)
         {
-            LingeringArea area = ObjectPool.instance.Get(ObjectTypes.LingeringAreas).GetComponent<LingeringArea>();//Instantiate(newMaskData.areaPrefab, transform.position, Quaternion.identity);
+            LingeringArea area = ObjectPool.instance.Get(ObjectTypes.LingeringAreas).GetComponent<LingeringArea>();
             area.transform.position = transform.position;
             
             if(playerMaskData.LingeringBaseDebuff)
                 area.SetDebuffData(playerMaskData.LingeringBaseDebuff as BoggedSO, playerMaskData.lingeringProcChance);
             
-            area.Initialize(newMaskData.areaRadius, newMaskData.effectDuration);
+            area.Initialize(newData.areaRadius, newData.effectDuration);
             
             yield return waitForCooldown;
         }

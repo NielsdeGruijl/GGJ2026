@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -24,6 +25,7 @@ public enum ObjectTypes
 
 public class ObjectPool : MonoBehaviour
 {
+    [SerializeField] private Transform pooledObjectsParent;
     [SerializeField] private List<Pool> pools;    
     
     private Dictionary<ObjectTypes, Queue<GameObject>> objectPools;
@@ -44,7 +46,7 @@ public class ObjectPool : MonoBehaviour
             
             for (int i = 0; i < pool.baseSize; i++)
             {
-                GameObject obj = Instantiate(pool.prefab, transform);
+                GameObject obj = Instantiate(pool.prefab, pooledObjectsParent);
                 obj.SetActive(false);
                 objectQueue.Enqueue(obj);
             }
@@ -79,7 +81,7 @@ public class ObjectPool : MonoBehaviour
         }
         
         objectToPool.SetActive(false);
-        objectToPool.transform.SetParent(transform);
+        objectToPool.transform.SetParent(pooledObjectsParent);
         objectPools[tag].Enqueue(objectToPool);
     }
 

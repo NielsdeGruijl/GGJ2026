@@ -7,7 +7,7 @@ public class BurstMask : InventoryMask
 {
     private Camera cam;
 
-    private BurstMaskSO newMaskData;
+    private BurstMaskSO newData;
 
     private WaitForSeconds waitBulletDelay;
     
@@ -16,7 +16,7 @@ public class BurstMask : InventoryMask
         base.Activate(playerMaskData);
         cam = Camera.main;
         
-        newMaskData = maskData as BurstMaskSO;
+        newData = maskData as BurstMaskSO;
 
         waitBulletDelay = new WaitForSeconds(0.1f);
         
@@ -31,16 +31,16 @@ public class BurstMask : InventoryMask
             Vector2 shootDirection = cam.ScreenToWorldPoint(mousePosition) - transform.position;
             shootDirection.Normalize();
 
-            for (int i = 0; i < newMaskData.bulletsPerBurst; i++)
+            for (int i = 0; i < newData.bulletsPerBurst; i++)
             {
                 Projectile bulletObject = ObjectPool.instance.Get(ObjectTypes.Projectiles).GetComponent<Projectile>();
                 bulletObject.transform.position = transform.position;
-                bulletObject.Initialize(shootDirection, newMaskData.bulletSpeed);
-                bulletObject.SetDamage(newMaskData.damagePerBullet);
+                bulletObject.Initialize(shootDirection, newData.bulletSpeed);
+                bulletObject.SetDamage(newData.damagePerBullet);
                 
                 bulletObject.OnHit.AddListener(UpdateDamageDealt);
                 
-                if(i != newMaskData.bulletsPerBurst - 1)
+                if(i != newData.bulletsPerBurst - 1)
                     yield return waitBulletDelay;
             }
 

@@ -72,6 +72,9 @@ public class HomingMissile : MonoBehaviour
         
         foreach (Collider2D target in targets)
         {
+            if (!target)
+                continue;
+            
             if (!target.CompareTag("Enemy"))
                 continue;
             

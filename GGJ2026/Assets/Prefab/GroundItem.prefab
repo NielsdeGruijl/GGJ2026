@@ -81,6 +81,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   collider: {fileID: 1921778280698761356}
   spriteRenderer: {fileID: 9027428832310985621}
+  randomHorizontalMovement: 3
+  randomVerticalMovement: 3
   maskSO: {fileID: 0}
 --- !u!61 &1921778280698761356
 BoxCollider2D:
