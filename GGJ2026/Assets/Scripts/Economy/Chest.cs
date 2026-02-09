@@ -21,7 +21,7 @@ public class Chest : MonoBehaviour
     
     private void Awake()
     {
-        price = (int)(basePrice * DifficultyManager.instance.chestCostMult);
+        price = (int)(basePrice);
 
         chestName.gameObject.SetActive(false);
         

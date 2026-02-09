@@ -21,5 +21,10 @@
 - Implemented new chest types
 - Implemented new masks
 	- Luck mask
+		- new sprite
 	- Magnet mask
-- Created luck mask sprite
+		- new sprite
+	- Fire rate mask
+	- Increase damage mask
+- Balance changes
+	- chests now increase in price upon opening a chest

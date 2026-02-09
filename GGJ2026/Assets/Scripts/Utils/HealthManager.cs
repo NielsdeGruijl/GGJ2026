@@ -11,7 +11,8 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private bool showDamageVFX;
     
     public float maxHealth;
-    public UnityEvent OnDeath;
+    public UnityEvent OnDeath = new();
+    public DamageEvent OnDamage = new();
 
     [SerializeField] private bool isEnemy;
     [SerializeField] private bool canDie = true;
@@ -57,20 +58,24 @@ public class HealthManager : MonoBehaviour
         currentHealth -= damage;
 
         damagePopupValue += damage;
+
+        OnDamage.Invoke(damage);
+        CreateDamagePopup(); 
         
         if (currentHealth <= 0 && canDie && !isDead)
         {
             isDead = true;
             
-            if(isGeneratingPopup || currentHealth + damage >= maxHealth)
-                CreateDamagePopup();
+            /*if(isGeneratingPopup || currentHealth + damage >= maxHealth)
+                CreateDamagePopup();*/
             
             StopAllCoroutines();
             OnDeath.Invoke();
         }
+
         
-        if (!isGeneratingPopup && gameObject.activeSelf)
-            StartCoroutine(ShowPopup());
+        /*if (!isGeneratingPopup && gameObject.activeSelf)
+            StartCoroutine(ShowPopup());*/
 
         UpdateHealthBar();
     }
