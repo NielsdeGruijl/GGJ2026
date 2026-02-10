@@ -22,6 +22,6 @@ public class DOTDebuff : BaseDebuff
     {
         base.Tick(interval);
         
-        targetHealth.ApplyDamage(damagePerSecond * interval);
+        targetHealth.ApplyDamage(new HitInfo(damagePerSecond * interval));
     }
 }

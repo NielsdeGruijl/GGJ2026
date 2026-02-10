@@ -11,6 +11,7 @@ public class Pool
     public int baseSize;
 }
 
+[System.Serializable]
 public enum ObjectTypes
 {
     Enemies,
@@ -22,12 +23,20 @@ public enum ObjectTypes
     Missiles
 }
 
+public interface IObjectPoolable
+{
+}
+
+public class PoolableObject
+{
+    
+}
 
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private Transform pooledObjectsParent;
-    [SerializeField] private List<Pool> pools;    
-    
+    [SerializeField] private List<Pool> pools;
+
     private Dictionary<ObjectTypes, Queue<GameObject>> objectPools;
     public static ObjectPool instance;
     

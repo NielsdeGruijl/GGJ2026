@@ -39,7 +39,7 @@ public class DamageFlashHandler : MonoBehaviour
         SetFlashValue();
     }
 
-    public void ShowFlash(float damage)
+    public void ShowFlash(HitInfo damage)
     {
         StartCoroutine(ShowFlashCo());
     }

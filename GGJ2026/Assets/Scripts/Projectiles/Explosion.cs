@@ -51,9 +51,10 @@ public class Explosion : MonoBehaviour
 
         foreach (Collider2D collider in colliders)
         {
-            if (collider.TryGetComponent(out HealthManager enemy) && !collider.CompareTag("Player"))
+            if (!collider.CompareTag("Player") && collider.TryGetComponent(out HealthManager enemy))
             {
-                enemy.ApplyDamage(damage);
+                Vector2 knockbackForce = (transform.position - enemy.transform.position).normalized * 10;
+                enemy.ApplyDamage(new HitInfo(damage, knockbackForce * -1));
                 OnHit.Invoke(damage);
             }
         }

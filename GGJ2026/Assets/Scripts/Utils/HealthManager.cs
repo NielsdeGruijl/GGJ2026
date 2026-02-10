@@ -2,11 +2,37 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum DamageType
+public struct HitInfo
 {
-    Impact,
-    Continuous,
-    None
+    public HitInfo(float damage)
+    {
+        this.damage = damage;
+        knockbackForce = Vector2.zero;
+        dealsKnockback = false;
+    }
+
+    public HitInfo(Vector2 knockbackForce)
+    {
+        damage = 0;
+        this.knockbackForce = knockbackForce;
+        dealsKnockback = true;
+    }
+    
+    public HitInfo(float damage, Vector2 knockbackForce)
+    {
+        this.damage = damage;
+        this.knockbackForce = knockbackForce;
+        dealsKnockback = true;
+    }
+
+    public float damage;
+    public Vector2 knockbackForce;
+    public bool dealsKnockback;
+}
+
+[System.Serializable]
+public class HitEvent : UnityEvent<HitInfo>
+{
 }
 
 public class HealthManager : MonoBehaviour
@@ -14,7 +40,7 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private Slider healthbar;
 
     public UnityEvent OnDeath = new();
-    public DamageEvent OnDamage = new();
+    public HitEvent OnDamage = new();
     
     public float maxHealth { get; private set; }
     private float currentHealth;
@@ -37,14 +63,13 @@ public class HealthManager : MonoBehaviour
         isDead = false;
     }
 
-    public void ApplyDamage(float damage, DamageType damageType = DamageType.None)
+    public void ApplyDamage(HitInfo hitInfo)
     {
-        currentHealth -= damage;
-
-        damagePopupValue += damage;
-
-        OnDamage.Invoke(damage);
+        OnDamage.Invoke(hitInfo);
+        damagePopupValue += hitInfo.damage;
         CreateDamagePopup(); 
+        
+        currentHealth -= hitInfo.damage;
         
         if (currentHealth <= 0 && !isDead)
         {

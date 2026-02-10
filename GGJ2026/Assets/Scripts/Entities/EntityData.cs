@@ -39,13 +39,7 @@ public class EntityData
 
     public float GetModifiedDamage(float inDamage)
     {
-        float multiplier = 1 + stats[StatType.AttackDamage].multiplier * 0.01f;
-        if (multiplier < 0.01f)
-            multiplier = 0.01f;
-        
-        Debug.Log("Damage multiplier: " + multiplier);
-        
-        float modifiedDamage = inDamage * multiplier + stats[StatType.AttackDamage].flatModifier;
+        float modifiedDamage = GetModifiedValue(StatType.AttackDamage, inDamage);
 
         if (!stats.ContainsKey(StatType.CritChance) || GetStatValue(StatType.CritChance) <= 0.01f)
             return modifiedDamage;
@@ -58,8 +52,6 @@ public class EntityData
         float multiplier = 1 + stats[stat].multiplier * 0.01f;
         if (multiplier < 0.01f)
             multiplier = 0.01f;
-        
-        Debug.Log("Damage multiplier: " + multiplier);
         
         return inValue * multiplier + stats[stat].flatModifier;
     }

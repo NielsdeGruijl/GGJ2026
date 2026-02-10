@@ -1,11 +1,13 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-
+public interface IKnockbackable
+{
+    void ApplyKnockback(HitInfo hitInfo);
+}
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Enemy : Entity
+public class Enemy : Entity, IKnockbackable
 {
     [SerializeField] private Animator animator;
     
@@ -26,6 +28,8 @@ public class Enemy : Entity
     protected override void Awake()
     {
         base.Awake();
+        
+        healthManager.OnDamage.AddListener(ApplyKnockback);
         
         stats.GetStatEvent(StatType.AttackSpeed).AddListener(UpdateAttackSpeed);
         
@@ -48,14 +52,21 @@ public class Enemy : Entity
         StartCoroutine(FindPathToPlayer());
     }
 
-    public void ApplyKnockback(Vector2 force)
+    public void ApplyKnockback(HitInfo hitInfo)
     {
-        rigidBody.AddForce(force, ForceMode2D.Impulse);
+        if (!hitInfo.dealsKnockback)
+            return;
+        
+        rigidBody.AddForce(hitInfo.knockbackForce, ForceMode2D.Impulse);
     }
 
     protected override void Die()
     {
         base.Die();
+        
+        StopAllCoroutines();
+        
+        velocity = Vector2.zero;
         
         SpawnCoin();
 
@@ -84,7 +95,8 @@ public class Enemy : Entity
 
     private IEnumerator PoolObjectCo()
     {
-        yield return null;
+        yield return new WaitForSeconds(0.2f);
+
         
         ObjectPool.instance.PoolObject(ObjectTypes.Enemies, gameObject);
     }
@@ -99,7 +111,7 @@ public class Enemy : Entity
             if ((target.transform.position.ToVector2() - transform.position.ToVector2()).magnitude < stats.GetStatValue(StatType.AttackRange))
             {
                 if (target)
-                    target.ApplyDamage(stats.GetStatValue(StatType.AttackDamage));
+                    target.ApplyDamage(new HitInfo(stats.GetStatValue(StatType.AttackDamage)));
             }
             
             yield return waitForAttack;

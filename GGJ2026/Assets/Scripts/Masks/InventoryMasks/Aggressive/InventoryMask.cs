@@ -41,7 +41,6 @@ public class InventoryMask :  MonoBehaviour
         orbitMoveSpeed = baseOrbitMoveSpeed + (ringCapacity * bonusOrbitMoveSpeed);
         
         waitForCooldown = new WaitForSeconds(manager.playerData.GetModifiedValue(StatType.AttackSpeed, maskData.cooldown));
-        //waitForCooldown = new WaitForSeconds(maskData.cooldown);
         waitForAuraCooldown = new WaitForSeconds(3);
 
         ActivateMask();
@@ -86,18 +85,5 @@ public class InventoryMask :  MonoBehaviour
         canDamageAura = true;
     }
     
-    protected virtual void OnTriggerEnter2D(Collider2D other)
-    {
-        /*if (playerMaskData.maskCollisionDamage <= 0)
-            return;
-     
-        if (other.TryGetComponent(out HealthManager enemy))
-        { 
-            enemy.ApplyDamage(playerMaskData.maskCollisionDamage);
-            OnAuraDamage.Invoke(playerMaskData.maskCollisionDamage / playerMaskData.sortedMasks["DamagingAura"].Count);
-            enemy.GetComponent<Enemy>().ApplyKnockback((enemy.transform.position - transform.position).normalized * 10);
-            
-            //StartCoroutine(DamagingAuraCooldownCo());
-        }*/
-    }
+
 }

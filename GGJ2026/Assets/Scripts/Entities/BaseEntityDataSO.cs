@@ -12,7 +12,8 @@ public enum StatType
     CritBonus,
     Luck,
     MagnetPull,
-    MagnetRange
+    MagnetRange,
+    Force
 }
 
 public enum StatModificationType

@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.TryGetComponent(out HealthManager enemy))
         {
-            enemy.ApplyDamage(damage);
+            enemy.ApplyDamage(new HitInfo(damage, velocity.normalized * 10));
             OnHit.Invoke(damage);
             OnHit.RemoveAllListeners();
             ObjectPool.instance.PoolObject(ObjectTypes.Projectiles, gameObject);

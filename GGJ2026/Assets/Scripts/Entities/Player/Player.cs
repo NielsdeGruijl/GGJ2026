@@ -100,7 +100,7 @@ public class Player : Entity
                 {
                     if (collider.TryGetComponent(out Enemy enemy))
                     {
-                        enemy.ApplyKnockback((enemy.transform.position - chests[0].transform.position).normalized * knockbackForce);
+                        enemy.ApplyKnockback(new HitInfo((enemy.transform.position - chests[0].transform.position).normalized * knockbackForce));
                     }
                 }
                 

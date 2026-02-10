@@ -51,7 +51,7 @@ public class Lightning : MonoBehaviour
 
             if (currentTarget.TryGetComponent(out HealthManager health))
             {
-                health.ApplyDamage(damage);
+                health.ApplyDamage(new HitInfo(damage));
             }
 
             previousTargets.Add(currentTarget);

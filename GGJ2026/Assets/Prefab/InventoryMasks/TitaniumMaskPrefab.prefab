@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2158674716094527555}
   - component: {fileID: 6155757418931180369}
   m_Layer: 0
-  m_Name: InventoryDamagingMask
+  m_Name: TitaniumMaskPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

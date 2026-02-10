@@ -27,12 +27,14 @@ public class TrailBlazerMask : InventoryMask
             GameObject go = Instantiate(newData.grenade, transform.position, transform.rotation);
             Vector2 moveDirection = Vector2.up;
             
-            foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, 20))
+            foreach (Collider2D collider in Physics2D.OverlapCircleAll(transform.position, 10))
             {
                 if (collider.TryGetComponent(out Enemy enemy))
                 {
                     moveDirection = collider.transform.position - transform.position;
                     moveDirection.Normalize();
+
+                    break;
                 }
             }
             

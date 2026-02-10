@@ -7,7 +7,7 @@ public class DamagingMasksSO : MaskSO
     
     public override InventoryMask MakeMask(Transform pPlayer)
     {
-        DamagingMask mask = base.MakeMask(pPlayer) as DamagingMask;
+        TitaniumMask mask = base.MakeMask(pPlayer) as TitaniumMask;
 
         if (!mask)
             return null;

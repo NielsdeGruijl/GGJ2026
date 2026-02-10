@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 249530301661184685}
   - component: {fileID: 4348970328246306527}
   m_Layer: 0
-  m_Name: HealSuckMask
+  m_Name: HealSuckPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
