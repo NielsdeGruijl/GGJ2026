@@ -47,6 +47,7 @@ public class HealSuckMask : InventoryMask
 
     private IEnumerator StartSuccCo()
     {
+        
         while (true)
         {
             float timeElapsed = 0;
@@ -54,6 +55,10 @@ public class HealSuckMask : InventoryMask
             HealthManager target = FindTarget();
             
             lineRenderer.enabled = true;
+
+            int tickCount = 0;
+            
+            float actualDamage = manager.playerData.GetModifiedDamage(newData.lifeSteal) * newData.succInterval;
             
             while (timeElapsed < newData.succDuration)
             {
@@ -66,18 +71,17 @@ public class HealSuckMask : InventoryMask
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, target.transform.position);
                 
-                float actualDamage = manager.playerData.GetModifiedDamage(newData.lifeSteal) * Time.deltaTime;
-                
                 // do enemy damage, heal player
-                if (target.isActiveAndEnabled)
+                if (target.isActiveAndEnabled && Mathf.FloorToInt(timeElapsed / newData.succInterval) > tickCount)
                 {
                     target.ApplyDamage(new HitInfo(actualDamage));
                     player.AddHealth(actualDamage * newData.healPercent);
                     UpdateDamageDealt(actualDamage);
+                    tickCount++;
                 }
                 
-                timeElapsed += Time.deltaTime;
                 yield return null;
+                timeElapsed += Time.deltaTime;
             }
             
             lineRenderer.enabled = false;

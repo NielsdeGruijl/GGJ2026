@@ -4,30 +4,34 @@ using UnityEngine.UI;
 
 public struct HitInfo
 {
-    public HitInfo(float damage)
+    public HitInfo(float damage, bool isContinuous = false)
     {
         this.damage = damage;
         knockbackForce = Vector2.zero;
         dealsKnockback = false;
+        this.isContinuous = isContinuous;
     }
 
-    public HitInfo(Vector2 knockbackForce)
+    public HitInfo(Vector2 knockbackForce, bool isContinuous = false)
     {
         damage = 0;
         this.knockbackForce = knockbackForce;
         dealsKnockback = true;
+        this.isContinuous = isContinuous;
     }
     
-    public HitInfo(float damage, Vector2 knockbackForce)
+    public HitInfo(float damage, Vector2 knockbackForce, bool isContinuous = false)
     {
         this.damage = damage;
         this.knockbackForce = knockbackForce;
         dealsKnockback = true;
+        this.isContinuous = isContinuous;
     }
 
     public float damage;
     public Vector2 knockbackForce;
     public bool dealsKnockback;
+    public bool isContinuous;
 }
 
 [System.Serializable]
@@ -67,7 +71,6 @@ public class HealthManager : MonoBehaviour
     {
         OnDamage.Invoke(hitInfo);
         damagePopupValue += hitInfo.damage;
-        CreateDamagePopup(); 
         
         currentHealth -= hitInfo.damage;
         
@@ -114,10 +117,5 @@ public class HealthManager : MonoBehaviour
         healthbar.value = currentHealth / maxHealth;
     }
 
-    private void CreateDamagePopup()
-    {
-        PopupManager.instance.CreateWorldPopup(transform.position, damagePopupValue);
-        
-        damagePopupValue = 0;
-    }
+
 }

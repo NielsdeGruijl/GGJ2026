@@ -7,6 +7,7 @@ public class HealSuckSO : MaskSO
     public float healPercent;
     public float succRange;
     public float succDuration;
+    public float succInterval;
     
     public override InventoryMask MakeMask(Transform pPlayer)
     {
@@ -14,11 +15,6 @@ public class HealSuckSO : MaskSO
 
         if (!mask)
             return null;
-        
-        /*mask.damage = lifeSteal;
-        mask.healPrecent = healPercent;
-        mask.succRange = succRange;
-        mask.succDuration = succDuration;*/
         
         return mask;
     }

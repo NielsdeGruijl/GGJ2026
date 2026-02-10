@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 915925493514814592}
   - component: {fileID: 4666267240486557114}
   - component: {fileID: 8953340587837885101}
-  - component: {fileID: 3219983316189299907}
   - component: {fileID: 3932741182536906237}
+  - component: {fileID: 2832460623151578876}
   - component: {fileID: 312843824609217552}
   - component: {fileID: 6654037893830515226}
   m_Layer: 10
@@ -55,8 +55,6 @@ MonoBehaviour:
   animator: {fileID: 5422532016514616965}
   coinPrefab: {fileID: 5097419895040924053, guid: be71082f30297734ab040fc4ba5799bc, type: 3}
   coinValue: 1
-  attackRange: 1.5
-  attackCooldown: 1
   pathFindingTickSpeed: 1
 --- !u!114 &4666267240486557114
 MonoBehaviour:
@@ -90,18 +88,6 @@ MonoBehaviour:
   OnDamage:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3219983316189299907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2145497220908810131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0694d75b8504d6208a11eb7b112276a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KnockbackHandler
 --- !u!114 &3932741182536906237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +104,18 @@ MonoBehaviour:
   - {fileID: 4790606215445549278}
   flashColor: {r: 1, g: 1, b: 1, a: 0}
   flashDuration: 0.1
+--- !u!114 &2832460623151578876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145497220908810131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec00453649cb670a6a58204fa483ab95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamagePopupHandler
 --- !u!58 &312843824609217552
 CircleCollider2D:
   m_ObjectHideFlags: 0

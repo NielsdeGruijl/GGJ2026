@@ -21,3 +21,4 @@ MonoBehaviour:
   healPercent: 0.5
   succRange: 8
   succDuration: 5
+  succInterval: 0.02

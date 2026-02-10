@@ -18,6 +18,8 @@ public class DamageFlashHandler : MonoBehaviour
 
     private int flashValue;
 
+    private bool isFlashing = false;
+    
     private void Awake()
     {
         materials = new Material[spriteRenderers.Count];
@@ -41,13 +43,14 @@ public class DamageFlashHandler : MonoBehaviour
 
     public void ShowFlash(HitInfo damage)
     {
+        if(flashValue >= 1)
+            StopAllCoroutines();
+        
         StartCoroutine(ShowFlashCo());
     }
 
     private IEnumerator ShowFlashCo()
     {
-        //float timeElapsed = 0;
-
         flashValue = 1;
         
         SetFlashColor();

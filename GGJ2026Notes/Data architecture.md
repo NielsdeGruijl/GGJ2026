@@ -12,11 +12,6 @@ https://www.youtube.com/watch?v=cc5l66FwpQ4
 	- Enable storing objects of types to avoid Get Component calls
 
 
-How to easily apply knockback to enemies on hit?
-- Knockback function should be easily modifyable
-	- interface?
-- Only certain attacks should deal knockback
-
 
 
 
@@ -38,6 +33,11 @@ How to easily apply knockback to enemies on hit?
 		- Custom
 	- DebuffSO return new BaseDebuff
 
+
+How to easily apply knockback to enemies on hit?
+- Knockback function should be easily modifyable
+	- interface?
+- Only certain attacks should deal knockback
 
  
 EntityStatModifier

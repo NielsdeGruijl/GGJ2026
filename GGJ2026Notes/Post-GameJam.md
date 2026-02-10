@@ -14,13 +14,14 @@
 [[PlayerCharacters]]
 
 
-- Fix healbeam DOT effect
-	- Only apply once per sec, only remove duration after hit
-	- If enemy is gone before hit, don't reduce duration and move on to next
+Enemy and player level up systems
+- Enemies give player XP on death
+- Enemies level up every interval (maybe not base enemies tho)
+
 
 - Combat juice:
-	- Add enemy knockback on hit
-	- Check damage flash shader performance
+	- Add enemy knockback on hit X
+	- Check damage flash shader performance X
 	- Improve damage popup performance
 
 

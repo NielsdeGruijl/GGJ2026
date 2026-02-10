@@ -22,11 +22,7 @@ public class EntityDebuffManager : MonoBehaviour
     private void OnEnable()
     {
         activeDebuffs = new List<BaseDebuff>();
-        Debug.Log("Active debuffs on enable death: " + activeDebuffs.Count);
-        
         debuffTickCoroutine = StartCoroutine(DebuffTickCo());
-
-        Debug.Log( "DebuffCount: " + activeDebuffs.Count);
     }
 
     private void ClearDebuffs()
@@ -42,8 +38,6 @@ public class EntityDebuffManager : MonoBehaviour
         }
 
         activeDebuffs.Clear();
-
-        Debug.Log("Active debuffs before death: " + activeDebuffs.Count);
     }
 
     public void ApplyDebuff(BaseDebuffSO debuff)

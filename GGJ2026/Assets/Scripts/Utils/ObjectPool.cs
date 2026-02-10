@@ -23,15 +23,6 @@ public enum ObjectTypes
     Missiles
 }
 
-public interface IObjectPoolable
-{
-}
-
-public class PoolableObject
-{
-    
-}
-
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private Transform pooledObjectsParent;

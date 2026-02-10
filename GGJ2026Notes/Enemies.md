@@ -1,10 +1,8 @@
 All the enemy design concepts for the game, enemies would ideally remain very simple with minimal to no pathfinding necessary.
 
 
-### EnemySpawner:
-- Give budget
-- Give random selection of enemy types per "wave"
-- Add support for boss spawning
+Enemies level up system improvements
+
 
 - Research yokai designs
 	  https://yokai.com/latest/
@@ -23,3 +21,8 @@ All the enemy design concepts for the game, enemies would ideally remain very si
 	- Shoots projectiles from distance
 
 - Enemies equipping masks??
+
+### EnemySpawner:
+- Give budget
+- Give random selection of enemy types per "wave"
+- Add support for boss spawning
