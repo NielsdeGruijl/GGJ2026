@@ -4,12 +4,17 @@ public class SpeedMask : InventoryMask
 {
     private SpeedMaskSO newData;
     
-    public override void Activate(PlayerMaskData playerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(playerMaskData);
+        base.ActivateMask();        
         
         newData = maskData as SpeedMaskSO;
         
-        playerMaskData.playerMoveSpeedMult += newData.speedMult * 0.01f;
+        float increaseAmount = newData.speedMult;
+
+        EntityStatModifier statModifier =
+            new EntityStatModifier(StatType.MoveSpeed, StatModificationType.multiplier, increaseAmount);
+        
+        manager.playerData.ApplyStatModifier(statModifier);
     }
 }

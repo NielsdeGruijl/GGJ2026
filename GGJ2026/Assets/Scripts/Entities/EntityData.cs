@@ -11,7 +11,7 @@ public class EntityData
     {
         foreach (EntityStat stat in baseData.baseStats)
         {
-            stats.Add(stat.statType, stat);
+            stats.Add(stat.statType, new EntityStat(stat));
         }
         
         LevelUpModifiers = new List<EntityStatModifier>(baseData.LevelupModifiers);
@@ -19,6 +19,12 @@ public class EntityData
 
     public float GetStatValue(StatType type)
     {
+        if (!stats.ContainsKey(type))
+        {
+            Debug.LogError($"Stat {type} not present in entity stats");
+            return 0;
+        }
+        
         float multiplier = 1 + stats[type].multiplier * 0.01f;
         if (multiplier < 0.01f)
             multiplier = 0.01f;
@@ -31,18 +37,31 @@ public class EntityData
         return value;
     }
 
-    public float GetModifiedDamage(float InDamage)
+    public float GetModifiedDamage(float inDamage)
     {
         float multiplier = 1 + stats[StatType.AttackDamage].multiplier * 0.01f;
         if (multiplier < 0.01f)
             multiplier = 0.01f;
+        
+        Debug.Log("Damage multiplier: " + multiplier);
+        
+        float modifiedDamage = inDamage * multiplier + stats[StatType.AttackDamage].flatModifier;
 
-        float modifiedDamage = InDamage * multiplier + stats[StatType.AttackDamage].flatModifier;
-
-        if (stats[StatType.CritChance] == null)
+        if (!stats.ContainsKey(StatType.CritChance) || GetStatValue(StatType.CritChance) <= 0.01f)
             return modifiedDamage;
 
         return modifiedDamage * GetCritDamage();
+    }
+
+    public float GetModifiedValue(StatType stat, float inValue)
+    {
+        float multiplier = 1 + stats[stat].multiplier * 0.01f;
+        if (multiplier < 0.01f)
+            multiplier = 0.01f;
+        
+        Debug.Log("Damage multiplier: " + multiplier);
+        
+        return inValue * multiplier + stats[stat].flatModifier;
     }
 
     private float GetCritDamage()

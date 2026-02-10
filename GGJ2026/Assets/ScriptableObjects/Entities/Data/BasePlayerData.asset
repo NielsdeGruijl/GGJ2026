@@ -20,8 +20,57 @@ MonoBehaviour:
     OnStatChanged:
       m_PersistentCalls:
         m_Calls: []
+  - statType: 1
+    baseValue: 0
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 3
+    baseValue: 1
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
   - statType: 4
     baseValue: 100
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 7
+    baseValue: 0
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 5
+    baseValue: 0
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 6
+    baseValue: 2
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 8
+    baseValue: 25
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 9
+    baseValue: 3
     flatModifier: 0
     multiplier: 0
     OnStatChanged:

@@ -34,7 +34,7 @@ public class PlayerMaskManager : MonoBehaviour
         pMask.Initialize(currentRingItemNum, currentRingCapacity, ringRadius);
         pMask.transform.SetParent(transform);
         
-        pMask.Activate(playerMaskData);
+        pMask.Activate(playerMaskData, this);
         
         currentRingItemNum++;
         

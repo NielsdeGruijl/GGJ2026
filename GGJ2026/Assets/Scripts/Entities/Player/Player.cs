@@ -76,17 +76,17 @@ public class Player : Entity
     {
         rigidBody.AddForce(moveDirection * (stats.GetStatValue(StatType.MoveSpeed)));
         
-        animator.SetFloat("WalkSpeed", PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult);
+        animator.SetFloat("WalkSpeed", stats.GetStatValue(StatType.MoveSpeed) / 2500);
 
         // Move to coin script!!
-        foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), succRadius + playerMaskData.playerMagnetRange, coinPullMask))
+        foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), stats.GetStatValue(StatType.MagnetRange), coinPullMask))
         {
             Vector2 moveDir = col.transform.position.ToVector2() - transform.position.ToVector2();
             
             col.transform.position = Vector2.MoveTowards(
                 col.transform.position, 
                 transform.position, 
-                ((pullSpeed + playerMaskData.playerMagnetForce) / moveDir.magnitude) * Time.fixedDeltaTime);
+                (stats.GetStatValue(StatType.MagnetPull) / moveDir.magnitude) * Time.fixedDeltaTime);
         }
     }
 
@@ -104,7 +104,7 @@ public class Player : Entity
                     }
                 }
                 
-                chests[0].Open(playerMaskData.luck);
+                chests[0].Open(stats.GetStatValue(StatType.Luck));
             }
         }
     }

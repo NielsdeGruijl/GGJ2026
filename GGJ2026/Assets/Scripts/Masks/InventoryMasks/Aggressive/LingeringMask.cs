@@ -5,9 +5,9 @@ public class LingeringMask : InventoryMask
 {
     private LingeringMaskSO newData;
     
-    public override void Activate(PlayerMaskData pPlayerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(pPlayerMaskData);
+        base.ActivateMask();
         
         newData = maskData as LingeringMaskSO;
         

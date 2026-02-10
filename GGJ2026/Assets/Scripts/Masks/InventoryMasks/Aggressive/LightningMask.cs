@@ -5,9 +5,9 @@ public class LightningMask : InventoryMask
 {
     private LightningMaskSO newData;
     
-    public override void Activate(PlayerMaskData pPlayerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(pPlayerMaskData);
+        base.ActivateMask();
         
         newData = maskData as LightningMaskSO;
 
@@ -19,7 +19,7 @@ public class LightningMask : InventoryMask
         while (true)
         {
             Lightning lightning = Instantiate(newData.lightningPrefab, transform.position, Quaternion.identity);
-            lightning.Initialize(newData.totalBounces, newData.damagePerBounce * playerMaskData.playerDamageMult);
+            lightning.Initialize(newData.totalBounces, manager.playerData.GetModifiedDamage(newData.damagePerBounce));
             yield return waitForCooldown;
         }
     }

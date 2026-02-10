@@ -7,9 +7,9 @@ public class TrailBlazerMask : InventoryMask
 
     private WaitForSeconds waitForExplosionDelay;
     
-    public override void Activate(PlayerMaskData playerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(playerMaskData);
+        base.ActivateMask();
         
         newData = maskData as TrailBlazerSO;
 
@@ -45,7 +45,7 @@ public class TrailBlazerMask : InventoryMask
 
                 Explosion explosionObject = ObjectPool.instance.Get(ObjectTypes.Explosions).GetComponent<Explosion>();
                 explosionObject.transform.position = go.transform.position;
-                explosionObject.Initialize(newData.explosionRange, newData.explosionDamage * playerMaskData.playerDamageMult, newData.fuzeTimer);
+                explosionObject.Initialize(newData.explosionRange, manager.playerData.GetModifiedDamage(newData.explosionDamage), newData.fuzeTimer);
                 explosionObject.OnHit.AddListener(UpdateDamageDealt);
 
                 i++;

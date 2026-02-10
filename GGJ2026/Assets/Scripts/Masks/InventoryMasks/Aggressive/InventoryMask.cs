@@ -23,15 +23,37 @@ public class InventoryMask :  MonoBehaviour
 
     private bool canDamageAura = true;
 
-    public virtual void Activate(PlayerMaskData pPlayerMaskData)
+    public void Initialize(int pNumInRing, int pRingCapacity, float pTargetRadius)
+    {
+        numInRing = pNumInRing;
+        ringCapacity = pRingCapacity;
+        targetRadius = pTargetRadius;
+    }    
+    
+    public void Activate(PlayerMaskData pPlayerMaskData, PlayerMaskManager maskManager)
     {
         playerMaskData = pPlayerMaskData;
-        playerMaskData.OnCooldownChanged.AddListener(UpdateCooldown);
+
+        manager = maskManager;
+        
+        manager.playerData.GetStatEvent(StatType.AttackSpeed).AddListener(UpdateCooldown);
         
         orbitMoveSpeed = baseOrbitMoveSpeed + (ringCapacity * bonusOrbitMoveSpeed);
         
-        waitForCooldown = new WaitForSeconds(maskData.cooldown);
+        waitForCooldown = new WaitForSeconds(manager.playerData.GetModifiedValue(StatType.AttackSpeed, maskData.cooldown));
+        //waitForCooldown = new WaitForSeconds(maskData.cooldown);
         waitForAuraCooldown = new WaitForSeconds(3);
+
+        ActivateMask();
+    }
+    
+    protected virtual void ActivateMask()
+    {
+    }
+
+    private void UpdateCooldown(float newCooldown)
+    {
+        waitForCooldown = new WaitForSeconds(manager.playerData.GetModifiedValue(StatType.AttackSpeed, maskData.cooldown));
     }
 
     private void Update()
@@ -39,23 +61,11 @@ public class InventoryMask :  MonoBehaviour
         Move();
     }
 
-    public void Initialize(int pNumInRing, int pRingCapacity, float pTargetRadius)
-    {
-        numInRing = pNumInRing;
-        ringCapacity = pRingCapacity;
-        targetRadius = pTargetRadius;
-    }
-
     private void Move()
     {
         transform.localPosition = GetMovePosition();
     }
 
-    private void UpdateCooldown()
-    {
-        waitForCooldown = new WaitForSeconds(maskData.cooldown * playerMaskData.cooldownMult);
-    }
-    
     protected void UpdateDamageDealt(float damage)
     {
         playerMaskData.maskTypeDamageDealt[maskData.maskName] += damage;
@@ -78,7 +88,7 @@ public class InventoryMask :  MonoBehaviour
     
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
-        if (playerMaskData.maskCollisionDamage <= 0)
+        /*if (playerMaskData.maskCollisionDamage <= 0)
             return;
      
         if (other.TryGetComponent(out HealthManager enemy))
@@ -88,6 +98,6 @@ public class InventoryMask :  MonoBehaviour
             enemy.GetComponent<Enemy>().ApplyKnockback((enemy.transform.position - transform.position).normalized * 10);
             
             //StartCoroutine(DamagingAuraCooldownCo());
-        }
+        }*/
     }
 }

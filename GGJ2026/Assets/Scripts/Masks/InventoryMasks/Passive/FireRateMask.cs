@@ -4,13 +4,17 @@ public class FireRateMask : InventoryMask
 {
     private FireRateMaskSO newData;
     
-    public override void Activate(PlayerMaskData pPlayerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(pPlayerMaskData);
-        
+        base.ActivateMask();
+                
         newData = maskData as FireRateMaskSO;
 
-        playerMaskData.cooldownMult -= (newData.cooldownReduction * 0.01f) / playerMaskData.sortedMasks[newData.maskName].Count;
-        playerMaskData.OnCooldownChanged.Invoke();
+        float cooldownReduction = newData.cooldownReduction / playerMaskData.sortedMasks[newData.maskName].Count;
+
+        EntityStatModifier statModifier =
+            new EntityStatModifier(StatType.AttackSpeed, StatModificationType.multiplier, cooldownReduction);
+        
+        manager.playerData.ApplyStatModifier(statModifier);
     }
 }

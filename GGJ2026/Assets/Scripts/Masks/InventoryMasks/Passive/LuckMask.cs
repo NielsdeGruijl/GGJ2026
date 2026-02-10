@@ -4,13 +4,18 @@ public class LuckMask : InventoryMask
 {
     private LuckMaskSO newData;
     
-    public override void Activate(PlayerMaskData pPlayerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(pPlayerMaskData);
+        base.ActivateMask();
         
         newData = maskData as LuckMaskSO;
 
         // Apply luck bonus with diminishing returns
-        pPlayerMaskData.luck += newData.luckIncrease / playerMaskData.sortedMasks[newData.maskName].Count;
+        float increaseAmount = newData.luckIncrease / playerMaskData.sortedMasks[newData.maskName].Count;
+
+        EntityStatModifier statModifier =
+            new EntityStatModifier(StatType.Luck, StatModificationType.flat, increaseAmount);
+        
+        manager.playerData.ApplyStatModifier(statModifier);
     }
 }

@@ -15,10 +15,10 @@ public class HealSuckMask : InventoryMask
         lineRenderer = GetComponent<LineRenderer>();
     }
 
-    public override void Activate(PlayerMaskData playerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(playerMaskData);
-        
+        base.ActivateMask();
+                
         newData =maskData as HealSuckSO;
 
         StartCoroutine(StartSuccCo());
@@ -66,7 +66,7 @@ public class HealSuckMask : InventoryMask
                 lineRenderer.SetPosition(0, transform.position);
                 lineRenderer.SetPosition(1, target.transform.position);
                 
-                float actualDamage = newData.lifeSteal * playerMaskData.playerDamageMult * Time.deltaTime;
+                float actualDamage = manager.playerData.GetModifiedDamage(newData.lifeSteal) * Time.deltaTime;
                 
                 // do enemy damage, heal player
                 if (target.isActiveAndEnabled)

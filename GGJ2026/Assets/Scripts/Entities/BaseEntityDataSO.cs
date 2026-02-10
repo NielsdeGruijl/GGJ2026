@@ -10,7 +10,9 @@ public enum StatType
     Health,
     CritChance,
     CritBonus,
-    Luck
+    Luck,
+    MagnetPull,
+    MagnetRange
 }
 
 public enum StatModificationType
@@ -23,6 +25,13 @@ public enum StatModificationType
 [System.Serializable]
 public struct EntityStatModifier
 {
+    public EntityStatModifier(StatType stat, StatModificationType type, float value)
+    {
+        this.stat = stat;
+        modificationType = type;
+        this.value = value;
+    }
+        
     public StatType stat;
     public StatModificationType modificationType;
     public float value;
@@ -31,6 +40,14 @@ public struct EntityStatModifier
 [System.Serializable]
 public class EntityStat
 {
+    public EntityStat(EntityStat instanceToCopy)
+    {
+        statType = instanceToCopy.statType;
+        baseValue = instanceToCopy.baseValue;
+        flatModifier = 0;
+        multiplier = 0;
+    }
+    
     public StatType statType;
     public float baseValue;
     [HideInInspector] public float flatModifier;

@@ -4,9 +4,9 @@ public class MagnetMask : InventoryMask
 {
     private MagnetMaskSO newData;
     
-    public override void Activate(PlayerMaskData pPlayerMaskData)
+    protected override void ActivateMask()
     {
-        base.Activate(pPlayerMaskData);
+        base.ActivateMask();
         
         newData = maskData as MagnetMaskSO;
 
@@ -15,8 +15,13 @@ public class MagnetMask : InventoryMask
             Debug.LogError("New data is not of type MagnetMaskSO");
             return;
         }
+
+        EntityStatModifier rangeModifier = 
+            new EntityStatModifier(StatType.MagnetRange, StatModificationType.flat, newData.magnetRangeIncrease);
+        EntityStatModifier pullModifier =
+            new EntityStatModifier(StatType.MagnetPull, StatModificationType.flat, newData.magnetForceIncrease);
         
-        playerMaskData.playerMagnetRange += newData.magnetRangeIncrease;
-        playerMaskData.playerMagnetForce += newData.magnetForceIncrease;
+        manager.playerData.ApplyStatModifier(rangeModifier);
+        manager.playerData.ApplyStatModifier(pullModifier);
     }
 }

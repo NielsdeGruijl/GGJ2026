@@ -79,7 +79,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  collider: {fileID: 1921778280698761356}
+  maskCollider: {fileID: 1921778280698761356}
   spriteRenderer: {fileID: 9027428832310985621}
   randomHorizontalMovement: 3
   randomVerticalMovement: 3
