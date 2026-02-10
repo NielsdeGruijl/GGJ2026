@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Post-GameJam.md",
+                "file": "Aggressive Masks.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Post-GameJam"
+              "title": "Aggressive Masks"
             }
           }
         ],
@@ -46,10 +46,14 @@
             "id": "bac33d50bf66ca01",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Data architecture.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Data architecture"
             }
           }
         ]
@@ -213,23 +217,24 @@
       "bases:Create new base": false
     }
   },
-  "active": "a40a4b7c6f10d4f8",
+  "active": "bac33d50bf66ca01",
   "lastOpenFiles": [
-    "Stand down.md",
-    "Post-GameJam.md",
-    "Aggressive Masks.md",
     "Enemies.md",
+    "Misc.md",
+    "Post-GameJam.md",
+    "PlayerCharacters.md",
+    "Data architecture.md",
+    "Aggressive Masks.md",
+    "Stand down.md",
     "Play tests.md",
     "Assets.md",
     "Legendary masks.md",
-    "Misc.md",
     "Passive masks.md",
     "World-interactables.md",
     "Masks.md",
     "Items.md",
     "Economy.md",
     "Balancing.md",
-    "Data architecture.md",
     "VFX.md",
     "UI.md",
     "Bug report.md",
@@ -240,7 +245,6 @@
     "GameJam/PlayerController.md",
     "GameJam/Polish.md",
     "GameJam",
-    "Polish.md",
-    "Mask system.md"
+    "Polish.md"
   ]
 }

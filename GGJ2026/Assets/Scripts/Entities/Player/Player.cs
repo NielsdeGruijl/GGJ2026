@@ -6,54 +6,48 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class Player : Entity
 {
-    [Header("Movement")]
-    [SerializeField] private float moveSpeed;
-
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    
+
     [SerializeField] private LayerMask coinPullMask;
     [SerializeField] private float pullSpeed;
     [SerializeField] private float succRadius;
 
     [SerializeField] private float knockbackRadius;
     [SerializeField] private float knockbackForce;
-    
-    
-    [HideInInspector] public float speedMult = 1;
 
     // Components
     private CurrencyManager currencyManager;
-    private HealthManager healthManager;
     private PlayerMaskData playerMaskData;
-    
-    private Rigidbody2D rigidBody;
+
     private PlayerInput playerInput;
-    
+
     // private variables
     private List<Chest> chests = new List<Chest>();
-    
+
     private Vector2 moveDirection;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        GetComponent<PlayerMaskManager>().playerData = stats;
+        playerInput = GetComponent<PlayerInput>();
+        currencyManager = GetComponent<CurrencyManager>();
+        
+        stats.GetStatEvent(StatType.Health).AddListener(healthManager.UpdateMaxHealth);
+    }
 
     void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
-        currencyManager = GetComponent<CurrencyManager>();
-        healthManager = GetComponent<HealthManager>();
-
         playerInput.actions["Move"].performed += MovePlayer;
         playerInput.actions["Move"].canceled += MovePlayer;
 
         playerInput.actions["Purchase"].started += PurchaseChest;
 
         playerInput.actions["Die"].started += TestDie;
-        
-        healthManager.OnDeath.AddListener(Die);
-        
-        rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.gravityScale = 0;
     }
 
     public void SetMaskData(PlayerMaskData maskData)
@@ -80,7 +74,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.AddForce(moveDirection * (moveSpeed * PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult));
+        rigidBody.AddForce(moveDirection * (stats.GetStatValue(StatType.MoveSpeed)));
         
         animator.SetFloat("WalkSpeed", PlayerLevelManager.instance.playerSpeedMult * playerMaskData.playerMoveSpeedMult);
 
@@ -120,8 +114,10 @@ public class Player : MonoBehaviour
         Die();
     }
     
-    private void Die()
+    protected override void Die()
     {
+        base.Die();
+        
         UpdateSessionData();
         StartCoroutine(DieCo());
     }

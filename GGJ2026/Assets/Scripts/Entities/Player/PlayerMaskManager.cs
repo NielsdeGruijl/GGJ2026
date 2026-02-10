@@ -11,7 +11,8 @@ public class PlayerMaskManager : MonoBehaviour
 
     [SerializeField] private MaskHUDContainer maskHUD;
     
-    private PlayerMaskData playerMaskData;
+    public PlayerMaskData playerMaskData;
+    public EntityData playerData;
 
     private int currentRingIndex = 0;
     private int currentRingItemNum = 0;

@@ -18,7 +18,7 @@ public class MenuEnemySpawner : MonoBehaviour
         while (true)
         {
             Enemy enemyObject = Instantiate(enemy, transform.position, Quaternion.identity);
-            enemyObject.Initialize(target);
+            enemyObject.Initialize(target.GetComponent<HealthManager>());
             
             yield return new WaitForSeconds(5);
         }

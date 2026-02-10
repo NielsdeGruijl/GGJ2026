@@ -12,6 +12,26 @@ https://www.youtube.com/watch?v=cc5l66FwpQ4
 	- Enable storing objects of types to avoid Get Component calls
 
 
+EntityStatModifier
+- enum StatType
+- enum StatModificationType
+- float changeValue
+- 
+
+ PlayerData class
+ - Stores EntityDataSO (baseData)
+	 - BaseData
+	 - List EntityStatModifier LevelUp data
+ - DataModifiers
+	 - Flat change
+	 - Mult change
+- void ApplyStatChange(EntityStatModifier)
+
+- Rework playermaskdata and DebuffData
+	- Use EntityData instead?
+
+
+
 
 ===== done =====
 

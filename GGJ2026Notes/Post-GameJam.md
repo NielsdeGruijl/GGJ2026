@@ -11,6 +11,12 @@
 [[Economy]]
 [[World-interactables]]
 [[Play tests]]
+[[PlayerCharacters]]
+
+
+- Fix healbeam DOT effect
+	- Only apply once per sec, only remove duration after hit
+	- If enemy is gone before hit, don't reduce duration and move on to next
 
 - Combat juice:
 	- Add enemy knockback on hit

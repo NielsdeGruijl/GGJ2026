@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 915925493514814592}
   - component: {fileID: 4666267240486557114}
   - component: {fileID: 8953340587837885101}
+  - component: {fileID: 3219983316189299907}
   - component: {fileID: 3932741182536906237}
   - component: {fileID: 312843824609217552}
   - component: {fileID: 6654037893830515226}
@@ -50,11 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7c94ecb76274ba49b1712d2adbcba68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: d4090cf6bdc02d2e08ed0c17c1945b8e, type: 2}
   animator: {fileID: 5422532016514616965}
   coinPrefab: {fileID: 5097419895040924053, guid: be71082f30297734ab040fc4ba5799bc, type: 3}
   coinValue: 1
-  damage: 5
-  moveSpeed: 5
   attackRange: 1.5
   attackCooldown: 1
   pathFindingTickSpeed: 1
@@ -84,17 +84,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
-  whiteFlash: {fileID: 4668093333374895871}
-  showDamageVFX: 1
-  maxHealth: 500
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
   OnDamage:
     m_PersistentCalls:
       m_Calls: []
-  isEnemy: 1
-  canDie: 1
+--- !u!114 &3219983316189299907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145497220908810131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0694d75b8504d6208a11eb7b112276a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockbackHandler
 --- !u!114 &3932741182536906237
 MonoBehaviour:
   m_ObjectHideFlags: 0

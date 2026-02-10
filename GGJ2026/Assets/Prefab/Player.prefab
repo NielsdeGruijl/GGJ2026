@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5655aa28832ce3b4fb8d31cdaa8b2dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: f8e38c99f4a64b0edb30148204e1f123, type: 2}
   moveSpeed: 2000
   animator: {fileID: 4482835597800704740}
   spriteRenderer: {fileID: 4314612522340278377}
@@ -62,7 +63,6 @@ MonoBehaviour:
   succRadius: 0
   knockbackRadius: 0
   knockbackForce: 0
-  speedMult: 1
 --- !u!114 &451689299078536013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,13 +107,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
-  popup: {fileID: 228213356413020129, guid: 02150a9e340bb3e419920607f5793611, type: 3}
+  whiteFlash: {fileID: 0}
+  showDamageVFX: 0
   maxHealth: 100
-  isEnemy: 0
-  canDie: 1
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  OnDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  isEnemy: 0
+  canDie: 1
 --- !u!114 &6779519355639478739
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 
+
 - Allow players to choose a starting mask
 
 - Play animation to open chest

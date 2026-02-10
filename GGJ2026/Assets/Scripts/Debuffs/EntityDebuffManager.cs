@@ -7,8 +7,6 @@ public class EntityDebuffManager : MonoBehaviour
 {
     [SerializeField] private float debuffTick;
     
-    private EntityStatModifiers debuffValues;
-
     private List<BaseDebuff> activeDebuffs;
 
     private Coroutine debuffTickCoroutine;

@@ -1,23 +1,4 @@
-using System.Collections.Generic;
 using UnityEngine;
-
-public enum StatType
-{
-    MoveSpeed,
-    AttackDamage,
-    Health,
-    CritChance,
-    CritBonus,
-    Luck
-}
-
-public enum StatModificationType
-{
-    flat,
-    multiplier,
-    DOT,
-    Custom
-}
 
 public enum StackingRule
 {

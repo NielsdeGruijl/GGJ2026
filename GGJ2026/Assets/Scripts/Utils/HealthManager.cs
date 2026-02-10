@@ -1,31 +1,27 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+public enum DamageType
+{
+    Impact,
+    Continuous,
+    None
+}
+
 public class HealthManager : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
-    
-    [SerializeField] private GameObject whiteFlash;
-    [SerializeField] private bool showDamageVFX;
-    
-    public float maxHealth;
+
     public UnityEvent OnDeath = new();
     public DamageEvent OnDamage = new();
-
-    [SerializeField] private bool isEnemy;
-    [SerializeField] private bool canDie = true;
+    
+    public float maxHealth { get; private set; }
+    private float currentHealth;
 
     private bool isDead = false;
     
-    private float currentHealth;
-
     private float damagePopupValue = 0;
-    private bool isGeneratingPopup = false;
-
-    private WaitForSeconds waitForDOTInterval;
-    private WaitForSeconds waitForPopup = new WaitForSeconds(1);
 
     private void Awake()
     {
@@ -36,25 +32,13 @@ public class HealthManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (isEnemy)
-        {
-            if (DifficultyManager.instance)
-                maxHealth *= DifficultyManager.instance.enemyHealthMult;
+        currentHealth = maxHealth;
             
-            currentHealth = maxHealth;
-            
-            isDead = false;
-            whiteFlash.SetActive(false);
-        }
-
-        isGeneratingPopup = false;
+        isDead = false;
     }
 
-    public void ApplyDamage(float damage, bool continuous = false)
+    public void ApplyDamage(float damage, DamageType damageType = DamageType.None)
     {
-        if (isEnemy)
-            damage *= PlayerLevelManager.instance.playerDamageMult;
-        
         currentHealth -= damage;
 
         damagePopupValue += damage;
@@ -62,20 +46,13 @@ public class HealthManager : MonoBehaviour
         OnDamage.Invoke(damage);
         CreateDamagePopup(); 
         
-        if (currentHealth <= 0 && canDie && !isDead)
+        if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            
-            /*if(isGeneratingPopup || currentHealth + damage >= maxHealth)
-                CreateDamagePopup();*/
             
             StopAllCoroutines();
             OnDeath.Invoke();
         }
-
-        
-        /*if (!isGeneratingPopup && gameObject.activeSelf)
-            StartCoroutine(ShowPopup());*/
 
         UpdateHealthBar();
     }
@@ -90,6 +67,18 @@ public class HealthManager : MonoBehaviour
         UpdateHealthBar();
     }
 
+    public void UpdateMaxHealth(float newMaxHealth)
+    {
+        if (maxHealth == 0)
+            currentHealth = newMaxHealth;
+        else
+            AddHealth(newMaxHealth - maxHealth);
+        
+        maxHealth = newMaxHealth;
+        
+        UpdateHealthBar();
+    }
+
     // ===== UI =====
     
     private void UpdateHealthBar()
@@ -100,24 +89,8 @@ public class HealthManager : MonoBehaviour
         healthbar.value = currentHealth / maxHealth;
     }
 
-    private IEnumerator ShowPopup()
-    {
-        isGeneratingPopup = true;
-        yield return waitForPopup;
-        
-        CreateDamagePopup();
-        
-        isGeneratingPopup = false;
-    }
-
     private void CreateDamagePopup()
     {
-        if (!isEnemy)
-        {
-            PopupManager.instance.CreateWorldPopup(transform.position, damagePopupValue, PopupType.Player);
-            return;
-        }
-        
         PopupManager.instance.CreateWorldPopup(transform.position, damagePopupValue);
         
         damagePopupValue = 0;

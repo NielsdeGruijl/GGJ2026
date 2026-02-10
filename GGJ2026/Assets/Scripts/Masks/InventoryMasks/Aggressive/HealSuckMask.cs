@@ -71,7 +71,7 @@ public class HealSuckMask : InventoryMask
                 // do enemy damage, heal player
                 if (target.isActiveAndEnabled)
                 {
-                    target.ApplyDamage(actualDamage, true);
+                    target.ApplyDamage(actualDamage, DamageType.Continuous);
                     player.AddHealth(actualDamage * newData.healPercent);
                     UpdateDamageDealt(actualDamage);
                 }

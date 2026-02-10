@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 public class Mask : MonoBehaviour
 {
     [SerializeField] private AnimationCurve curve;
-    [SerializeField] private BoxCollider2D collider;
+    [SerializeField] private BoxCollider2D maskCollider;
     
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -24,7 +24,7 @@ public class Mask : MonoBehaviour
     
     private void Awake()
     {
-        collider.enabled = false;
+        maskCollider.enabled = false;
         startPosition = transform.position;
         
         if (maskSO)
@@ -43,12 +43,10 @@ public class Mask : MonoBehaviour
 
     private void Update()
     {
-
-        
         if(curve.keys[curve.length - 1].time > timeElapsed)
             transform.position = startPosition + new Vector2(timeElapsed * horizontal,  curve.Evaluate(timeElapsed) * vertical);
         else
-            collider.enabled = true;
+            maskCollider.enabled = true;
 
         timeElapsed += Time.deltaTime;
     }

@@ -33,6 +33,12 @@ public class DamageFlashHandler : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        flashValue = 0;
+        SetFlashValue();
+    }
+
     public void ShowFlash(float damage)
     {
         StartCoroutine(ShowFlashCo());
@@ -40,7 +46,7 @@ public class DamageFlashHandler : MonoBehaviour
 
     private IEnumerator ShowFlashCo()
     {
-        float timeElapsed = 0;
+        //float timeElapsed = 0;
 
         flashValue = 1;
         
@@ -50,7 +56,6 @@ public class DamageFlashHandler : MonoBehaviour
         yield return new WaitForSeconds(flashDuration);
         
         flashValue = 0;
-        SetFlashColor();
         SetFlashValue();
     }
 

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d041065cfa9ae3e47b3b4f97c992d43b, type: 3}
+  m_Name: BaseEnemyData
+  m_EditorClassIdentifier: Assembly-CSharp::BaseEntityDataSO
+  baseStats:
+  - statType: 0
+    baseValue: 5
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 1
+    baseValue: 5
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 2
+    baseValue: 1.5
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 3
+    baseValue: 1
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - statType: 4
+    baseValue: 50
+    flatModifier: 0
+    multiplier: 0
+    OnStatChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  LevelupModifiers: []

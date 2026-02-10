@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private Player player;
+    [SerializeField] private HealthManager player;
 
     [SerializeField] private Enemy enemyPrefab;
     
@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
                 int randomSpawnpoint = Random.Range(0, spawnPoints.Count);
                 Enemy enemyObject = ObjectPool.instance.Get(ObjectTypes.Enemies).GetComponent<Enemy>();
                 enemyObject.transform.position = spawnPoints[randomSpawnpoint].position.ToVector2();
-                enemyObject.Initialize(player.transform);
+                enemyObject.Initialize(player);
 
                 i++;
                 yield return null;

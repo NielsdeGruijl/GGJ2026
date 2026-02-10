@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Enemy : MonoBehaviour
+public class Enemy : Entity
 {
     [SerializeField] private Animator animator;
     
@@ -13,54 +13,36 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Coin coinPrefab;
     [SerializeField] private int coinValue;
 
-    [Header("Stats")] 
-    [SerializeField] private float damage;
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float attackRange;
-    [SerializeField] private float attackCooldown;
-    
     [Header("Misc")]
     [SerializeField] private float pathFindingTickSpeed;
 
-    private HealthManager healthManager;
-    
-    private Rigidbody2D rigidBody;
+    private Vector2 velocity;
 
-    private Vector2 baseVelocity;
-    private float velocityMult = 1;
-
-    private bool canAttack;
-
-    private Transform target;
-    private HealthManager targetHealth;
+    private HealthManager target;
 
     private WaitForSeconds waitForPathFinding;
     private WaitForSeconds waitForAttack;
     
-    private void Awake()
+    protected override void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.gravityScale = 0;
+        base.Awake();
         
-        healthManager = GetComponent<HealthManager>();
+        stats.GetStatEvent(StatType.AttackSpeed).AddListener(UpdateAttackSpeed);
         
-        healthManager.OnDeath.AddListener(Die);
-
-        if (DifficultyManager.instance)
-            DifficultyManager.instance.OnDifficultyChanged.AddListener(UpdateVelocity);
-
-        waitForAttack = new WaitForSeconds(attackCooldown);
+        waitForAttack = new WaitForSeconds(stats.GetStatValue(StatType.AttackSpeed));
         waitForPathFinding = new WaitForSeconds(pathFindingTickSpeed);
         
         StartCoroutine(FindPathToPlayer());
     }
 
-    public void Initialize(Transform pTarget)
+    private void OnEnable()
+    {
+        healthManager.UpdateMaxHealth(stats.GetStatValue(StatType.Health));
+    }
+
+    public void Initialize(HealthManager pTarget)
     {
         target = pTarget;
-        targetHealth = target.GetComponent<HealthManager>();
-        
-        UpdateVelocity();
         
         StartCoroutine(TryAttackPlayerCo());
         StartCoroutine(FindPathToPlayer());
@@ -70,26 +52,34 @@ public class Enemy : MonoBehaviour
     {
         rigidBody.AddForce(force, ForceMode2D.Impulse);
     }
-    
-    private void Die()
+
+    protected override void Die()
+    {
+        base.Die();
+        
+        SpawnCoin();
+
+        StartCoroutine(PoolObjectCo());
+    }
+
+    private void SpawnCoin()
     {
         GameObject obj = ObjectPool.instance.Get(ObjectTypes.Coins);
         Coin coinObject = obj.GetComponent<Coin>();
 
         coinObject.transform.position = transform.position;
         coinObject.value = coinValue;
-
-        StartCoroutine(PoolObjectCo());
     }
 
+    private void UpdateAttackSpeed(float newAttackSpeed)
+    {
+        waitForAttack = new WaitForSeconds(newAttackSpeed);
+    }
+    
+    
     private void FixedUpdate()
     {
-        rigidBody.AddForce(baseVelocity * velocityMult);
-    }
-
-    private void UpdateVelocity()
-    {
-        velocityMult = DifficultyManager.instance.enemyMoveSpeedMult;
+        rigidBody.AddForce(velocity);
     }
 
     private IEnumerator PoolObjectCo()
@@ -106,10 +96,10 @@ public class Enemy : MonoBehaviour
             if (!gameObject.activeSelf)
                 break;
             
-            if ((target.transform.position.ToVector2() - transform.position.ToVector2()).magnitude < attackRange)
+            if ((target.transform.position.ToVector2() - transform.position.ToVector2()).magnitude < stats.GetStatValue(StatType.AttackRange))
             {
-                if (targetHealth)
-                    targetHealth.ApplyDamage(damage * DifficultyManager.instance.enemyDamageMult);
+                if (target)
+                    target.ApplyDamage(stats.GetStatValue(StatType.AttackDamage));
             }
             
             yield return waitForAttack;
@@ -125,9 +115,9 @@ public class Enemy : MonoBehaviour
             
             Vector2 moveDirection = target.transform.position.ToVector2() - transform.position.ToVector2();
             moveDirection.Normalize();
-            baseVelocity = moveDirection * moveSpeed;
+            velocity = moveDirection * stats.GetStatValue(StatType.MoveSpeed);
 
-            if (baseVelocity.x < 0)
+            if (velocity.x < 0)
                 animator.SetFloat("WalkDir", -1);
             else
                 animator.SetFloat("WalkDir", 1);

@@ -1,35 +1,34 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
 public class InventoryMask :  MonoBehaviour
 {
-    [SerializeField] protected float baseMoveSpeed = 1;
-    protected float bonusMoveSpeed = 0.25f;
+    [SerializeField] protected float baseOrbitMoveSpeed = 1;
 
     [HideInInspector] public MaskSO maskData;
+    public DamageEvent OnAuraDamage;
+
+    protected PlayerMaskManager manager;
+    protected PlayerMaskData playerMaskData;
+    protected WaitForSeconds waitForCooldown;
+    
+    private WaitForSeconds waitForAuraCooldown;
 
     private int numInRing;
     private int ringCapacity;
     private float targetRadius;
     
-    private float moveSpeed;
+    private const float bonusOrbitMoveSpeed = 0.25f;
+    private float orbitMoveSpeed;
 
-    protected PlayerMaskData playerMaskData;
-
-    public DamageEvent OnAuraDamage;
-
-    protected WaitForSeconds waitForCooldown;
-    private WaitForSeconds waitForAuraCooldown;
     private bool canDamageAura = true;
 
     public virtual void Activate(PlayerMaskData pPlayerMaskData)
     {
         playerMaskData = pPlayerMaskData;
-        
         playerMaskData.OnCooldownChanged.AddListener(UpdateCooldown);
         
-        moveSpeed = baseMoveSpeed + (ringCapacity * bonusMoveSpeed);
+        orbitMoveSpeed = baseOrbitMoveSpeed + (ringCapacity * bonusOrbitMoveSpeed);
         
         waitForCooldown = new WaitForSeconds(maskData.cooldown);
         waitForAuraCooldown = new WaitForSeconds(3);
@@ -65,8 +64,8 @@ public class InventoryMask :  MonoBehaviour
     private Vector3 GetMovePosition()
     {
         float fract = (((float)numInRing * (Mathf.PI * 2)) / (float)ringCapacity);
-        float xPosition = Mathf.Cos((Time.time * moveSpeed) + fract);
-        float yPosition = Mathf.Sin((Time.time * moveSpeed) + fract);
+        float xPosition = Mathf.Cos((Time.time * orbitMoveSpeed) + fract);
+        float yPosition = Mathf.Sin((Time.time * orbitMoveSpeed) + fract);
         return new Vector3(xPosition, yPosition, 0) * targetRadius;
     }
 

@@ -2,7 +2,9 @@ All the enemy design concepts for the game, enemies would ideally remain very si
 
 
 ### EnemySpawner:
-- 
+- Give budget
+- Give random selection of enemy types per "wave"
+- Add support for boss spawning
 
 - Research yokai designs
 	  https://yokai.com/latest/
