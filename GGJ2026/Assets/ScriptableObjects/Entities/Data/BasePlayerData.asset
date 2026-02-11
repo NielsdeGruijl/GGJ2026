@@ -76,4 +76,10 @@ MonoBehaviour:
     OnStatChanged:
       m_PersistentCalls:
         m_Calls: []
-  LevelupModifiers: []
+  LevelupModifiers:
+  - stat: 1
+    modificationType: 1
+    value: 0.5
+  - stat: 4
+    modificationType: 0
+    value: 5

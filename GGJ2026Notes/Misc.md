@@ -1,4 +1,7 @@
-
+- Juicier coin pickups
+	- Add (text) vfx on pickup
+	- Add sound on pickup
+		- Increasing pitch until no pickup for a while?
 
 - Allow players to choose a starting mask
 

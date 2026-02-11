@@ -58,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: weight
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: basePrice
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: masks.Array.size

@@ -50,6 +50,11 @@ public class Player : Entity
         playerInput.actions["Die"].started += TestDie;
     }
 
+    public void SetPlayerData(BaseEntityDataSO baseStats)
+    {
+        
+    }
+    
     public void SetMaskData(PlayerMaskData maskData)
     {
         playerMaskData = maskData;

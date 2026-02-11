@@ -17,6 +17,7 @@
 Enemy and player level up systems
 - Enemies give player XP on death
 - Enemies level up every interval (maybe not base enemies tho)
+- Main menu character selection screen
 
 
 - Combat juice:

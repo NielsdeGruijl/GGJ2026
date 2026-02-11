@@ -28,3 +28,14 @@
 	- Increase damage mask
 - Balance changes
 	- chests now increase in price upon opening a chest
+
+09/02/2026
+
+- Implemented damage flash shader
+
+10/02/2026
+
+- Refactored player/enemy data into unified EntityData system
+- Refactored masks to use EntityData for player stat interactions
+- Implemented knockback system
+- Improved healbeam and Titanium (formerly DamagingAura) mask logic
