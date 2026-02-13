@@ -18,12 +18,22 @@ public class Enemy : Entity, IKnockbackable
     [Header("Misc")]
     [SerializeField] private float pathFindingTickSpeed;
 
+    [SerializeField] private float relocationRange;
+    [SerializeField] private float relocationInterval;
+
+    
+    private float XPValue = 5;
+    
+    public static ValueEvent OnDeath = new();
+
     private Vector2 velocity;
 
     private HealthManager target;
 
     private WaitForSeconds waitForPathFinding;
+    private WaitForSeconds waitForAttackRangeCheck;
     private WaitForSeconds waitForAttack;
+    private WaitForSeconds waitForRelocation;
     
     protected override void Awake()
     {
@@ -34,7 +44,9 @@ public class Enemy : Entity, IKnockbackable
         stats.GetStatEvent(StatType.AttackSpeed).AddListener(UpdateAttackSpeed);
         
         waitForAttack = new WaitForSeconds(stats.GetStatValue(StatType.AttackSpeed));
+        waitForAttackRangeCheck = new WaitForSeconds(0.1f);
         waitForPathFinding = new WaitForSeconds(pathFindingTickSpeed);
+        waitForRelocation = new WaitForSeconds(relocationInterval);
         
         StartCoroutine(FindPathToPlayer());
     }
@@ -50,6 +62,7 @@ public class Enemy : Entity, IKnockbackable
         
         StartCoroutine(TryAttackPlayerCo());
         StartCoroutine(FindPathToPlayer());
+        StartCoroutine(RelocateCo());
     }
 
     public void ApplyKnockback(HitInfo hitInfo)
@@ -69,7 +82,7 @@ public class Enemy : Entity, IKnockbackable
         velocity = Vector2.zero;
         
         SpawnCoin();
-
+        
         StartCoroutine(PoolObjectCo());
     }
 
@@ -87,7 +100,6 @@ public class Enemy : Entity, IKnockbackable
         waitForAttack = new WaitForSeconds(newAttackSpeed);
     }
     
-    
     private void FixedUpdate()
     {
         rigidBody.AddForce(velocity);
@@ -97,7 +109,7 @@ public class Enemy : Entity, IKnockbackable
     {
         yield return new WaitForSeconds(0.2f);
 
-        
+        OnDeath.Invoke(XPValue);
         ObjectPool.instance.PoolObject(ObjectTypes.Enemies, gameObject);
     }
     
@@ -111,10 +123,13 @@ public class Enemy : Entity, IKnockbackable
             if ((target.transform.position.ToVector2() - transform.position.ToVector2()).magnitude < stats.GetStatValue(StatType.AttackRange))
             {
                 if (target)
+                {
                     target.ApplyDamage(new HitInfo(stats.GetStatValue(StatType.AttackDamage)));
+                    yield return waitForAttack;
+                }
             }
             
-            yield return waitForAttack;
+            yield return waitForAttackRangeCheck;
         }
     }
     
@@ -135,6 +150,21 @@ public class Enemy : Entity, IKnockbackable
                 animator.SetFloat("WalkDir", 1);
 
             yield return waitForPathFinding;
+        }
+    }
+
+    private IEnumerator RelocateCo()
+    {
+        while (true)
+        {
+            Vector2 relativePositionToTarget = target.transform.position - transform.position;
+
+            if (relativePositionToTarget.magnitude >= relocationRange)
+            {
+                transform.position = target.transform.position.ToVector2() + relativePositionToTarget;
+            }
+            
+            yield return waitForRelocation;
         }
     }
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &4744809364322639126
+--- !u!1001 &8478429096791588792
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,14 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 993040976484893748, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
-      propertyPath: m_text
-      value: E ($30)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1955803553996745439, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 2446025391926272952, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -59,27 +51,47 @@ PrefabInstance:
     - target: {fileID: 7529176833689025212, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3a72f8112b909caed81b3e6bada3ffc8, type: 3}
+      objectReference: {fileID: 21300000, guid: 087e950337603e9f1a76df0a01549a36, type: 3}
     - target: {fileID: 8159845423846061865, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: m_Name
-      value: LegendaryChest
+      value: PassiveChest
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: ba3d02d7e8d78de34bf5e4b452bb0010, type: 2}
+    - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: weight
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: basePrice
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: masks.Array.size
-      value: 1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
+      propertyPath: multPriceIncrease
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
       propertyPath: 'masks.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 00fe9e537b30a85c3a3bfcc67d66dc22, type: 2}
+      objectReference: {fileID: 11400000, guid: 0d0717f43c77a464891c1f285e7aeea3, type: 2}
+    - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
+      propertyPath: 'masks.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d3e31a2d321511e883cf271b43da091, type: 2}
+    - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
+      propertyPath: 'masks.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f7c755b1810617db921d0706e552656, type: 2}
+    - target: {fileID: 8662950776992207428, guid: 52dfdb68216921345ad96e9acf3c289b, type: 3}
+      propertyPath: 'masks.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 143d13f2f1de1c47e91959c8662f5606, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

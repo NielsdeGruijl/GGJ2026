@@ -91,7 +91,11 @@ public class EntityData
         foreach (EntityStatModifier statModifier in LevelUpModifiers)
         {
             ApplyStatModifier(statModifier);
+            
+            Debug.Log("New value after level up: " + GetStatValue(statModifier.stat));
+            
         }
+        
     }
 
     public ValueEvent GetStatEvent(StatType type)

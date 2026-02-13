@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BaseEntityDataSO
   baseStats:
   - statType: 0
-    baseValue: 2500
+    baseValue: 5000
     flatModifier: 0
     multiplier: 0
     OnStatChanged:

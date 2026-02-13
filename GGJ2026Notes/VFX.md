@@ -3,6 +3,10 @@
 	- Missle explosion effect?
 
 - enemy damage
+	- Flash X
+	- Blood/sparks?
+	- Enemy death
+
 - Damage popup
 	- how to optimize?
 

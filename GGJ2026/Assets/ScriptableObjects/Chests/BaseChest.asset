@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f4193726c33da16bff32728b6ade84, type: 3}
+  m_Name: BaseChest
+  m_EditorClassIdentifier: Assembly-CSharp::ChestSO
+  chestSprite: {fileID: 21300000, guid: f794270350f7c44609b6fa419bb0721a, type: 3}
+  basePrice: 5
+  flatPriceIncrease: 2
+  multPriceIncrease: 1.2
+  spawnChance: 80
+  masks:
+  - {fileID: 11400000, guid: 08e9074af56a6cb488661ef88aee4c05, type: 2}
+  - {fileID: 11400000, guid: 1c637f085d64dff4c8e14581ff4938cd, type: 2}
+  - {fileID: 11400000, guid: 0c2b213bb7fc02d43a626dfd216f2f62, type: 2}
+  - {fileID: 11400000, guid: 487ac0e6f168517659b8535f2edfa689, type: 2}
+  - {fileID: 11400000, guid: 9b28865bc6fea7f78afcdc0f1dc8d5e6, type: 2}
+  - {fileID: 11400000, guid: 1be085d0b9b907647b8b8698ff4140bc, type: 2}
+  - {fileID: 11400000, guid: 8b174c1adf08e1745a6ad23e3db964ac, type: 2}

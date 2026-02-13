@@ -18,5 +18,5 @@ MonoBehaviour:
   maskSprite: {fileID: 21300000, guid: c4b7c2f606308dc84ac6d00d539ceec2, type: 3}
   cooldown: 5
   lightningPrefab: {fileID: 6558168995363864860, guid: 987e58777f282c0f0a3790fee35ec7a4, type: 3}
-  totalBounces: 8
+  totalBounces: 5
   damagePerBounce: 60

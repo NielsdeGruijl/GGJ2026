@@ -55,7 +55,9 @@ MonoBehaviour:
   animator: {fileID: 5422532016514616965}
   coinPrefab: {fileID: 5097419895040924053, guid: be71082f30297734ab040fc4ba5799bc, type: 3}
   coinValue: 1
-  pathFindingTickSpeed: 1
+  pathFindingTickSpeed: 0.1
+  relocationRange: 35
+  relocationInterval: 10
 --- !u!114 &4666267240486557114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,12 +84,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: 8b3a93c51752438948c7b9442757ba01, type: 3}
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
   OnDamage:
     m_PersistentCalls:
       m_Calls: []
+  currentHealth: 0
 --- !u!114 &3932741182536906237
 MonoBehaviour:
   m_ObjectHideFlags: 0

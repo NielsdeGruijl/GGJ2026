@@ -2,6 +2,8 @@ All the enemy design concepts for the game, enemies would ideally remain very si
 
 
 Enemies level up system improvements
+- Level up on interval
+- Level up based on entitydata
 
 
 - Research yokai designs

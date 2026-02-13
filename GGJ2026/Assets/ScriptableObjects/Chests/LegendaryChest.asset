@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f4193726c33da16bff32728b6ade84, type: 3}
+  m_Name: LegendaryChest
+  m_EditorClassIdentifier: Assembly-CSharp::ChestSO
+  chestSprite: {fileID: 0}
+  basePrice: 30
+  flatPriceIncrease: 2
+  multPriceIncrease: 1.2
+  spawnChance: 1
+  masks:
+  - {fileID: 11400000, guid: 00fe9e537b30a85c3a3bfcc67d66dc22, type: 2}

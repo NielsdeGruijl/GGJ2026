@@ -1,12 +1,17 @@
 - Juicier coin pickups
 	- Add (text) vfx on pickup
-	- Add sound on pickup
-		- Increasing pitch until no pickup for a while?
+	- Add sound on pickup X
+		- Increasing pitch until no pickup for a while? X
 
-- Allow players to choose a starting mask
+- Add recycle/smith mechanic
+	- Player can take or scrap an item from a chest
+	- Scrapped items turn into a scrap material
+	- Random/rare smiths can turn scrap into a new mask
+	- Player can choose out of 3 masks
 
 - Play animation to open chest
 	- Mask goes up in sky and falls down X
+	- Particle effects
 
 - Design player agency system
 	- Player must interact with mask on ground to pickup

@@ -10,6 +10,15 @@ public class ValueEvent : UnityEvent<float>
 {
 }
 
+[Serializable]
+public struct ChestData
+{
+    public Chest chestPrefab;
+    public float basePrice;
+    public float flatPriceIncrease;
+    public float multPriceIncrease;
+}
+
 public class ChestSpawner : MonoBehaviour
 {
     [SerializeField] private Player player;
@@ -18,15 +27,15 @@ public class ChestSpawner : MonoBehaviour
     
     [SerializeField] private float chestSpawnRadius = 20;
     [SerializeField] private int minChestCountInRadius = 5;
-    [SerializeField] private float priceMultIncrease = 1;
     
     private List<Chest> chests;
 
     private WaitForSeconds waitForSpawnInterval;
-    private ValueEvent OnPricesIncreased = new();
+    private IntValueEvent OnPricesIncreased = new();
 
+    private int chestsOpened = 0;
+    
     private float totalWeight;
-    private float priceMult = 1;
 
     private void Awake()
     {
@@ -34,7 +43,7 @@ public class ChestSpawner : MonoBehaviour
 
         foreach (Chest chest in chestPrefabs)
         {
-            totalWeight += chest.weight;
+            totalWeight += chest.data.spawnChance;
         }
         
         StartCoroutine(SpawnChestsCo());
@@ -42,8 +51,8 @@ public class ChestSpawner : MonoBehaviour
 
     private void IncreasePrices()
     {
-        priceMult *= priceMultIncrease;
-        OnPricesIncreased.Invoke(priceMult);
+        chestsOpened++;
+        OnPricesIncreased.Invoke(chestsOpened);
     }
     
     private void SpawnChests(int chestCountToSpawn)
@@ -61,7 +70,7 @@ public class ChestSpawner : MonoBehaviour
             
             for (int j = 0; j < chestPrefabs.Count; j++)
             {
-                currentWeight += chestPrefabs[j].weight;
+                currentWeight += chestPrefabs[j].data.spawnChance;
                 if (randomWeight < currentWeight)
                 {
                     chestIndex = j;
@@ -72,7 +81,9 @@ public class ChestSpawner : MonoBehaviour
             Chest chestObject = Instantiate(chestPrefabs[chestIndex], player.transform.position + new Vector3(x, y, 0), Quaternion.identity);
             
             // Update chest price to current price
-            chestObject.IncreasePrice(priceMult);
+            if(chestsOpened > 0)
+                chestObject.IncreasePrice(chestsOpened);
+            
             chestObject.OnOpen.AddListener(IncreasePrices);
             OnPricesIncreased.AddListener(chestObject.IncreasePrice);
         }

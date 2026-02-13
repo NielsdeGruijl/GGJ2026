@@ -35,7 +35,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   - statType: 3
-    baseValue: 1
+    baseValue: 0.5
     flatModifier: 0
     multiplier: 0
     OnStatChanged:

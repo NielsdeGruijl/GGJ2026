@@ -18,7 +18,7 @@ MonoBehaviour:
   maskSprite: {fileID: 21300000, guid: cfad9058d51c3af448f6c14fcb693e69, type: 3}
   cooldown: 5
   lifeSteal: 50
-  healPercent: 0.5
+  healPercent: 5
   succRange: 8
   succDuration: 5
   succInterval: 0.2

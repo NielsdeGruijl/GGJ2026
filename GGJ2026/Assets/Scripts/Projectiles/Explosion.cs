@@ -19,19 +19,16 @@ public class Explosion : MonoBehaviour
 
     private Vector2 baseScale;
     
-    private void Awake()
-    {
-        waitFuze = new WaitForSeconds(fuzeTimer);
-        waitParticle = new WaitForSeconds(particles.main.duration);
-
-        baseScale = new Vector2(1, 1);
-    }
-
     public void Initialize(float pRange, float pDamage, float pFuzeTimer)
     {
         range = pRange;
         damage = pDamage;
         fuzeTimer = pFuzeTimer;
+        
+        waitFuze = new WaitForSeconds(fuzeTimer);
+        waitParticle = new WaitForSeconds(particles.main.duration);
+
+        baseScale = new Vector2(1, 1);
         
         sprite.gameObject.SetActive(true);
         sprite.localScale = baseScale * (range * 2);

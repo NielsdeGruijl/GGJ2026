@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -16,6 +15,7 @@ public class DamagePopup : MonoBehaviour
 
     [SerializeField] private float duration;
     [SerializeField] private float moveUpSpeed;
+    [SerializeField] private AnimationCurve movementCurve;
     
     private float timeElapsed = 0;
 
@@ -55,12 +55,19 @@ public class DamagePopup : MonoBehaviour
 
     private IEnumerator UpdatePopupCo()
     {
-        while (timeElapsed <= duration)
+        Vector2 basePos = transform.position;
+
+        float randomX = Random.Range(-3, 3);
+        float randomY = Random.Range(3, 8);
+        
+        while (timeElapsed <= movementCurve[movementCurve.length - 1].time + 0.05f)
         {
-            transform.Translate(Vector2.up * (moveUpSpeed * updateInterval));
- 
+            //transform.Translate(Vector2.up * (moveUpSpeed * updateInterval));
+            
+            transform.position = basePos + new Vector2(timeElapsed * randomX, movementCurve.Evaluate(timeElapsed) * randomY);
+            
             //text.alpha = Mathf.Lerp(1, 0, timeElapsed / duration);
-            timeElapsed += updateInterval;
+            timeElapsed += updateInterval * 0.8f;
   
             yield return new WaitForSeconds(updateInterval);
         }

@@ -1,31 +1,28 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Chest : MonoBehaviour
 {
-    [SerializeField] TMP_Text chestName;
-
-    [SerializeField] private List<MaskSO> masks;
-
+    [SerializeField] TMP_Text pricePopup;
     [SerializeField] private Mask maskWorldItemPrefab;
 
-    [SerializeField] private float basePrice;
+    public ChestSO data;
     
     [HideInInspector] public int price;
 
-    public float weight;
-
     public UnityEvent OnOpen;
     
-    private void Awake()
+    private void OnEnable()
     {
-        price = (int)(basePrice);
+        price = (int)data.basePrice;
 
-        chestName.gameObject.SetActive(false);
+        pricePopup.gameObject.SetActive(false);
         
-        chestName.text = $"E (${price})";
+        pricePopup.text = $"E (${price})";
     }
 
     public void Open(float playerLuck)
@@ -33,19 +30,15 @@ public class Chest : MonoBehaviour
         int itemCount = 1;
         itemCount += Mathf.FloorToInt(playerLuck / 100);
         
-        Debug.Log("Items: " + itemCount);
-        
         if (Random.Range(0f, 100) < playerLuck % 100)
             itemCount++;
         
-        Debug.Log("Items: " + itemCount);
-        
         for (int i = 0; i < itemCount; i++)
         {
-            int randomIndex = Random.Range(0, masks.Count);
+            int randomIndex = Random.Range(0, data.masks.Count);
         
             Mask maskObject = Instantiate(maskWorldItemPrefab, transform.position, Quaternion.identity);
-            maskObject.Initialize(masks[randomIndex]);
+            maskObject.Initialize(data.masks[randomIndex]);
         }
 
         OnOpen.Invoke();
@@ -53,17 +46,17 @@ public class Chest : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void IncreasePrice(float newMult)
+    public void IncreasePrice(int priceIncreaseMagnitude)
     {
-        price = (int)(basePrice * newMult);
-        chestName.text = $"E (${price})";
+        price = (int)((data.basePrice + data.flatPriceIncrease * priceIncreaseMagnitude) * Mathf.Pow(data.multPriceIncrease, priceIncreaseMagnitude));
+        pricePopup.text = $"E (${price})";
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            chestName.gameObject.SetActive(true);
+            pricePopup.gameObject.SetActive(true);
         }
     }
 
@@ -71,7 +64,7 @@ public class Chest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            chestName.gameObject.SetActive(false);
+            pricePopup.gameObject.SetActive(false);
         }
     }
 }

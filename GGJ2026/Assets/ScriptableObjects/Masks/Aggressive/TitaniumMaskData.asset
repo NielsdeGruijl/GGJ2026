@@ -16,5 +16,5 @@ MonoBehaviour:
   maskDescription: Damages enemies on collision
   maskItem: {fileID: 2158674716094527555, guid: 7a4df3f0f7918874ea12ccf2802421e1, type: 3}
   maskSprite: {fileID: 21300000, guid: 123288f487d762c45be5ad910db06460, type: 3}
-  cooldown: 0.5
+  cooldown: 0.2
   collisionDamagePerStack: 60

@@ -34,6 +34,10 @@ public struct HitInfo
     public bool isContinuous;
 }
 
+public class ReadOnlyAttribute : PropertyAttribute
+{
+}
+
 [System.Serializable]
 public class HitEvent : UnityEvent<HitInfo>
 {
@@ -42,12 +46,14 @@ public class HitEvent : UnityEvent<HitInfo>
 public class HealthManager : MonoBehaviour
 {
     [SerializeField] private Slider healthbar;
+    
+    [SerializeField] private AudioClip damageSound;
 
     public UnityEvent OnDeath = new();
     public HitEvent OnDamage = new();
     
     public float maxHealth { get; private set; }
-    private float currentHealth;
+    [ReadOnly] public float currentHealth;
 
     private bool isDead = false;
     
@@ -73,6 +79,9 @@ public class HealthManager : MonoBehaviour
         damagePopupValue += hitInfo.damage;
         
         currentHealth -= hitInfo.damage;
+        
+        if(damageSound)
+            AudioManager.instance.PlaySFX(damageSound);
         
         if (currentHealth <= 0 && !isDead)
         {

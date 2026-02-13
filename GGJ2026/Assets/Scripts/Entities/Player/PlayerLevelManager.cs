@@ -1,42 +1,29 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerLevelManager : MonoBehaviour
 {
-    public static PlayerLevelManager instance;
-
     [SerializeField] private float baseXP;
     [SerializeField] private float XPScaling = 1.2f;
     [SerializeField] private float XPIncrement = 3f;
-    [SerializeField] private float playerDamgeScaling = 1;
-    [SerializeField] private float playerSpeedScaling = 1;
 
-    [HideInInspector] public float playerDamageMult = 1;
-    [HideInInspector] public float playerSpeedMult = 1;
+    public UnityEvent OnLevelUp;
     
-    private float currentXPMult = 1.2f;
-    private float currentXP = 0;
-    private float currentLevelXP = 0;
-    
+    private float currentXPMult = 1;
+    private float currentXP;
+    private float currentLevelXP;
+
     private void Awake()
     {
-        if (instance && instance != this)
-            Destroy(this);
-        else
-            instance = this;
-        
-        currentLevelXP = baseXP;
+        Enemy.OnDeath.AddListener(AddXP);
     }
 
     private void LevelUp()
     {
-        playerDamageMult *= playerDamgeScaling; 
-        playerSpeedMult *= playerSpeedScaling;
-        
-        currentXPMult *= XPScaling;
-        
-        currentLevelXP = (currentLevelXP + XPIncrement) * currentXPMult;
+        currentLevelXP = (currentLevelXP + XPIncrement) * XPScaling;
         currentXP = 0;
+
+        OnLevelUp.Invoke();
         
         Debug.Log("level up! new xp: " + currentLevelXP);
     }
@@ -45,6 +32,8 @@ public class PlayerLevelManager : MonoBehaviour
     {
         currentXP += amount;
 
+        Debug.Log("XP added: " + amount);
+        
         if (currentXP >= currentLevelXP)
             LevelUp();
     }

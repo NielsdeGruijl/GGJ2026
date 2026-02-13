@@ -74,7 +74,7 @@ public class HealSuckMask : InventoryMask
                 if (target.isActiveAndEnabled && Mathf.FloorToInt(timeElapsed / newData.succInterval) > tickCount)
                 {
                     target.ApplyDamage(new HitInfo(actualDamage));
-                    player.AddHealth(actualDamage * newData.healPercent);
+                    player.AddHealth(actualDamage * newData.healPercent * 0.01f);
                     UpdateDamageDealt(actualDamage);
                     tickCount++;
                 }

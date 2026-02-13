@@ -12,8 +12,6 @@ public class Player : Entity
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     [SerializeField] private LayerMask coinPullMask;
-    [SerializeField] private float pullSpeed;
-    [SerializeField] private float succRadius;
 
     [SerializeField] private float knockbackRadius;
     [SerializeField] private float knockbackForce;
@@ -33,6 +31,7 @@ public class Player : Entity
     {
         base.Awake();
 
+        GetComponent<PlayerLevelManager>().OnLevelUp.AddListener(stats.LevelUp);
         GetComponent<PlayerMaskManager>().playerData = stats;
         playerInput = GetComponent<PlayerInput>();
         currencyManager = GetComponent<CurrencyManager>();
@@ -60,7 +59,7 @@ public class Player : Entity
         playerMaskData = maskData;
     }
     
-    void MovePlayer(InputAction.CallbackContext pContext)
+    private void MovePlayer(InputAction.CallbackContext pContext)
     {
         moveDirection = pContext.ReadValue<Vector2>();
         
@@ -81,7 +80,7 @@ public class Player : Entity
     {
         rigidBody.AddForce(moveDirection * (stats.GetStatValue(StatType.MoveSpeed)));
         
-        animator.SetFloat("WalkSpeed", stats.GetStatValue(StatType.MoveSpeed) / 2500);
+        animator.SetFloat("WalkSpeed", stats.GetStatValue(StatType.MoveSpeed) / 5000);
 
         // Move to coin script!!
         foreach (Collider2D col in Physics2D.OverlapCircleAll(new Vector2(transform.position.x, transform.position.y), stats.GetStatValue(StatType.MagnetRange), coinPullMask))
