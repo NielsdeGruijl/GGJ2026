@@ -106,12 +106,13 @@ public class HealthManager : MonoBehaviour
 
     public void UpdateMaxHealth(float newMaxHealth)
     {
-        if (maxHealth == 0)
+        float gainedHealth = newMaxHealth - maxHealth;
+        maxHealth = newMaxHealth;
+        
+        if (gainedHealth == newMaxHealth)
             currentHealth = newMaxHealth;
         else
-            AddHealth(newMaxHealth - maxHealth);
-        
-        maxHealth = newMaxHealth;
+            AddHealth(gainedHealth);
         
         UpdateHealthBar();
     }

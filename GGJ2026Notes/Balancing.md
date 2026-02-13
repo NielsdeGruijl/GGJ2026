@@ -17,5 +17,3 @@
 - Enemies don't seem to scale that much?
 	- Make more dangerous
 	- Make deal damage immediately (look at attackCo timer)
-
-- 
