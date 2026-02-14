@@ -20,9 +20,19 @@ public class EndScreenDataUIHandler : MonoBehaviour
         foreach (MaskData data in SessionData.instance.maskData)
         {
             MaskDataUIElement maskUI = Instantiate(maskDataUIPrefab, maskDataUIContainer);
-            maskUI.Initialize(data.damageDealt.ToString("0.0"), data.maskCount.ToString(), data.maskSprite);
+            maskUI.Initialize(GetDamageString(data.damageDealt), data.maskCount.ToString(), data.maskSprite);
         }
 
         timeSurvivedText.text = $"Time survived: {SessionData.instance.timeSurvived}";
+    }
+
+    private string GetDamageString(float value)
+    {
+        if (value > 1000000)
+            return (value / 1000000).ToString("0.0") + "m";
+        if (value > 1000)
+            return (value / 1000).ToString("0.0") + "k";
+
+        return value.ToString("0");
     }
 }

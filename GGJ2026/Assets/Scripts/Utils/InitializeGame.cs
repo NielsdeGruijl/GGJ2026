@@ -10,10 +10,13 @@ public class InitializeGame : MonoBehaviour
 
     private void Awake()
     {
+        if (!data || !data.selectedCharacter)
+            return;
+        
         if(player)
             player.SetPlayerData(data.selectedCharacter.CharacterData);
         
         if(groundItem)
-            groundItem.maskSO = data.selectedCharacter.maskData;
+            groundItem.Initialize(data.selectedCharacter.maskData);
     }
 }

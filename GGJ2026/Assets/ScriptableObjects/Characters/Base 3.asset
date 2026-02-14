@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee713511d3470a222b7d86059b0eb0b7, type: 3}
-  m_Name: Base
+  m_Name: Base 3
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSO
   CharacterData: {fileID: 11400000, guid: f8e38c99f4a64b0edb30148204e1f123, type: 2}
-  maskData: {fileID: 11400000, guid: 08e9074af56a6cb488661ef88aee4c05, type: 2}
+  maskData: {fileID: 11400000, guid: 1c637f085d64dff4c8e14581ff4938cd, type: 2}
   characterSprite: {fileID: -467307283419413426, guid: 3166e8c9c29260ac88c1d32d19267743, type: 3}
   characterName: Red Panda

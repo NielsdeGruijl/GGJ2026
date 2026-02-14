@@ -20,7 +20,7 @@ public class Player : Entity
     private CurrencyManager currencyManager;
     private PlayerMaskData playerMaskData;
 
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
 
     // private variables
     private List<Chest> chests = new List<Chest>();
@@ -31,9 +31,11 @@ public class Player : Entity
     {
         base.Awake();
 
+        //InputSystem.DisableAllEnabledActions();
+        
         GetComponent<PlayerLevelManager>().OnLevelUp.AddListener(stats.LevelUp);
         GetComponent<PlayerMaskManager>().playerData = stats;
-        playerInput = GetComponent<PlayerInput>();
+        //playerInput = GetComponent<PlayerInput>();
         currencyManager = GetComponent<CurrencyManager>();
         
         stats.GetStatEvent(StatType.Health).AddListener(healthManager.UpdateMaxHealth);
@@ -41,12 +43,15 @@ public class Player : Entity
 
     void Start()
     {
-        playerInput.actions["Move"].performed += MovePlayer;
-        playerInput.actions["Move"].canceled += MovePlayer;
+        InputSystem.actions["Move"].Enable();
+        InputSystem.actions["Move"].performed += MovePlayer;
+        InputSystem.actions["Move"].canceled += MovePlayer;
 
-        playerInput.actions["Purchase"].started += PurchaseChest;
+        InputSystem.actions["Purchase"].Enable();
+        InputSystem.actions["Purchase"].started += PurchaseChest;
 
-        playerInput.actions["Die"].started += TestDie;
+        InputSystem.actions["Die"].Enable();
+        InputSystem.actions["Die"].started += TestDie;
     }
 
     public void SetPlayerData(BaseEntityDataSO baseStats)
@@ -117,10 +122,22 @@ public class Player : Entity
     {
         Die();
     }
+
+    public void MenuDie()
+    {
+        Die();
+    }
     
     protected override void Die()
     {
         base.Die();
+
+        InputSystem.actions["move"].performed -= MovePlayer;
+        InputSystem.actions["move"].canceled -= MovePlayer;
+        
+        InputSystem.actions["Purchase"].started -= PurchaseChest;
+        
+        InputSystem.actions["Die"].started -= TestDie;
         
         UpdateSessionData();
         StartCoroutine(DieCo());

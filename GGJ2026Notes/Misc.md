@@ -21,7 +21,6 @@
 		- passive chest type X
 		- Legendary X
 
-- Revisit popup system
 
 ===== Done =====
 

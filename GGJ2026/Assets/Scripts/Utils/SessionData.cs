@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public struct MaskData
 {
@@ -16,7 +17,7 @@ public class SessionData : MonoBehaviour
     
     public List<MaskData> maskData = new();
 
-    public string timeSurvived;
+    [ReadOnly] public string timeSurvived;
 
     private void Awake()
     {
@@ -27,6 +28,16 @@ public class SessionData : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        
+
+        SceneManager.sceneLoaded += ResetData;
+    }
+
+    private void ResetData(Scene tempScene, LoadSceneMode mode)
+    {
+        if (tempScene == SceneManager.GetSceneByBuildIndex(1))
+        {
+            maskData = new();
+            timeSurvived = "";
+        }
     }
 }

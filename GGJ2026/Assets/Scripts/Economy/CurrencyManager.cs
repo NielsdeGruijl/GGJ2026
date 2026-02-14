@@ -18,9 +18,10 @@ public class CurrencyManager : MonoBehaviour
     private Coroutine coinPitchReset;
 
     private bool isCoinPitchResetRunning;
-    
-    private float coinPitch = 1;
 
+    private int coinPickupChain = 0;
+    private float coinPitch = 1;
+    
     private void Awake()
     {
         waitForCoinPitchReset = new WaitForSeconds(coinPitchResetDelay);
@@ -45,7 +46,8 @@ public class CurrencyManager : MonoBehaviour
         
         AudioManager.instance.PlayCoinSound(pickupCoinSound, coinPitch);
 
-        coinPitch += coinPitchIncrement;
+        coinPitch = Mathf.Clamp(coinPitch + coinPitchIncrement, 1, 1.1f);
+        coinPickupChain++;
 
         coinPitchReset = StartCoroutine(ResetCoinPitchCo());
         

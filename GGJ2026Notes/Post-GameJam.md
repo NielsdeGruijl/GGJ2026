@@ -14,19 +14,6 @@
 [[PlayerCharacters]]
 
 
-Enemy and player level up systems
-- Enemies give player XP on death X
-- Enemies level up every interval (maybe not base enemies tho)
-- Main menu character selection screen X
-
-
-- Combat juice:
-	- Add enemy knockback on hit X
-	- Check damage flash shader performance X
-	- Improve damage popup performance
-
-
-
 - Come up with better bogged lingering area solution
 	- currently uses exact same prefab - same debuff data
 	- can't change data (damage) independently

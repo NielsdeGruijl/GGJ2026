@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LuckMask
   m_EditorClassIdentifier: Assembly-CSharp::LuckMaskSO
   maskName: Luck
-  maskDescription: Increases luck
+  maskDescription: Increases chance to get more items from chests
   maskItem: {fileID: -7385087000713563073, guid: 86320add0ce9f5f84b1eae3ddea2e996, type: 3}
   maskSprite: {fileID: 21300000, guid: 87ffd3e27bd2736b289869a45f45e26a, type: 3}
   cooldown: 0

@@ -48,12 +48,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Balancing.md",
+                "file": "Misc.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Balancing"
+              "title": "Misc"
             }
           }
         ]
@@ -219,17 +219,17 @@
   },
   "active": "bac33d50bf66ca01",
   "lastOpenFiles": [
+    "Masks.md",
+    "Misc.md",
+    "Post-GameJam.md",
     "Bug report.md",
+    "Balancing.md",
     "Data architecture.md",
     "Economy.md",
     "Enemies.md",
     "Items.md",
     "Legendary masks.md",
-    "Masks.md",
-    "Misc.md",
-    "Post-GameJam.md",
     "VFX.md",
-    "Balancing.md",
     "World-interactables.md",
     "UI.md",
     "Stand down.md",

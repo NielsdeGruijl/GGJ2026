@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 410615551175019217}
   - component: {fileID: 3788693209431208830}
-  - component: {fileID: 2040308353746517946}
   - component: {fileID: 6084386061714686481}
   - component: {fileID: 6275069232259198607}
   m_Layer: 0
@@ -70,19 +69,6 @@ MonoBehaviour:
   - tag: 6
     prefab: {fileID: 5907491010488970924, guid: 24985ab5fee6a694c9a46c1835d657de, type: 3}
     baseSize: 25
---- !u!114 &2040308353746517946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128931254888360544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0477deb9773c15daa1e87daeb451c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SessionData
-  timeSurvived: 0
 --- !u!114 &6084386061714686481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dbfdb646a09adc34804b3e13618e470, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InitializeGame
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: db760382e83b7e9b49a5be6983be12f2, type: 2}
   player: {fileID: 0}
   groundItem: {fileID: 0}
